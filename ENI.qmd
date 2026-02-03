@@ -17,8 +17,7 @@ source("R/grafic.R", encoding = "UTF-8")
 
 ```
 
-::: {.stat-box}
-
+::: stat-box
 ::: panel-tabset
 ## Verificación
 

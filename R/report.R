@@ -170,6 +170,14 @@ consolidado <- consolidado %>%
   )
 
 
+consolidado <- consolidado %>%
+  mutate(
+    responsible = ifelse(
+      !is.na(responsible),
+      sub("_.*$", "", responsible),
+      NA_character_
+    )
+  )
 
 
 # DEFINICIÓN DE ETAPA -----------------------------------------------------
@@ -236,6 +244,57 @@ consolidado <- consolidado %>%
     flag_duracion_negativa = duracion_seg < 0,
     
     # Limpieza básica
+    duracion_seg = ifelse(flag_na_datetime | flag_duracion_negativa, NA, duracion_seg),
+    duracion_min = duracion_seg / 60
+  )
+
+
+consolidado <- consolidado %>%
+  mutate(
+    # -------------------------------
+    # Parseo de fechas y horas
+    # -------------------------------
+    datetime_i = suppressWarnings(ymd_hms(P_2_1)),  # inicio
+    datetime_t = suppressWarnings(ymd_hms(P_9_1)),  # término
+    
+    # -------------------------------
+    # Indicadores temporales
+    # -------------------------------
+    dia_semana = ifelse(
+      !is.na(datetime_i),
+      weekdays(as.Date(datetime_i)),
+      NA_character_
+    ),
+    
+    # Normalización ES-CL
+    dia_semana = recode(
+      dia_semana,
+      "Monday"    = "Lunes",
+      "Tuesday"   = "Martes",
+      "Wednesday" = "Miércoles",
+      "Thursday"  = "Jueves",
+      "Friday"    = "Viernes",
+      "Saturday"  = "Sábado",
+      "Sunday"    = "Domingo"
+    ),
+    
+    horario = ifelse(
+      !is.na(datetime_i),
+      ifelse(hour(datetime_i) < 12, "AM", "PM"),
+      NA_character_
+    ),
+    
+    # -------------------------------
+    # Flags de error temporal
+    # -------------------------------
+    flag_na_datetime = is.na(datetime_i) | is.na(datetime_t),
+    
+    # -------------------------------
+    # Duración
+    # -------------------------------
+    duracion_seg = as.numeric(difftime(datetime_t, datetime_i, units = "secs")),
+    flag_duracion_negativa = duracion_seg < 0,
+    
     duracion_seg = ifelse(flag_na_datetime | flag_duracion_negativa, NA, duracion_seg),
     duracion_min = duracion_seg / 60
   )
@@ -571,8 +630,34 @@ reporte_auditoria_fina <- consolidado %>%
   )
 
 
+# 9. reporte por horario --------------------------------------------------
+reporte_por_horario <- consolidado %>%
+  filter(!is.na(horario)) %>%
+  reporte_generico(horario)
 
 
+
+# 10. reporte por día de la semana ----------------------------------------
+reporte_por_dia <- consolidado %>%
+  filter(!is.na(dia_semana)) %>%
+  reporte_generico(dia_semana)
+
+
+# 11. reporte por día y horario -------------------------------------------
+reporte_dia_horario <- consolidado %>%
+  filter(!is.na(dia_semana), !is.na(horario)) %>%
+  reporte_generico(dia_semana, horario)
+
+
+# 12. reporte responsable por día ----------------------------------------
+reporte_responsable_dia <- consolidado %>%
+  filter(!is.na(responsible), !is.na(dia_semana)) %>%
+  reporte_generico(responsible, dia_semana)
+
+# 13. reporte responsable por horario ------------------------------------
+reporte_responsable_horario <- consolidado %>%
+  filter(!is.na(responsible), !is.na(horario)) %>%
+  reporte_generico(responsible, horario)
 #SALIDA ------------------------------------------------------------------
 
 
@@ -640,6 +725,38 @@ write.xlsx(
   overwrite = TRUE
 )
 
+write.xlsx(
+  reporte_por_horario,
+  file.path(dir_publicable, "R6_horario.xlsx"),
+  overwrite = TRUE
+)
+
+write.xlsx(
+  reporte_por_dia,
+  file.path(dir_publicable, "R7_dia_semana.xlsx"),
+  overwrite = TRUE
+)
+
+write.xlsx(
+  reporte_dia_horario,
+  file.path(dir_publicable, "R8_dia_horario.xlsx"),
+  overwrite = TRUE
+)
+
+
+write.xlsx(
+  reporte_responsable_dia,
+  file.path(dir_publicable, "R9_responsable_dia.xlsx"),
+  overwrite = TRUE
+)
+
+write.xlsx(
+  reporte_responsable_horario,
+  file.path(dir_publicable, "R10_responsable_horario.xlsx"),
+  overwrite = TRUE
+)
+
+
 message("Tabulados publicables exportados en assets/tabulados/")
 
 
@@ -697,9 +814,19 @@ add_sheet(wb, "R2 encuesta y etapa",         reporte_origen_etapa)
 add_sheet(wb, "R3 usuario y etapa",          reporte_por_responsible_etapa)
 add_sheet(wb, "R4 etapa",                    reporte_etapa)
 add_sheet(wb, "R5 usuario",                  reporte_por_responsible)
-add_sheet(wb, "R6 alerta",                   reporte_alerta)
+
+add_sheet(wb, "R6 por horario",              reporte_por_horario)
+add_sheet(wb, "R7 por día",                  reporte_por_dia)
+add_sheet(wb, "R8 día y horario",            reporte_dia_horario)
+
+add_sheet(wb, "R9 responsable por día",      reporte_responsable_dia)
+add_sheet(wb, "R10 responsable por horario", reporte_responsable_horario)
+
+add_sheet(wb, "R11 alerta",                  reporte_alerta)
 add_sheet(wb, "Resumen global",              reporte_auditoria_global)
 add_sheet(wb, "Auditoría fina",              reporte_auditoria_fina)
+
+
 
 # ---- Guardado ----------------------------------------------------------
 
@@ -709,7 +836,7 @@ tryCatch(
 
     message("Excel generado correctamente")
     message("Ruta: ", normalizePath(ruta_salida))
-    message("Hojas: 8")
+    message("Hojas: 13")
   },
   error = function(e) {
     message("Error al generar el Excel:")

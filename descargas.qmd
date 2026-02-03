@@ -43,47 +43,33 @@ Indicadores agregados de supervisión por responsable. <a href="assets/tabulados
 ::: tab-group
 ::: tab-row
 **Supervisión por Horario (AM / PM)**\
-Indicadores de supervisión según franja horaria de inicio de la entrevista.
-<a href="assets/tabulados/R6_horario.xlsx" class="btn-download" download> Descargar </a>
+Indicadores de supervisión según franja horaria de inicio de la entrevista. <a href="assets/tabulados/R6_horario.xlsx" class="btn-download" download> Descargar </a>
 :::
 
 ::: tab-row
 **Supervisión por Día de la Semana**\
-Distribución de indicadores según día de realización de la supervisión.
-<a href="assets/tabulados/R7_dia_semana.xlsx" class="btn-download" download> Descargar </a>
+Distribución de indicadores según día de realización de la supervisión. <a href="assets/tabulados/R7_dia_semana.xlsx" class="btn-download" download> Descargar </a>
 :::
 :::
 
-
------------------------------------------------------------------------
-
-
+------------------------------------------------------------------------
 
 ::: tab-group
 ::: tab-row
 **Día de la Semana y Horario**\
-Indicadores combinados por día y franja horaria de la supervisión.
-<a href="assets/tabulados/R8_dia_horario.xlsx" class="btn-download" download> Descargar </a>
+Indicadores combinados por día y franja horaria de la supervisión. <a href="assets/tabulados/R8_dia_horario.xlsx" class="btn-download" download> Descargar </a>
 :::
 
 ::: tab-row
 **Usuario y Día de la Semana**\
-Indicadores de supervisión por responsable, desagregados por día.
-<a href="assets/tabulados/R9_responsable_dia.xlsx" class="btn-download" download> Descargar </a>
+Indicadores de supervisión por responsable, desagregados por día. <a href="assets/tabulados/R9_responsable_dia.xlsx" class="btn-download" download> Descargar </a>
 :::
-
 
 ::: tab-row
 **Usuario y Horario**\
-Indicadores de supervisión por responsable, según horario de realización.
-<a href="assets/tabulados/R10_responsable_horario.xlsx" class="btn-download" download> Descargar </a>
+Indicadores de supervisión por responsable, según horario de realización. <a href="assets/tabulados/R10_responsable_horario.xlsx" class="btn-download" download> Descargar </a>
 :::
-
 :::
-
-
-
-
 
 ------------------------------------------------------------------------
 

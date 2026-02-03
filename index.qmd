@@ -1,11 +1,32 @@
 ---
 title: "dashboard_SV"
+
 ---
+
+
+
+```{r}
+source("R/report.R",encoding = "UTF-8")
+source("R/target.R", encoding = "UTF-8")
+source("R/grafic.R", encoding = "UTF-8")
+```
 
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
 ```{r}
-1 + 1
+# Preparar datos
+consolidado_grafico <- prep_dia_franja(consolidado)
+
+# Serie para una encuesta específica
+serie <- consolidado_grafico %>%
+  filter(encuesta == "ENI") %>%
+  serie_am_pm()
+
+# Gráfico
+plot_lineas_am_pm(
+  serie,
+  titulo = "Entrevistas por día de la semana — ENI"
+)
 ```
