@@ -4,17 +4,38 @@ project:
 
 website:
   title: "dashboard_SV"
-  navbar:
-    left:
+  site-url: "https://ftorov.github.io/dashboard_SV"
+  favicon: "assets/images/logo_ine.png"
+  
+  sidebar:
+    pinned: true                             
+    style: "floating"                          
+    collapse-level: 1                          
+    search: true                               
+    contents:
       - href: index.qmd
         text: Home
-      - about.qmd
+        icon: house
+      - section: "Encuestas"
+        icon: clipboard-data
+        contents:
+         - text: "Encuesta Nacional de Innovación"
+           icon: lightbulb
+           href: ENI.qmd
+         - text: "Encuesta Nacional Industrial Anual"
+           icon: boxes
+           href: ENIA.qmd
+         - text: "Encuesta Longitudinal de Empresas"
+           icon: layers
+           href: ELE.qmd
+         - text: "Encuesta de Oferta Cultural"
+           icon: palette
+           href: EOC.qmd
+      - text: "Descargas"
+        icon: download
+        href: descargas.qmd
 
 format:
   html:
     theme: cosmo
-    css: styles.css
-    toc: true
-
-editor: visual
 

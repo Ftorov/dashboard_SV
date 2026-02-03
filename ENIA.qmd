@@ -1,0 +1,125 @@
+---
+title: ""
+---
+
+```{r setup, include = FALSE}
+
+
+library(dplyr)
+library(janitor)
+library(htmltools)
+library(tibble)
+
+source("R/report.R",encoding = "UTF-8")
+source("R/target.R", encoding = "UTF-8")
+source("R/grafic.R", encoding = "UTF-8")
+
+
+```
+
+::: {.stat-box}
+
+::: panel-tabset
+## Verificación
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Verificación",
+  kpi_sel      = "Calidad"
+)
+
+```
+
+
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Verificación",
+  kpi_sel      = "Cobertura"
+)
+
+```
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Verificación",
+  kpi_sel      = "Duraciones"
+)
+
+```
+
+## Recolección
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Recolección",
+  kpi_sel      = "Calidad"
+)
+
+```
+
+
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Recolección",
+  kpi_sel      = "Cobertura"
+)
+
+```
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Recolección",
+  kpi_sel      = "Duraciones"
+)
+
+```
+
+## Análisis y consistencia
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Consistencia",
+  kpi_sel      = "Calidad"
+)
+
+```
+
+
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Consistencia",
+  kpi_sel      = "Cobertura"
+)
+
+```
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Consistencia",
+  kpi_sel      = "Duraciones"
+)
+
+```
+:::
+
