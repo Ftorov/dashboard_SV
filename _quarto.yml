@@ -37,5 +37,37 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo                 # Tema claro
+      dark: darkly                 # Tema oscuro
+    page-navigation: true          # Navegación entre páginas
+    anchor-sections: true          # Anclas en los títulos
+    smooth-scroll: true            # Desplazamiento suave
+    link-external-newwindow: true  # Enlaces externos abren nueva pestaña
+    link-external-icon: true       # Muestra icono en enlaces externos
+    code-fold: false               # No pliega bloques de codigo
+    code-copy: false               # No muestra botón de copiar
+    code-tools: false              # Sin herramientas de código
+    code-overflow: wrap            # Ajuste de líneas largas
+    number-sections: false         # No numera secciones
+    title-block-banner: false       # Banner en el título
+    sanitize: false                # Permite HTML sin sanitizar
+    css: 
+    - styles.css
+    - https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css
+    toc: false
+    grid:
+     sidebar-width: "240px"       # Ancho de la barra lateral
+     body-width: "1400px"         # Ancho del contenido central
+     margin-width: "140px"        # Márgenes laterales
 
+editor: visual
+
+execute:
+  echo: false          # Oculta el código en los documentos
+  warning: false       # Oculta advertencias
+  message: false       # Oculta mensajes
+  error: false         # Oculta errores
+  cache: false         # No usa caché
+  freeze: false         # Recalcula solo si el archivo cambió
+  encoding: "UTF-8"    # Codificación de texto
