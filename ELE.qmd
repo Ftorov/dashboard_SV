@@ -1,0 +1,205 @@
+---
+title: ""
+---
+
+```{r setup, include = FALSE}
+
+
+library(dplyr)
+library(janitor)
+library(htmltools)
+library(tibble)
+
+source("R/report.R",encoding = "UTF-8")
+source("R/target.R", encoding = "UTF-8")
+source("R/grafic.R", encoding = "UTF-8")
+
+
+```
+
+::: panel-tabset
+## Verificación
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Verificación",
+  kpi_sel      = "Duraciones"
+)
+
+```
+
+::: columns
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ELE", etapa == "Verificación"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ELE — Verificación"
+)
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Verificación",
+  kpi_sel      = "Calidad"
+)
+
+```
+:::
+:::
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Verificación",
+  kpi_sel      = "Cobertura"
+)
+
+```
+
+```{r}
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ELE",
+     etapa    = "Verificación")
+```
+
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ELE",
+     etapa_sel    = "Verificación")
+```
+
+## Recolección
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Recolección",
+  kpi_sel      = "Duraciones"
+)
+
+```
+
+::: columns
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ELE", etapa == "Recolección"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ELE — Recolección"
+)
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Recolección",
+  kpi_sel      = "Calidad"
+)
+
+```
+:::
+:::
+
+```{r}
+
+
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Recolección",
+  kpi_sel      = "Cobertura"
+)
+```
+
+```{r}
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ELE",
+     etapa    = "Recolección")
+```
+
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ELE",
+     etapa_sel    = "Recolección")
+```
+
+## Análisis y consistencia
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Consistencia",
+  kpi_sel      = "Duraciones"
+)
+
+```
+
+::: columns
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ELE", etapa == "Consistencia"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ELE — Consistencia"
+)
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Consistencia",
+  kpi_sel      = "Calidad"
+)
+
+```
+:::
+:::
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ELE",
+  etapa_sel    = "Consistencia",
+  kpi_sel      = "Cobertura"
+)
+
+```
+
+```{r}
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ELE",
+     etapa    = "Consistencia")
+```
+
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ELE",
+     etapa_sel    = "Consistencia")
+```
+:::

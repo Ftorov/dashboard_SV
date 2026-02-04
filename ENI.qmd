@@ -1,5 +1,6 @@
 ---
 title: ""
+subtitle: "Seguimiento de cobertura, calidad y tiempos por etapa del proceso de supervisión"
 ---
 
 ```{r setup, include = FALSE}
@@ -17,8 +18,11 @@ source("R/grafic.R", encoding = "UTF-8")
 
 ```
 
+
 ::: panel-tabset
 ## Verificación
+
+
 
 ```{r}
 kpi_dashboard_completo(

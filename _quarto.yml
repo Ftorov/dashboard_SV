@@ -16,6 +16,7 @@ website:
       - href: index.qmd
         text: Home
         icon: house
+        
       - section: "Encuestas"
         icon: clipboard-data
         contents:
@@ -40,6 +41,8 @@ format:
     theme:
       light: cosmo                 # Tema claro
       dark: darkly                 # Tema oscuro
+      
+
     page-navigation: true          # Navegación entre páginas
     anchor-sections: true          # Anclas en los títulos
     smooth-scroll: true            # Desplazamiento suave
@@ -69,5 +72,5 @@ execute:
   message: false       # Oculta mensajes
   error: false         # Oculta errores
   cache: false         # No usa caché
-  freeze: false         # Recalcula solo si el archivo cambió
+  freeze: auto         # Recalcula solo si el archivo cambió
   encoding: "UTF-8"    # Codificación de texto

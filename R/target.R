@@ -4,9 +4,9 @@ library(htmltools)
 library(tibble)
 library(purrr)
 
-# ========================================================================
+
 # HELPERS DE PRESENTACIÓN 
-# ========================================================================
+
 
 # Porcentaje en formato CL (devuelve TEXTO: "2,13")
 fmt_pct_cl <- function(x, digits = 2) {
@@ -28,9 +28,9 @@ estado_pct <- function(x) {
   }
 }
 
-# ========================================================================
+
 # FUNCIÓN GENÉRICA DE REPORTE 
-# ========================================================================
+
 
 reporte_generico <- function(data, ...) {
   
@@ -109,9 +109,9 @@ reporte_generico <- function(data, ...) {
     select(-valores_validos)
 }
 
-# ========================================================================
+
 # GRUPOS DE KPI
-# ========================================================================
+
 
 kpi_grupos <- list(
   Calidad = c(
@@ -131,9 +131,9 @@ kpi_grupos <- list(
   )
 )
 
-# ========================================================================
+
 # DEFINICIONES METODOLÓGICAS
-# ========================================================================
+
 
 kpi_definiciones <- list(
   "Error en registro de fecha" =
@@ -164,9 +164,9 @@ kpi_definiciones <- list(
     "Mayor tiempo de respuesta observado entre los registros válidos sin outliers."
 )
 
-# ========================================================================
+
 # DASHBOARD KPI
-# ========================================================================
+
 
 kpi_dashboard_completo <- function(df, encuesta_sel, etapa_sel, kpi_sel) {
   

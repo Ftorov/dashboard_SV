@@ -3,25 +3,13 @@ library(echarts4r)
 library(dplyr)
 library(tidyr)
 library(purrr)
-
+library(knitr)
+library(lubridate)
 
 # 1. GRÁFICO COBERTURA DE REGISTROS ------------------------------------------
 
-# =========================================================
-# 1. GRÁFICO COBERTURA DE REGISTROS (ECHARTS4R)
-# - Manejo robusto de "sin datos"
-# - Compatible con Quarto / GitHub Pages
-# =========================================================
-
-library(dplyr)
-library(tidyr)
-library(echarts4r)
-library(htmlwidgets)
-library(knitr)
-
-# ---------------------------------------------------------
 # PREPARACIÓN DE DATOS
-# ---------------------------------------------------------
+
 prep_registros_calidad <- function(tabla_reporte) {
   
   tabla_reporte %>%
@@ -53,58 +41,48 @@ prep_registros_calidad <- function(tabla_reporte) {
     )
 }
 
-# ---------------------------------------------------------
+
 # GRÁFICO PRINCIPAL
-# ---------------------------------------------------------
+
 plot_cobertura_registros <- function(
     tabla_reporte,
     titulo,
     subtitulo
 ) {
   
-  # -------------------------------------------------
+
   # VALIDACIÓN 1: SIN FILAS
-  # -------------------------------------------------
+
   if (is.null(tabla_reporte) || nrow(tabla_reporte) == 0) {
     return(
       knitr::asis_output(
-        "
-        <div class='kpi-empty'>
-          <strong>No hay información para mostrar</strong><br>
-          La combinación seleccionada no registra datos.
-        </div>
-        "
+        ""
       )
     )
   }
   
   datos <- prep_registros_calidad(tabla_reporte)
   
-  # -------------------------------------------------
+
   # VALIDACIÓN 2: SIN VALORES NUMÉRICOS
-  # -------------------------------------------------
+
   if (sum(datos$n, na.rm = TRUE) == 0) {
     return(
       knitr::asis_output(
-        "
-        <div class='kpi-empty'>
-          <strong>No hay información para mostrar</strong><br>
-          La combinación seleccionada no registra datos.
-        </div>
-        "
+        ""
       )
     )
   }
   
-  # -------------------------------------------------
+
   # COLORES
-  # -------------------------------------------------
+
   datos <- datos %>%
     mutate(color = c("#2F5597", "#6AA84F", "#CC4125"))
   
-  # -------------------------------------------------
+
   # GRÁFICO
-  # -------------------------------------------------
+
   datos %>%
     e_charts(estado) %>%
     e_bar(
@@ -181,20 +159,9 @@ plot_cobertura_registros <- function(
 
 # 2. GRAFICO HORARIO Y DIA DE LA SEMANA --------------------------------------
 
-# =========================================================
-# 2. GRÁFICO HORARIO Y DÍA DE LA SEMANA (AM vs PM)
-# - Manejo robusto de "sin datos"
-# - Compatible con Quarto / GitHub Pages
-# =========================================================
 
-library(dplyr)
-library(tidyr)
-library(echarts4r)
-library(knitr)
-
-# ---------------------------------------------------------
 # PREPARACIÓN BASE
-# ---------------------------------------------------------
+
 prep_dia_franja <- function(consolidado) {
   
   consolidado %>%
@@ -218,18 +185,18 @@ prep_dia_franja <- function(consolidado) {
 # Base para gráficos
 consolidado_grafico <- prep_dia_franja(consolidado)
 
-# ---------------------------------------------------------
+
 # FUNCIÓN DE GRÁFICO
-# ---------------------------------------------------------
+
 grafico_am_pm <- function(
     data,
     encuesta = NULL,
     etapa    = NULL
 ) {
   
-  # -------------------------------------------------
+
   # FILTROS
-  # -------------------------------------------------
+
   df <- data
   
   if (!is.null(encuesta)) {
@@ -240,17 +207,13 @@ grafico_am_pm <- function(
     df <- df[df$etapa == etapa, ]
   }
   
-  # -------------------------------------------------
+
   # VALIDACIÓN: SIN FILAS
-  # -------------------------------------------------
+
   if (is.null(df) || nrow(df) == 0) {
     return(
       knitr::asis_output(
         "
-        <div class='kpi-empty'>
-          <strong>No hay información para mostrar</strong><br>
-          La combinación seleccionada no registra datos.
-        </div>
         "
       )
     )
@@ -258,9 +221,9 @@ grafico_am_pm <- function(
   
   n_total <- nrow(df)
   
-  # -------------------------------------------------
+
   # SERIE DÍA × FRANJA
-  # -------------------------------------------------
+
   serie <- df %>%
     dplyr::group_by(dia_semana, horario) %>%
     dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
@@ -270,25 +233,20 @@ grafico_am_pm <- function(
       values_fill = 0
     )
   
-  # -------------------------------------------------
+
   # VALIDACIÓN: SIN VALORES
-  # -------------------------------------------------
+
   if (sum(serie$AM + serie$PM, na.rm = TRUE) == 0) {
     return(
       knitr::asis_output(
-        "
-        <div class='kpi-empty'>
-          <strong>No hay información para mostrar</strong><br>
-          La combinación seleccionada no registra datos.
-        </div>
-        "
+        ""
       )
     )
   }
   
-  # -------------------------------------------------
+
   # TÍTULOS
-  # -------------------------------------------------
+
   titulo <- paste(
     "Distribución de entrevistas",
     if (!is.null(encuesta)) paste("—", encuesta) else "",
@@ -301,9 +259,9 @@ grafico_am_pm <- function(
     "· AM vs PM por día"
   )
   
-  # -------------------------------------------------
+
   # GRÁFICO
-  # -------------------------------------------------
+
   serie %>%
     echarts4r::e_charts(dia_semana) %>%
     echarts4r::e_line(
@@ -349,28 +307,17 @@ grafico_am_pm <- function(
 
 # 3. HEATMAP DIA Y HORARIO -----------------------------------------------------------------
 
-# =========================================================
-# 3. HEATMAP DÍA Y HORARIO (ECHARTS4R)
-# - Manejo robusto de "sin datos"
-# - Horas ordenadas 08–18
-# - Compatible con Quarto / GitHub Pages
-# =========================================================
 
-library(dplyr)
-library(tidyr)
-library(echarts4r)
-library(knitr)
-library(lubridate)
+
 
 plot_heatmap_horario_etapa <- function(
     consolidado,
     encuesta_sel,
     etapa_sel
 ) {
-  
-  # -------------------------------------------------
+
   # 1) FILTRO
-  # -------------------------------------------------
+
   df <- consolidado %>%
     dplyr::filter(
       !is.na(datetime_i),
@@ -387,25 +334,20 @@ plot_heatmap_horario_etapa <- function(
       hora <= 18
     )
   
-  # -------------------------------------------------
+
   # VALIDACIÓN 1: SIN FILAS
-  # -------------------------------------------------
+
   if (is.null(df) || nrow(df) == 0) {
     return(
       knitr::asis_output(
-        "
-        <div class='kpi-empty'>
-          <strong>No hay información para mostrar</strong><br>
-          La combinación seleccionada no registra datos.
-        </div>
-        "
+        ""
       )
     )
   }
   
-  # -------------------------------------------------
+
   # 2) AGREGACIÓN PARA HEATMAP
-  # -------------------------------------------------
+
   horas_levels <- sprintf("%02d", 8:18)
   
   heatmap_df <- df %>%
@@ -432,25 +374,20 @@ plot_heatmap_horario_etapa <- function(
       fill = list(value = 0)
     )
   
-  # -------------------------------------------------
+
   # VALIDACIÓN 2: SIN VALORES
-  # -------------------------------------------------
+
   if (sum(heatmap_df$value, na.rm = TRUE) == 0) {
     return(
       knitr::asis_output(
-        "
-        <div class='kpi-empty'>
-          <strong>No hay información para mostrar</strong><br>
-          La combinación seleccionada no registra datos.
-        </div>
-        "
+        ""
       )
     )
   }
   
-  # -------------------------------------------------
+
   # 3) ECHARTS HEATMAP
-  # -------------------------------------------------
+
   heatmap_df %>%
     e_charts(hora) %>%
     e_heatmap(
