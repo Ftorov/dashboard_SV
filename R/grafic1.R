@@ -145,10 +145,10 @@ plot_heatmap_horario <- function(heatmap_df, encuesta) {
 
 
 
-# plot_heatmap_horario(
-#   heatmap_df,
-#   encuesta = "ENI"
-# )
+plot_heatmap_horario(
+  heatmap_df,
+  encuesta = "ENI"
+)
 
 
 

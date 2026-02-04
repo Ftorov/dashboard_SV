@@ -37,7 +37,12 @@ kpi_dashboard_completo(
 ::: {.columns}
 ::: {.column width="70%"}
 ```{r}
-
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ENI", etapa == "Verificación"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ENI — Verificación"
+)
 ```
 :::
 ::: {.column width="30%"}
@@ -45,11 +50,12 @@ kpi_dashboard_completo(
 
 
 ```{r}
+
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Verificación",
-  kpi_sel      = "Cobertura"
+  kpi_sel      = "Calidad"
 )
 
 ```
@@ -62,7 +68,7 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Verificación",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Cobertura"
 )
 
 ```
@@ -75,6 +81,13 @@ grafico_am_pm(
      etapa    = "Verificación")
 ```
 
+
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ENI",
+     etapa_sel    = "Verificación")
+```
 
 
 
@@ -111,7 +124,7 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Recolección",
-  kpi_sel      = "Cobertura"
+  kpi_sel      = "Calidad"
 )
 
 ```
@@ -120,13 +133,14 @@ kpi_dashboard_completo(
 :::
 
 ```{r}
+
+
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Recolección",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Cobertura"
 )
-
 ```
 
 ```{r}
@@ -136,6 +150,12 @@ grafico_am_pm(
      etapa    = "Recolección")
 ```
 
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ENI",
+     etapa_sel    = "Recolección")
+```
 
 ## Análisis y consistencia
 
@@ -170,7 +190,7 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Consistencia",
-  kpi_sel      = "Cobertura"
+  kpi_sel      = "Calidad"
 )
 
 ```
@@ -183,7 +203,7 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Consistencia",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Cobertura"
 )
 
 ```
@@ -193,6 +213,13 @@ grafico_am_pm(
      consolidado_grafico,
      encuesta = "ENI",
      etapa    = "Consistencia")
+```
+
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ENI",
+     etapa_sel    = "Consistencia")
 ```
 
 :::
