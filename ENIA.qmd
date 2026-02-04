@@ -17,12 +17,40 @@ source("R/grafic.R", encoding = "UTF-8")
 
 ```
 
-::: {.stat-box}
 
 ::: panel-tabset
+
 ## Verificación
 
+
 ```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Verificación",
+  kpi_sel      = "Duraciones"
+)
+
+```
+
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ENIA", etapa == "Verificación"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ENIA — Verificación"
+)
+```
+:::
+::: {.column width="30%"}
+
+
+
+```{r}
+
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENIA",
@@ -32,7 +60,8 @@ kpi_dashboard_completo(
 
 ```
 
-
+:::
+:::
 
 ```{r}
 kpi_dashboard_completo(
@@ -44,15 +73,23 @@ kpi_dashboard_completo(
 
 ```
 
-```{r}
-kpi_dashboard_completo(
-  df           = reporte_origen_etapa,
-  encuesta_sel = "ENIA",
-  etapa_sel    = "Verificación",
-  kpi_sel      = "Duraciones"
-)
 
+```{r}
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ENIA",
+     etapa    = "Verificación")
 ```
+
+
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ENIA",
+     etapa_sel    = "Verificación")
+```
+
+
 
 ## Recolección
 
@@ -61,31 +98,63 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENIA",
   etapa_sel    = "Recolección",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Duraciones"
 )
 
 ```
 
 
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ENIA", etapa == "Recolección"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ENIA — Recolección"
+)
+```
+:::
+::: {.column width="30%"}
+
+
 
 ```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Recolección",
+  kpi_sel      = "Calidad"
+)
+
+```
+
+:::
+:::
+
+```{r}
+
+
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENIA",
   etapa_sel    = "Recolección",
   kpi_sel      = "Cobertura"
 )
-
 ```
 
 ```{r}
-kpi_dashboard_completo(
-  df           = reporte_origen_etapa,
-  encuesta_sel = "ENIA",
-  etapa_sel    = "Recolección",
-  kpi_sel      = "Duraciones"
-)
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ENIA",
+     etapa    = "Recolección")
+```
 
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ENIA",
+     etapa_sel    = "Recolección")
 ```
 
 ## Análisis y consistencia
@@ -95,12 +164,39 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENIA",
   etapa_sel    = "Consistencia",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Duraciones"
 )
 
 ```
 
 
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ENIA", etapa == "Consistencia"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ENIA — Consistencia"
+)
+```
+:::
+::: {.column width="30%"}
+
+
+
+```{r}
+kpi_dashboard_completo(
+  df           = reporte_origen_etapa,
+  encuesta_sel = "ENIA",
+  etapa_sel    = "Consistencia",
+  kpi_sel      = "Calidad"
+)
+
+```
+
+:::
+:::
 
 ```{r}
 kpi_dashboard_completo(
@@ -113,13 +209,19 @@ kpi_dashboard_completo(
 ```
 
 ```{r}
-kpi_dashboard_completo(
-  df           = reporte_origen_etapa,
-  encuesta_sel = "ENIA",
-  etapa_sel    = "Consistencia",
-  kpi_sel      = "Duraciones"
-)
-
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ENIA",
+     etapa    = "Consistencia")
 ```
+
+```{r}
+plot_heatmap_horario_etapa(
+     consolidado,
+     encuesta_sel = "ENIA",
+     etapa_sel    = "Consistencia")
+```
+
 :::
+
 

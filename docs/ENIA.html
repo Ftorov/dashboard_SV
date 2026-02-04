@@ -71,6 +71,18 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/echarts4r-4.8.0/echarts-en.min.js"></script>
+
+<script src="site_libs/echarts4r-4.8.0/ecStat.min.js"></script>
+
+<script src="site_libs/echarts4r-4.8.0/dataTool.min.js"></script>
+
+<script src="site_libs/echarts4r-binding-0.4.6/echarts4r.js"></script>
+
 
 
 <link rel="stylesheet" href="styles.css">
@@ -180,7 +192,6 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="stat-box">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Verificación</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Recolección</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Análisis y consistencia</a></li></ul>
 <div class="tab-content">
@@ -193,6 +204,28 @@ ul.task-list li input[type="checkbox"] {
          </div>
 </div>
 </div>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<pre><code>    &lt;div class='kpi-empty'&gt;
+      &lt;strong&gt;No hay información para mostrar&lt;/strong&gt;&lt;br&gt;
+      La combinación seleccionada no registra datos.
+    &lt;/div&gt;
+    </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="kpi-empty">
+           <strong>No hay información para mostrar</strong><br>
+           La combinación seleccionada no registra datos.
+         </div>
+</div>
+</div>
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <div class="kpi-empty">
@@ -203,14 +236,84 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-empty">
-           <strong>No hay información para mostrar</strong><br>
-           La combinación seleccionada no registra datos.
-         </div>
+<pre><code>    &lt;div class='kpi-empty'&gt;
+      &lt;strong&gt;No hay información para mostrar&lt;/strong&gt;&lt;br&gt;
+      La combinación seleccionada no registra datos.
+    &lt;/div&gt;
+    </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<pre><code>    &lt;div class='kpi-empty'&gt;
+      &lt;strong&gt;No hay información para mostrar&lt;/strong&gt;&lt;br&gt;
+      La combinación seleccionada no registra datos.
+    &lt;/div&gt;
+    </code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="kpi-grid">
+<div class="kpi-card time neutral">
+<div class="kpi-head">
+<i class="bi bi-clock"></i>
+<span>Duración media</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Promedio del tiempo de respuesta calculado sobre registros válidos sin outliers.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">00:02:37</span>
+</div>
+</div>
+<div class="kpi-card time neutral">
+<div class="kpi-head">
+<i class="bi bi-arrow-down"></i>
+<span>Duración mínima</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Menor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">00:00:18</span>
+</div>
+</div>
+<div class="kpi-card time neutral">
+<div class="kpi-head">
+<i class="bi bi-arrow-up"></i>
+<span>Duración máxima</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Mayor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">00:05:31</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-ee24998277396d80b718" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-ee24998277396d80b718">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["1844","Registros evaluados"]},{"value":["1725","Registros válidos"]},{"value":["1329","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENIA — Recolección"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
 <div class="cell">
 <div class="cell-output-display">
 <div class="kpi-grid">
@@ -261,6 +364,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="kpi-value">21,48%</span>
 </div>
 <div class="kpi-sub">396 registros</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -318,6 +423,20 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-3d696698b2cac84202ce" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-3d696698b2cac84202ce">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes"," 21"]},{"value":["martes","120"]},{"value":["miércoles","114"]},{"value":["jueves","139"]},{"value":["viernes","147"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","233"]},{"value":["martes","235"]},{"value":["miércoles","341"]},{"value":["jueves","332"]},{"value":["viernes","162"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENIA — Recolección","subtext":"Total entrevistas: 1.844 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-8ac203862e4eb8dffdd6" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-8ac203862e4eb8dffdd6">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes","  0"]},{"value":["09","lunes","  5"]},{"value":["10","lunes","  9"]},{"value":["11","lunes","  7"]},{"value":["12","lunes"," 12"]},{"value":["13","lunes","  5"]},{"value":["14","lunes"," 40"]},{"value":["15","lunes"," 50"]},{"value":["16","lunes"," 76"]},{"value":["17","lunes"," 44"]},{"value":["18","lunes","  5"]},{"value":["08","martes"," 11"]},{"value":["09","martes"," 25"]},{"value":["10","martes"," 32"]},{"value":["11","martes"," 52"]},{"value":["12","martes"," 43"]},{"value":["13","martes"," 39"]},{"value":["14","martes"," 26"]},{"value":["15","martes"," 44"]},{"value":["16","martes"," 55"]},{"value":["17","martes"," 24"]},{"value":["18","martes","  4"]},{"value":["08","miércoles"," 18"]},{"value":["09","miércoles"," 22"]},{"value":["10","miércoles"," 24"]},{"value":["11","miércoles"," 50"]},{"value":["12","miércoles"," 60"]},{"value":["13","miércoles"," 31"]},{"value":["14","miércoles"," 49"]},{"value":["15","miércoles"," 68"]},{"value":["16","miércoles","100"]},{"value":["17","miércoles"," 31"]},{"value":["18","miércoles","  2"]},{"value":["08","jueves","  8"]},{"value":["09","jueves"," 21"]},{"value":["10","jueves"," 48"]},{"value":["11","jueves"," 62"]},{"value":["12","jueves"," 60"]},{"value":["13","jueves"," 17"]},{"value":["14","jueves"," 25"]},{"value":["15","jueves"," 83"]},{"value":["16","jueves"," 97"]},{"value":["17","jueves"," 40"]},{"value":["18","jueves"," 10"]},{"value":["08","viernes","  0"]},{"value":["09","viernes"," 25"]},{"value":["10","viernes"," 43"]},{"value":["11","viernes"," 79"]},{"value":["12","viernes"," 37"]},{"value":["13","viernes"," 21"]},{"value":["14","viernes"," 31"]},{"value":["15","viernes"," 47"]},{"value":["16","viernes"," 19"]},{"value":["17","viernes","  7"]},{"value":["18","viernes","  0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":100}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENIA — Recolección"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<div class="cell-output-display">
 <div class="kpi-grid">
 <div class="kpi-card time neutral">
 <div class="kpi-head">
@@ -331,7 +450,7 @@ ul.task-list li input[type="checkbox"] {
 </details>
 </div>
 <div class="kpi-main">
-<span class="kpi-value">00:02:37</span>
+<span class="kpi-value">00:03:07</span>
 </div>
 </div>
 <div class="kpi-card time neutral">
@@ -361,14 +480,21 @@ ul.task-list li input[type="checkbox"] {
 </details>
 </div>
 <div class="kpi-main">
-<span class="kpi-value">00:05:31</span>
+<span class="kpi-value">00:08:13</span>
 </div>
 </div>
 </div>
 </div>
 </div>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-82b8bfc9bc659a571f3d" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-82b8bfc9bc659a571f3d">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["1397","Registros evaluados"]},{"value":[" 992","Registros válidos"]},{"value":[" 675","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENIA — Consistencia"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+</div>
+</div><div class="column" style="width:30%;">
 <div class="cell">
 <div class="cell-output-display">
 <div class="kpi-grid">
@@ -419,6 +545,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="kpi-value">22,69%</span>
 </div>
 <div class="kpi-sub">317 registros</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -476,53 +604,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-grid">
-<div class="kpi-card time neutral">
-<div class="kpi-head">
-<i class="bi bi-clock"></i>
-<span>Duración media</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Promedio del tiempo de respuesta calculado sobre registros válidos sin outliers.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">00:03:07</span>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-1cc14932a1dbe0477233" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-1cc14932a1dbe0477233">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes"," 21"]},{"value":["martes","113"]},{"value":["miércoles","145"]},{"value":["jueves","117"]},{"value":["viernes","116"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","222"]},{"value":["martes","181"]},{"value":["miércoles","178"]},{"value":["jueves","188"]},{"value":["viernes","116"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENIA — Consistencia","subtext":"Total entrevistas: 1.397 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<div class="kpi-card time neutral">
-<div class="kpi-head">
-<i class="bi bi-arrow-down"></i>
-<span>Duración mínima</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Menor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">00:00:18</span>
-</div>
-</div>
-<div class="kpi-card time neutral">
-<div class="kpi-head">
-<i class="bi bi-arrow-up"></i>
-<span>Duración máxima</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Mayor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">00:08:13</span>
-</div>
-</div>
-</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-f1b2c935df12edca64b2" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-f1b2c935df12edca64b2">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes"," 0"]},{"value":["09","lunes"," 2"]},{"value":["10","lunes"," 7"]},{"value":["11","lunes","12"]},{"value":["12","lunes","34"]},{"value":["13","lunes"," 5"]},{"value":["14","lunes","15"]},{"value":["15","lunes","51"]},{"value":["16","lunes","71"]},{"value":["17","lunes","31"]},{"value":["18","lunes","15"]},{"value":["08","martes","20"]},{"value":["09","martes","27"]},{"value":["10","martes","33"]},{"value":["11","martes","33"]},{"value":["12","martes","33"]},{"value":["13","martes","16"]},{"value":["14","martes","31"]},{"value":["15","martes","43"]},{"value":["16","martes","52"]},{"value":["17","martes"," 6"]},{"value":["18","martes"," 0"]},{"value":["08","miércoles","15"]},{"value":["09","miércoles","44"]},{"value":["10","miércoles","41"]},{"value":["11","miércoles","45"]},{"value":["12","miércoles","37"]},{"value":["13","miércoles"," 6"]},{"value":["14","miércoles","43"]},{"value":["15","miércoles","57"]},{"value":["16","miércoles","32"]},{"value":["17","miércoles"," 3"]},{"value":["18","miércoles"," 0"]},{"value":["08","jueves"," 8"]},{"value":["09","jueves","16"]},{"value":["10","jueves","38"]},{"value":["11","jueves","55"]},{"value":["12","jueves","49"]},{"value":["13","jueves","14"]},{"value":["14","jueves","12"]},{"value":["15","jueves","48"]},{"value":["16","jueves","49"]},{"value":["17","jueves","16"]},{"value":["18","jueves"," 0"]},{"value":["08","viernes"," 3"]},{"value":["09","viernes","18"]},{"value":["10","viernes","47"]},{"value":["11","viernes","48"]},{"value":["12","viernes","37"]},{"value":["13","viernes","12"]},{"value":["14","viernes","25"]},{"value":["15","viernes","41"]},{"value":["16","viernes"," 1"]},{"value":["17","viernes"," 0"]},{"value":["18","viernes"," 0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":71}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENIA — Consistencia"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -530,7 +619,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
-</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,7 +1,3 @@
-# =========================================================
-# GRÁFICO COBERTURA DE REGISTROS — ECHARTS
-# =========================================================
-
 library(htmlwidgets)
 library(echarts4r)
 library(dplyr)
@@ -9,60 +5,134 @@ library(tidyr)
 library(purrr)
 
 
-prep_registros_calidad <- function(tabla_reporte)
-{ tabla_reporte %>%
-    transmute( evaluados = as.numeric(gsub("\\.", "", n_total)),
-               validos = as.numeric(gsub("\\.", "", n_validos)),
-               sin_out = as.numeric(gsub("\\.", "", n_validos_sin_outliers)) ) %>%
-    summarise( evaluados = sum(evaluados, na.rm = TRUE),
-               validos = sum(validos, na.rm = TRUE),
-               sin_out = sum(sin_out, na.rm = TRUE) ) %>%
-    pivot_longer( everything(),
-                  names_to = "estado", values_to = "n" ) %>%
-    mutate( estado = factor( estado, levels = c("evaluados", "validos", "sin_out"),
-                             labels = c( "Registros evaluados", "Registros válidos", "Válidos sin outliers" ) ) ) }
+# 1. GRÁFICO COBERTURA DE REGISTROS ------------------------------------------
 
+# =========================================================
+# 1. GRÁFICO COBERTURA DE REGISTROS (ECHARTS4R)
+# - Manejo robusto de "sin datos"
+# - Compatible con Quarto / GitHub Pages
+# =========================================================
+
+library(dplyr)
+library(tidyr)
+library(echarts4r)
+library(htmlwidgets)
+library(knitr)
+
+# ---------------------------------------------------------
+# PREPARACIÓN DE DATOS
+# ---------------------------------------------------------
+prep_registros_calidad <- function(tabla_reporte) {
+  
+  tabla_reporte %>%
+    transmute(
+      evaluados = as.numeric(gsub("\\.", "", n_total)),
+      validos   = as.numeric(gsub("\\.", "", n_validos)),
+      sin_out   = as.numeric(gsub("\\.", "", n_validos_sin_outliers))
+    ) %>%
+    summarise(
+      evaluados = sum(evaluados, na.rm = TRUE),
+      validos   = sum(validos,   na.rm = TRUE),
+      sin_out   = sum(sin_out,   na.rm = TRUE)
+    ) %>%
+    pivot_longer(
+      everything(),
+      names_to  = "estado",
+      values_to = "n"
+    ) %>%
+    mutate(
+      estado = factor(
+        estado,
+        levels = c("evaluados", "validos", "sin_out"),
+        labels = c(
+          "Registros evaluados",
+          "Registros válidos",
+          "Válidos sin outliers"
+        )
+      )
+    )
+}
+
+# ---------------------------------------------------------
+# GRÁFICO PRINCIPAL
+# ---------------------------------------------------------
 plot_cobertura_registros <- function(
     tabla_reporte,
     titulo,
     subtitulo
 ) {
   
-  datos <- prep_registros_calidad(tabla_reporte) %>%
-    mutate(
-      color = c("#2F5597", "#6AA84F", "#CC4125")
+  # -------------------------------------------------
+  # VALIDACIÓN 1: SIN FILAS
+  # -------------------------------------------------
+  if (is.null(tabla_reporte) || nrow(tabla_reporte) == 0) {
+    return(
+      knitr::asis_output(
+        "
+        <div class='kpi-empty'>
+          <strong>No hay información para mostrar</strong><br>
+          La combinación seleccionada no registra datos.
+        </div>
+        "
+      )
     )
+  }
   
+  datos <- prep_registros_calidad(tabla_reporte)
+  
+  # -------------------------------------------------
+  # VALIDACIÓN 2: SIN VALORES NUMÉRICOS
+  # -------------------------------------------------
+  if (sum(datos$n, na.rm = TRUE) == 0) {
+    return(
+      knitr::asis_output(
+        "
+        <div class='kpi-empty'>
+          <strong>No hay información para mostrar</strong><br>
+          La combinación seleccionada no registra datos.
+        </div>
+        "
+      )
+    )
+  }
+  
+  # -------------------------------------------------
+  # COLORES
+  # -------------------------------------------------
+  datos <- datos %>%
+    mutate(color = c("#2F5597", "#6AA84F", "#CC4125"))
+  
+  # -------------------------------------------------
+  # GRÁFICO
+  # -------------------------------------------------
   datos %>%
     e_charts(estado) %>%
     e_bar(
       n,
       barMaxWidth = 42,
       itemStyle = JS("
-    function(params){
-      return { color: params.data.color };
-    }
-  "),
+        function(params){
+          return { color: params.data.color };
+        }
+      "),
       label = list(
         show = TRUE,
         position = "insideRight",
-        color = "#FFFFFF",   
+        color = "#FFFFFF",
+        fontWeight = "bold",
         formatter = JS("
-      function(params){
-        var v = params.value;
-
-        if (Array.isArray(v)) v = v[0];
-        if (typeof v === 'string')
-          v = Number(v.replace(/\\./g,'').replace(',','.'));
-
-        return v
-          .toFixed(0)
-          .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');
-      }
-    "),
-        fontWeight = "bold"
+          function(params){
+            var v = params.value;
+            if (Array.isArray(v)) v = v[0];
+            if (typeof v === 'string')
+              v = Number(v.replace(/\\./g,'').replace(',','.'));
+            return v
+              .toFixed(0)
+              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');
+          }
+        ")
       )
-    )%>%
+    ) %>%
     e_flip_coords() %>%
     e_legend(FALSE) %>%
     e_tooltip(
@@ -72,25 +142,13 @@ plot_cobertura_registros <- function(
         function(params){
           var p = params[0];
           var v = p.value;
-
           if (Array.isArray(v)) v = v[0];
           if (typeof v === 'string')
             v = Number(v.replace(/\\./g,'').replace(',','.'));
-
-          var formatted = v
-            .toFixed(0)
-            .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');
-
-          return '<b>' + p.axisValue + '</b><br/>' + formatted;
+          return '<b>' + p.axisValue + '</b><br>' +
+                 v.toLocaleString('es-CL');
         }
       ")
-    ) %>%
-    e_x_axis(
-      axisLabel = list(
-        formatter = JS(
-          "function(v){ return v.toLocaleString('es-CL'); }"
-        )
-      )
     ) %>%
     e_title(
       text = titulo,
@@ -110,19 +168,35 @@ plot_cobertura_registros <- function(
       right  = 10,
       top    = 10
     ) %>%
-    e_toolbox_feature("saveAsImage") %>% 
-    e_toolbox_feature("magicType", type = c("bar", "line")) %>% 
-    e_animation(duration = 900, easing = "cubicOut")
-  
-  
+    e_toolbox_feature("saveAsImage") %>%
+    e_toolbox_feature("magicType", type = c("bar", "line")) %>%
+    e_animation(
+      duration = 900,
+      easing   = "cubicOut"
+    )
 }
 
 
 
 
-# horario y dia de la semana ----------------------------------------------
+# 2. GRAFICO HORARIO Y DIA DE LA SEMANA --------------------------------------
 
+# =========================================================
+# 2. GRÁFICO HORARIO Y DÍA DE LA SEMANA (AM vs PM)
+# - Manejo robusto de "sin datos"
+# - Compatible con Quarto / GitHub Pages
+# =========================================================
+
+library(dplyr)
+library(tidyr)
+library(echarts4r)
+library(knitr)
+
+# ---------------------------------------------------------
+# PREPARACIÓN BASE
+# ---------------------------------------------------------
 prep_dia_franja <- function(consolidado) {
+  
   consolidado %>%
     dplyr::filter(
       !is.na(datetime_i),
@@ -144,17 +218,18 @@ prep_dia_franja <- function(consolidado) {
 # Base para gráficos
 consolidado_grafico <- prep_dia_franja(consolidado)
 
-
-
+# ---------------------------------------------------------
+# FUNCIÓN DE GRÁFICO
+# ---------------------------------------------------------
 grafico_am_pm <- function(
     data,
     encuesta = NULL,
     etapa    = NULL
 ) {
   
-  # -----------------------------
-  # Filtros explícitos
-  # -----------------------------
+  # -------------------------------------------------
+  # FILTROS
+  # -------------------------------------------------
   df <- data
   
   if (!is.null(encuesta)) {
@@ -165,18 +240,27 @@ grafico_am_pm <- function(
     df <- df[df$etapa == etapa, ]
   }
   
-  # -----------------------------
-  # Validación
-  # -----------------------------
-  if (nrow(df) == 0) {
-    stop("No hay datos para la combinación solicitada")
+  # -------------------------------------------------
+  # VALIDACIÓN: SIN FILAS
+  # -------------------------------------------------
+  if (is.null(df) || nrow(df) == 0) {
+    return(
+      knitr::asis_output(
+        "
+        <div class='kpi-empty'>
+          <strong>No hay información para mostrar</strong><br>
+          La combinación seleccionada no registra datos.
+        </div>
+        "
+      )
+    )
   }
   
-  n_total <- nrow(df)  # <- aquí están las 245
+  n_total <- nrow(df)
   
-  # -----------------------------
-  # Serie día x franja (ABSOLUTA)
-  # -----------------------------
+  # -------------------------------------------------
+  # SERIE DÍA × FRANJA
+  # -------------------------------------------------
   serie <- df %>%
     dplyr::group_by(dia_semana, horario) %>%
     dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
@@ -186,13 +270,29 @@ grafico_am_pm <- function(
       values_fill = 0
     )
   
-  # -----------------------------
-  # Título
-  # -----------------------------
+  # -------------------------------------------------
+  # VALIDACIÓN: SIN VALORES
+  # -------------------------------------------------
+  if (sum(serie$AM + serie$PM, na.rm = TRUE) == 0) {
+    return(
+      knitr::asis_output(
+        "
+        <div class='kpi-empty'>
+          <strong>No hay información para mostrar</strong><br>
+          La combinación seleccionada no registra datos.
+        </div>
+        "
+      )
+    )
+  }
+  
+  # -------------------------------------------------
+  # TÍTULOS
+  # -------------------------------------------------
   titulo <- paste(
     "Distribución de entrevistas",
     if (!is.null(encuesta)) paste("—", encuesta) else "",
-    if (!is.null(etapa)) paste("—", etapa, ")") else ""
+    if (!is.null(etapa)) paste("—", etapa) else ""
   )
   
   subtitulo <- paste(
@@ -201,43 +301,66 @@ grafico_am_pm <- function(
     "· AM vs PM por día"
   )
   
-  # -----------------------------
-  # Gráfico
-  # -----------------------------
+  # -------------------------------------------------
+  # GRÁFICO
+  # -------------------------------------------------
   serie %>%
     echarts4r::e_charts(dia_semana) %>%
-    echarts4r::e_line(AM, name = "AM", smooth = TRUE, symbol = "circle") %>%
-    echarts4r::e_line(PM, name = "PM", smooth = TRUE, symbol = "circle") %>%
+    echarts4r::e_line(
+      AM,
+      name = "AM",
+      smooth = TRUE,
+      symbol = "circle"
+    ) %>%
+    echarts4r::e_line(
+      PM,
+      name = "PM",
+      smooth = TRUE,
+      symbol = "circle"
+    ) %>%
     echarts4r::e_tooltip(trigger = "axis") %>%
     echarts4r::e_legend(
-      show  = TRUE,
+      show   = TRUE,
       orient = "vertical",
       right  = 10,
       top    = "middle"
-    ) %>% 
+    ) %>%
     echarts4r::e_y_axis(name = "Número de entrevistas") %>%
     echarts4r::e_title(
-      text = titulo,
+      text     = titulo,
       subtext = subtitulo,
-      left = "center"
-    ) %>% 
-    e_toolbox(
+      left     = "center"
+    ) %>%
+    echarts4r::e_toolbox(
       show   = TRUE,
       orient = "horizontal",
       right  = 10,
       top    = 10
     ) %>%
-    e_toolbox_feature("saveAsImage") %>% 
-    e_toolbox_feature("magicType", type = c("bar", "line")) %>% 
-    e_animation(duration = 900, easing = "cubicOut") 
-  
-  
+    echarts4r::e_toolbox_feature("saveAsImage") %>%
+    echarts4r::e_toolbox_feature("magicType", type = c("bar", "line")) %>%
+    echarts4r::e_animation(
+      duration = 900,
+      easing   = "cubicOut"
+    )
 }
 
 
 
+# 3. HEATMAP DIA Y HORARIO -----------------------------------------------------------------
 
-# heatmap -----------------------------------------------------------------
+# =========================================================
+# 3. HEATMAP DÍA Y HORARIO (ECHARTS4R)
+# - Manejo robusto de "sin datos"
+# - Horas ordenadas 08–18
+# - Compatible con Quarto / GitHub Pages
+# =========================================================
+
+library(dplyr)
+library(tidyr)
+library(echarts4r)
+library(knitr)
+library(lubridate)
 
 plot_heatmap_horario_etapa <- function(
     consolidado,
@@ -245,35 +368,52 @@ plot_heatmap_horario_etapa <- function(
     etapa_sel
 ) {
   
-  # -----------------------------------------------------
-  # 1) FILTRO (MISMA LÓGICA QUE EL GGPLOT QUE FUNCIONA)
-  # -----------------------------------------------------
+  # -------------------------------------------------
+  # 1) FILTRO
+  # -------------------------------------------------
   df <- consolidado %>%
-    filter(
+    dplyr::filter(
       !is.na(datetime_i),
       .data[["encuesta"]] == encuesta_sel,
-      .data[["etapa"]] == etapa_sel
+      .data[["etapa"]]    == etapa_sel
     ) %>%
-    mutate(
-      dia = weekdays(as.Date(datetime_i)),
-      hora = hour(datetime_i)
+    dplyr::mutate(
+      dia  = weekdays(as.Date(datetime_i)),
+      hora = lubridate::hour(datetime_i)
     ) %>%
-    filter(
+    dplyr::filter(
       dia %in% c("lunes", "martes", "miércoles", "jueves", "viernes"),
       hora >= 8,
-      hora <= 19
+      hora <= 18
     )
   
-  if (nrow(df) == 0) {
-    stop("No hay registros para la encuesta y etapa seleccionadas")
+  # -------------------------------------------------
+  # VALIDACIÓN 1: SIN FILAS
+  # -------------------------------------------------
+  if (is.null(df) || nrow(df) == 0) {
+    return(
+      knitr::asis_output(
+        "
+        <div class='kpi-empty'>
+          <strong>No hay información para mostrar</strong><br>
+          La combinación seleccionada no registra datos.
+        </div>
+        "
+      )
+    )
   }
   
-  # -----------------------------------------------------
+  # -------------------------------------------------
   # 2) AGREGACIÓN PARA HEATMAP
-  # -----------------------------------------------------
+  # -------------------------------------------------
+  horas_levels <- sprintf("%02d", 8:18)
+  
   heatmap_df <- df %>%
-    mutate(
-      hora = sprintf("%02d", hora),
+    dplyr::mutate(
+      hora = factor(
+        sprintf("%02d", hora),
+        levels = horas_levels
+      ),
       dia = factor(
         dia,
         levels = c(
@@ -285,17 +425,32 @@ plot_heatmap_horario_etapa <- function(
         )
       )
     ) %>%
-    count(dia, hora, name = "value")
+    dplyr::count(dia, hora, name = "value") %>%
+    tidyr::complete(
+      dia,
+      hora,
+      fill = list(value = 0)
+    )
   
-  #  prueba dura (puedes dejarla o quitarla)
-  message(
-    "Total registros graficados: ",
-    sum(heatmap_df$value)
-  )
+  # -------------------------------------------------
+  # VALIDACIÓN 2: SIN VALORES
+  # -------------------------------------------------
+  if (sum(heatmap_df$value, na.rm = TRUE) == 0) {
+    return(
+      knitr::asis_output(
+        "
+        <div class='kpi-empty'>
+          <strong>No hay información para mostrar</strong><br>
+          La combinación seleccionada no registra datos.
+        </div>
+        "
+      )
+    )
+  }
   
-  # -----------------------------------------------------
+  # -------------------------------------------------
   # 3) ECHARTS HEATMAP
-  # -----------------------------------------------------
+  # -------------------------------------------------
   heatmap_df %>%
     e_charts(hora) %>%
     e_heatmap(
@@ -318,6 +473,8 @@ plot_heatmap_horario_etapa <- function(
       top = "middle"
     ) %>%
     e_x_axis(
+      type = "category",
+      data = horas_levels,
       name = "Hora del día",
       nameLocation = "middle",
       nameGap = 30
@@ -326,32 +483,34 @@ plot_heatmap_horario_etapa <- function(
       name = "Día de la semana"
     ) %>%
     e_title(
-      text = "Distribución horaria del trabajo (08–19)",
+      text = "Distribución horaria del trabajo (08:00 a 18:59)",
       subtext = paste(encuesta_sel, "—", etapa_sel),
       left = "center"
     ) %>%
     e_tooltip(
       trigger = "item",
       formatter = JS("
-      function (params) {
-        var hora = params.value[0];
-        var dia  = params.value[1];
-        var val  = params.value[2];
+        function (params) {
+          var hora = params.value[0];
+          var dia  = params.value[1];
+          var val  = params.value[2];
 
-        return (
-          '<b>' + dia + '</b><br/>' +
-          'Hora: ' + hora +':00 a ' + hora + ':59'  + '<br/>' +
-          'Entrevistas: ' + val
-        );
-      }
-    ")
-    )%>%
+          if (val === 0) return '';
+
+          return (
+            '<b>' + dia + '</b><br/>' +
+            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +
+            'Supervisiones: ' + val
+          );
+        }
+      ")
+    ) %>%
     e_grid(
       left = 80,
       right = 80,
       top = 80,
       bottom = 40
-    ) %>% 
+    ) %>%
     e_toolbox(
       show   = TRUE,
       orient = "horizontal",
@@ -359,5 +518,4 @@ plot_heatmap_horario_etapa <- function(
       top    = 10
     ) %>%
     e_toolbox_feature("saveAsImage")
-  
 }

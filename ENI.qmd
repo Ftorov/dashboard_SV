@@ -17,11 +17,8 @@ source("R/grafic.R", encoding = "UTF-8")
 
 ```
 
-
 ::: panel-tabset
-
 ## Verificación
-
 
 ```{r}
 kpi_dashboard_completo(
@@ -33,8 +30,7 @@ kpi_dashboard_completo(
 
 ```
 
-
-::: {.columns}
+::: columns
 ::: {.column width="70%"}
 ```{r}
 plot_cobertura_registros(
@@ -45,10 +41,8 @@ plot_cobertura_registros(
 )
 ```
 :::
+
 ::: {.column width="30%"}
-
-
-
 ```{r}
 
 kpi_dashboard_completo(
@@ -59,7 +53,6 @@ kpi_dashboard_completo(
 )
 
 ```
-
 :::
 :::
 
@@ -73,7 +66,6 @@ kpi_dashboard_completo(
 
 ```
 
-
 ```{r}
 grafico_am_pm(
      consolidado_grafico,
@@ -81,15 +73,12 @@ grafico_am_pm(
      etapa    = "Verificación")
 ```
 
-
 ```{r}
 plot_heatmap_horario_etapa(
      consolidado,
      encuesta_sel = "ENI",
      etapa_sel    = "Verificación")
 ```
-
-
 
 ## Recolección
 
@@ -103,8 +92,7 @@ kpi_dashboard_completo(
 
 ```
 
-
-::: {.columns}
+::: columns
 ::: {.column width="70%"}
 ```{r}
 plot_cobertura_registros(
@@ -115,10 +103,8 @@ plot_cobertura_registros(
 )
 ```
 :::
+
 ::: {.column width="30%"}
-
-
-
 ```{r}
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
@@ -128,7 +114,6 @@ kpi_dashboard_completo(
 )
 
 ```
-
 :::
 :::
 
@@ -169,8 +154,7 @@ kpi_dashboard_completo(
 
 ```
 
-
-::: {.columns}
+::: columns
 ::: {.column width="70%"}
 ```{r}
 plot_cobertura_registros(
@@ -181,10 +165,8 @@ plot_cobertura_registros(
 )
 ```
 :::
+
 ::: {.column width="30%"}
-
-
-
 ```{r}
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
@@ -194,7 +176,6 @@ kpi_dashboard_completo(
 )
 
 ```
-
 :::
 :::
 
@@ -221,7 +202,4 @@ plot_heatmap_horario_etapa(
      encuesta_sel = "ENI",
      etapa_sel    = "Consistencia")
 ```
-
 :::
-
-
