@@ -17,19 +17,32 @@ source("R/grafic.R", encoding = "UTF-8")
 
 ```
 
-::: stat-box
+
 ::: panel-tabset
+
 ## Verificación
+
 
 ```{r}
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Verificación",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Duraciones"
 )
 
 ```
+
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+
+```
+:::
+::: {.column width="30%"}
+
+
 
 ```{r}
 kpi_dashboard_completo(
@@ -41,15 +54,29 @@ kpi_dashboard_completo(
 
 ```
 
+:::
+:::
+
 ```{r}
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Verificación",
-  kpi_sel      = "Duraciones"
+  kpi_sel      = "Calidad"
 )
 
 ```
+
+
+```{r}
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ENI",
+     etapa    = "Verificación")
+```
+
+
+
 
 ## Recolección
 
@@ -58,10 +85,26 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Recolección",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Duraciones"
 )
 
 ```
+
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ENI", etapa == "Recolección"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ENI — Recolección"
+)
+```
+:::
+::: {.column width="30%"}
+
+
 
 ```{r}
 kpi_dashboard_completo(
@@ -73,15 +116,26 @@ kpi_dashboard_completo(
 
 ```
 
+:::
+:::
+
 ```{r}
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Recolección",
-  kpi_sel      = "Duraciones"
+  kpi_sel      = "Calidad"
 )
 
 ```
+
+```{r}
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ENI",
+     etapa    = "Recolección")
+```
+
 
 ## Análisis y consistencia
 
@@ -90,10 +144,26 @@ kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Consistencia",
-  kpi_sel      = "Calidad"
+  kpi_sel      = "Duraciones"
 )
 
 ```
+
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+plot_cobertura_registros(
+  tabla_reporte = reporte_origen_etapa %>%
+    filter(encuesta == "ENI", etapa == "Consistencia"),
+  titulo    = "Cobertura de registros",
+  subtitulo = "ENI — Consistencia"
+)
+```
+:::
+::: {.column width="30%"}
+
+
 
 ```{r}
 kpi_dashboard_completo(
@@ -105,14 +175,26 @@ kpi_dashboard_completo(
 
 ```
 
+:::
+:::
+
 ```{r}
 kpi_dashboard_completo(
   df           = reporte_origen_etapa,
   encuesta_sel = "ENI",
   etapa_sel    = "Consistencia",
-  kpi_sel      = "Duraciones"
+  kpi_sel      = "Calidad"
 )
 
 ```
+
+```{r}
+grafico_am_pm(
+     consolidado_grafico,
+     encuesta = "ENI",
+     etapa    = "Consistencia")
+```
+
 :::
-:::
+
+

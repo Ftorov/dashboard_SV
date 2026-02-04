@@ -46,125 +46,73 @@ body {
 /* Card base */
 
 .kpi-card {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.95),
-    rgba(255, 255, 255, 1)
-  );
-  border-radius: 18px;
-  padding: 1.6rem 1.7rem 1.7rem;
-  min-height: 160px;
+  padding: 1.1rem 1.25rem 1.2rem;
+  min-height: 120px;
+  border-radius: 14px;
   box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 12px 28px rgba(15, 23, 42, 0.06);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+    0 1px 1px rgba(15, 23, 42, 0.04),
+    0 8px 20px rgba(15, 23, 42, 0.05);
 }
 
 .kpi-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow:
-    0 2px 6px rgba(15, 23, 42, 0.06),
-    0 18px 36px rgba(15, 23, 42, 0.08);
+    0 2px 4px rgba(15, 23, 42, 0.06),
+    0 12px 24px rgba(15, 23, 42, 0.07);
 }
 
 
-/* Cabecera */
-
+/* Header más liviano */
 .kpi-head {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #64748b;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  gap: 0.4rem;
+  justify-content: space-between;
 }
 
 .kpi-head i {
-  font-size: 1rem;
-  opacity: 0.7;
+  font-size: 0.9rem;
+  opacity: 0.65;
 }
 
-
-/* Valor principal */
-
+/* Número principal más equilibrado */
 .kpi-main {
-  margin-top: 0.85rem;
-  font-size: 2.15rem;
+  margin-top: 0.55rem;
+  font-size: 1.85rem;
   font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  color: #020617;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
-
-/* Texto secundario */
-
+/* Texto secundario más compacto */
 .kpi-sub {
-  margin-top: 0.35rem;
-  font-size: 0.8rem;
-  font-weight: 400;
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
   color: #6b7280;
 }
-
 
 /* =========================================================
    Estados semánticos
    ========================================================= */
 
-/* OK */
-
 .kpi-card.risk.ok {
-  background: #ecfdf5;
+  background: linear-gradient(180deg, #f0fdfa, #ffffff);
 }
-
-.kpi-card.risk.ok .kpi-head i {
-  color: #0f766e;
-}
-
-
-/* Advertencia */
 
 .kpi-card.risk.warn {
-  background: #fff7ed;
+  background: linear-gradient(180deg, #fff7ed, #ffffff);
 }
-
-.kpi-card.risk.warn .kpi-head i {
-  color: #b45309;
-}
-
-
-/* Crítico */
 
 .kpi-card.risk.bad {
-  background: #fef2f2;
+  background: linear-gradient(180deg, #fef2f2, #ffffff);
 }
-
-.kpi-card.risk.bad .kpi-head i {
-  color: #b91c1c;
-}
-
-
-/* Neutro */
 
 .kpi-card.neutral {
-  background: #f8fafc;
+  background: linear-gradient(180deg, #f8fafc, #ffffff);
 }
-
-.kpi-card.neutral .kpi-head i {
-  color: #003a8f;
-}
-
-
-/* Tiempo */
 
 .kpi-card.time {
-  background: #eef2ff;
-}
-
-.kpi-card.time .kpi-head i {
-  color: #4f46e5;
+  background: linear-gradient(180deg, #eef2ff, #ffffff);
 }
 
 
@@ -275,20 +223,31 @@ body {
 /* =========================================================
    KPI Help / Definiciones
    ========================================================= */
+/* =========================================================
+   KPI Help — Popover / Tooltip
+   ========================================================= */
 
-.kpi-help {
+.kpi-card {
   position: relative;
-  margin-left: auto;
 }
 
+/* Botón de ayuda */
+.kpi-help {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.75rem;
+  z-index: 20;
+}
+
+/* Ícono */
 .kpi-help summary {
   list-style: none;
   cursor: pointer;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: #64748b;
+  padding: 0.15rem 0.4rem;
   border-radius: 999px;
-  padding: 0.1rem 0.35rem;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -298,39 +257,55 @@ body {
 
 .kpi-help summary:hover {
   background: rgba(148, 163, 184, 0.15);
-  color: #475569;
+  color: #334155;
 }
 
-
-/* Panel desplegable */
-
+/* Ventana emergente */
 .kpi-help-text {
   position: absolute;
+  top: calc(100% + 8px);   /* ⬅ aparece debajo del icono */
   right: 0;
-  top: 1.4rem;
-  z-index: 20;
-  width: 260px;
-  padding: 0.75rem 0.9rem;
-  font-size: 0.78rem;
-  line-height: 1.45;
+  z-index: 50;
+
+  width: 240px;
+  padding: 0.65rem 0.8rem;
+
+  font-size: 0.75rem;
+  line-height: 1.4;
   color: #334155;
+
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow:
     0 4px 12px rgba(15, 23, 42, 0.08),
-    0 12px 28px rgba(15, 23, 42, 0.12);
+    0 16px 32px rgba(15, 23, 42, 0.12);
+
+  /* Estado oculto */
   opacity: 0;
   transform: translateY(-4px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-
-/* Mostrar con animación */
-
+/* Mostrar popover */
 .kpi-help[open] .kpi-help-text {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
 }
+.kpi-help-text::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
+}
+
 
 
 /* =========================================================

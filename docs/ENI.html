@@ -71,6 +71,18 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/echarts4r-4.8.0/echarts-en.min.js"></script>
+
+<script src="site_libs/echarts4r-4.8.0/ecStat.min.js"></script>
+
+<script src="site_libs/echarts4r-4.8.0/dataTool.min.js"></script>
+
+<script src="site_libs/echarts4r-binding-0.4.6/echarts4r.js"></script>
+
 
 
 <link rel="stylesheet" href="styles.css">
@@ -180,20 +192,120 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="stat-box">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Verificación</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Recolección</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Análisis y consistencia</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Calidad</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Verificación</span>
+<div class="kpi-grid">
+<div class="kpi-card time neutral">
+<div class="kpi-head">
+<i class="bi bi-clock"></i>
+<span>Duración media</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Promedio del tiempo de respuesta calculado sobre registros válidos sin outliers.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">00:01:16</span>
 </div>
 </div>
+<div class="kpi-card time neutral">
+<div class="kpi-head">
+<i class="bi bi-arrow-down"></i>
+<span>Duración mínima</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Menor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">00:00:29</span>
+</div>
+</div>
+<div class="kpi-card time neutral">
+<div class="kpi-head">
+<i class="bi bi-arrow-up"></i>
+<span>Duración máxima</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Mayor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">00:03:42</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:70%;">
+
+</div><div class="column" style="width:30%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="kpi-grid">
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-clipboard-data"></i>
+<span>Registros evaluados</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Total de registros procesados en la etapa considerada.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">245</span>
+</div>
+</div>
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-check-lg"></i>
+<span>Registros válidos</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Número de registros cuya duración cumple las reglas operativas definidas.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">242</span>
+</div>
+</div>
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-check-circle"></i>
+<span>Válidos sin outliers</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Registros válidos que no presentan valores atípicos y que conforman la base final para el análisis.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">230</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
 <div class="kpi-grid">
 <div class="kpi-card risk ok">
 <div class="kpi-head">
@@ -248,71 +360,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Cobertura</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Verificación</span>
-</div>
-</div>
-<div class="kpi-grid">
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-clipboard-data"></i>
-<span>Registros evaluados</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Total de registros procesados en la etapa considerada.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">245</span>
-</div>
-</div>
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-check-lg"></i>
-<span>Registros válidos</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Número de registros cuya duración cumple las reglas operativas definidas.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">242</span>
-</div>
-</div>
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-check-circle"></i>
-<span>Válidos sin outliers</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Registros válidos que no presentan valores atípicos y que conforman la base final para el análisis.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">230</span>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-d8950a703a936711db69" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-d8950a703a936711db69">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":false,"type":"plain"},"series":[{"data":[{"value":["lunes","12"]},{"value":["martes","25"]},{"value":["miércoles","29"]},{"value":["jueves","23"]},{"value":["viernes","15"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","29"]},{"value":["martes","32"]},{"value":["miércoles","46"]},{"value":["jueves","20"]},{"value":["viernes","14"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI ( Verificación )","subtext":"Total entrevistas: 245 · AM vs PM por día"}]},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
-</div>
-</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Duraciones</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Verificación</span>
-</div>
-</div>
 <div class="kpi-grid">
 <div class="kpi-card time neutral">
 <div class="kpi-head">
@@ -326,7 +381,7 @@ ul.task-list li input[type="checkbox"] {
 </details>
 </div>
 <div class="kpi-main">
-<span class="kpi-value">00:01:16</span>
+<span class="kpi-value">00:00:52</span>
 </div>
 </div>
 <div class="kpi-card time neutral">
@@ -341,7 +396,7 @@ ul.task-list li input[type="checkbox"] {
 </details>
 </div>
 <div class="kpi-main">
-<span class="kpi-value">00:00:29</span>
+<span class="kpi-value">00:00:18</span>
 </div>
 </div>
 <div class="kpi-card time neutral">
@@ -356,23 +411,76 @@ ul.task-list li input[type="checkbox"] {
 </details>
 </div>
 <div class="kpi-main">
-<span class="kpi-value">00:03:42</span>
+<span class="kpi-value">00:05:22</span>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="columns">
+<div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Calidad</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Recolección</span>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-69c505d2bfb16b5b7639" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-69c505d2bfb16b5b7639">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true,"axisLabel":{"formatter":"function(v){ return v.toLocaleString('es-CL'); }"}}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["3395","Registros evaluados"]},{"value":["2072","Registros válidos"]},{"value":["2046","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      "}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n\n          var formatted = v\n            .toFixed(0)\n            .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n\n          return '<b>' + p.axisValue + '<\/b><br/>' + formatted;\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Recolección"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}]},"dispose":true},"evals":["opts.xAxis.0.axisLabel.formatter","opts.series.0.itemStyle","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
+</div><div class="column" style="width:30%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="kpi-grid">
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-clipboard-data"></i>
+<span>Registros evaluados</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Total de registros procesados en la etapa considerada.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">3.395</span>
+</div>
+</div>
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-check-lg"></i>
+<span>Registros válidos</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Número de registros cuya duración cumple las reglas operativas definidas.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">2.072</span>
+</div>
+</div>
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-check-circle"></i>
+<span>Válidos sin outliers</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Registros válidos que no presentan valores atípicos y que conforman la base final para el análisis.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">2.046</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
 <div class="kpi-grid">
 <div class="kpi-card risk ok">
 <div class="kpi-head">
@@ -427,71 +535,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Cobertura</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Recolección</span>
-</div>
-</div>
-<div class="kpi-grid">
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-clipboard-data"></i>
-<span>Registros evaluados</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Total de registros procesados en la etapa considerada.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">3.395</span>
-</div>
-</div>
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-check-lg"></i>
-<span>Registros válidos</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Número de registros cuya duración cumple las reglas operativas definidas.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">2.072</span>
-</div>
-</div>
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-check-circle"></i>
-<span>Válidos sin outliers</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Registros válidos que no presentan valores atípicos y que conforman la base final para el análisis.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">2.046</span>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-d0bf30ebd7bc447a1466" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-d0bf30ebd7bc447a1466">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":false,"type":"plain"},"series":[{"data":[{"value":["lunes","442"]},{"value":["martes","157"]},{"value":["miércoles"," 80"]},{"value":["jueves","529"]},{"value":["viernes","474"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","443"]},{"value":["martes"," 64"]},{"value":["miércoles","305"]},{"value":["jueves","598"]},{"value":["viernes","303"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI ( Recolección )","subtext":"Total entrevistas: 3.395 · AM vs PM por día"}]},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
-</div>
-</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Duraciones</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Recolección</span>
-</div>
-</div>
 <div class="kpi-grid">
 <div class="kpi-card time neutral">
 <div class="kpi-head">
@@ -505,7 +556,7 @@ ul.task-list li input[type="checkbox"] {
 </details>
 </div>
 <div class="kpi-main">
-<span class="kpi-value">00:00:52</span>
+<span class="kpi-value">00:01:35</span>
 </div>
 </div>
 <div class="kpi-card time neutral">
@@ -535,23 +586,76 @@ ul.task-list li input[type="checkbox"] {
 </details>
 </div>
 <div class="kpi-main">
-<span class="kpi-value">00:05:22</span>
+<span class="kpi-value">00:08:15</span>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="columns">
+<div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Calidad</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Consistencia</span>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-775fd8c3894a0d8362ad" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-775fd8c3894a0d8362ad">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true,"axisLabel":{"formatter":"function(v){ return v.toLocaleString('es-CL'); }"}}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["1407","Registros evaluados"]},{"value":["1366","Registros válidos"]},{"value":["1274","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      "}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n\n          var formatted = v\n            .toFixed(0)\n            .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n\n          return '<b>' + p.axisValue + '<\/b><br/>' + formatted;\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Consistencia"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}]},"dispose":true},"evals":["opts.xAxis.0.axisLabel.formatter","opts.series.0.itemStyle","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
+</div><div class="column" style="width:30%;">
+<div class="cell">
+<div class="cell-output-display">
+<div class="kpi-grid">
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-clipboard-data"></i>
+<span>Registros evaluados</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Total de registros procesados en la etapa considerada.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">1.407</span>
+</div>
+</div>
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-check-lg"></i>
+<span>Registros válidos</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Número de registros cuya duración cumple las reglas operativas definidas.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">1.366</span>
+</div>
+</div>
+<div class="kpi-card neutral neutral">
+<div class="kpi-head">
+<i class="bi bi-check-circle"></i>
+<span>Válidos sin outliers</span>
+<details class="kpi-help">
+<summary title="Ver definición metodológica">
+<i class="bi bi-info-circle"></i>
+</summary>
+<div class="kpi-help-text">Registros válidos que no presentan valores atípicos y que conforman la base final para el análisis.</div>
+</details>
+</div>
+<div class="kpi-main">
+<span class="kpi-value">1.274</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
 <div class="kpi-grid">
 <div class="kpi-card risk warn">
 <div class="kpi-head">
@@ -606,119 +710,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Cobertura</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Consistencia</span>
-</div>
-</div>
-<div class="kpi-grid">
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-clipboard-data"></i>
-<span>Registros evaluados</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Total de registros procesados en la etapa considerada.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">1.407</span>
-</div>
-</div>
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-check-lg"></i>
-<span>Registros válidos</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Número de registros cuya duración cumple las reglas operativas definidas.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">1.366</span>
-</div>
-</div>
-<div class="kpi-card neutral neutral">
-<div class="kpi-head">
-<i class="bi bi-check-circle"></i>
-<span>Válidos sin outliers</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Registros válidos que no presentan valores atípicos y que conforman la base final para el análisis.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">1.274</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div class="kpi-header">
-<div class="kpi-header-title">Duraciones</div>
-<div class="kpi-header-meta">
-<span class="kpi-pill">ENI</span>
-<span class="kpi-pill">Consistencia</span>
-</div>
-</div>
-<div class="kpi-grid">
-<div class="kpi-card time neutral">
-<div class="kpi-head">
-<i class="bi bi-clock"></i>
-<span>Duración media</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Promedio del tiempo de respuesta calculado sobre registros válidos sin outliers.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">00:01:35</span>
-</div>
-</div>
-<div class="kpi-card time neutral">
-<div class="kpi-head">
-<i class="bi bi-arrow-down"></i>
-<span>Duración mínima</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Menor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">00:00:18</span>
-</div>
-</div>
-<div class="kpi-card time neutral">
-<div class="kpi-head">
-<i class="bi bi-arrow-up"></i>
-<span>Duración máxima</span>
-<details class="kpi-help">
-<summary title="Ver definición metodológica">
-<i class="bi bi-info-circle"></i>
-</summary>
-<div class="kpi-help-text">Mayor tiempo de respuesta observado entre los registros válidos sin outliers.</div>
-</details>
-</div>
-<div class="kpi-main">
-<span class="kpi-value">00:08:15</span>
-</div>
-</div>
-</div>
-</div>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-6881aff346074e706fd3" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-6881aff346074e706fd3">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":false,"type":"plain"},"series":[{"data":[{"value":["lunes","171"]},{"value":["martes","178"]},{"value":["miércoles"," 74"]},{"value":["jueves"," 86"]},{"value":["viernes"," 91"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","242"]},{"value":["martes","282"]},{"value":["miércoles"," 64"]},{"value":["jueves","125"]},{"value":["viernes"," 94"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI ( Consistencia )","subtext":"Total entrevistas: 1.407 · AM vs PM por día"}]},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>

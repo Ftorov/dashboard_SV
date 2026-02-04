@@ -311,18 +311,8 @@ kpi_dashboard_completo <- function(df, encuesta_sel, etapa_sel, kpi_sel) {
   cards <- purrr::pmap(cards_def, render_card)
   
   browsable(
-    tagList(
-      tags$div(
-        class = "kpi-header",
-        tags$div(class = "kpi-header-title", kpi_sel),
-        tags$div(
-          class = "kpi-header-meta",
-          tags$span(class = "kpi-pill", encuesta_sel),
-          tags$span(class = "kpi-pill", etapa_sel)
-        )
-      ),
-      tags$div(class = "kpi-grid", cards)
-    )
+    tags$div(class = "kpi-grid", cards)
   )
+  
 }
 

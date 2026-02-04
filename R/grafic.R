@@ -1,222 +1,190 @@
 # =========================================================
-# GRÁFICOS OPERATIVOS — PREPARACIÓN Y FUNCIONES
+# GRÁFICO COBERTURA DE REGISTROS — ECHARTS
 # =========================================================
 
-library(dplyr)
-library(lubridate)
-library(tidyr)
-library(echarts4r)
-library(ggplot2)
-
-# ---------------------------------------------------------
-# 1) PREPARACIÓN BASE: día de semana + franja AM/PM
-# ---------------------------------------------------------
-
-prep_dia_franja <- function(consolidado) {
-  consolidado %>%
-    filter(!is.na(datetime_i)) %>%
-    mutate(
-      dia_semana = factor(
-        lubridate::wday(
-          datetime_i,
-          label = TRUE,
-          abbr = FALSE,
-          week_start = 1
-        ),
-        levels = c(
-          "lunes", "martes", "miércoles",
-          "jueves", "viernes", "sábado", "domingo"
-        )
-      ),
-      franja = if_else(lubridate::hour(datetime_i) < 12, "AM", "PM")
-    )
-}
-
-# ---------------------------------------------------------
-# 2) SERIE AM / PM POR DÍA (GLOBAL O POR ENCUESTA)
-# ---------------------------------------------------------
-
-serie_am_pm <- function(df) {
-  df %>%
-    group_by(dia_semana, franja) %>%
-    summarise(n = n(), .groups = "drop") %>%
-    pivot_wider(
-      names_from = franja,
-      values_from = n,
-      values_fill = 0
-    )
-}
-
-serie_am_pm_encuesta <- function(df) {
-  df %>%
-    group_by(encuesta, dia_semana, franja) %>%
-    summarise(n = n(), .groups = "drop") %>%
-    pivot_wider(
-      names_from = franja,
-      values_from = n,
-      values_fill = 0
-    )
-}
-
-# ---------------------------------------------------------
-# 3) GRÁFICO LÍNEAS AM / PM (ECHARTS)
-# ---------------------------------------------------------
-
-plot_lineas_am_pm <- function(df, titulo) {
-  df %>%
-    e_charts(dia_semana) %>%
-    e_line(AM, name = "AM", smooth = TRUE, symbol = "circle") %>%
-    e_line(PM, name = "PM", smooth = TRUE, symbol = "circle") %>%
-    e_tooltip(trigger = "axis") %>%
-    e_legend(orient = "vertical", right = 10, top = "middle") %>%
-    e_x_axis(
-      name = "Día de la semana",
-      nameLocation = "middle",
-      nameGap = 30
-    ) %>%
-    e_y_axis(name = "Número de entrevistas") %>%
-    e_title(
-      text = titulo,
-      subtext = "Comparación AM vs PM",
-      left = "center"
-    )
-}
-
-
-
-# # Cargar funciones
-# source("R/graficos_operativos.R")
-# 
-# # Preparar datos
-# consolidado_grafico <- prep_dia_franja(consolidado)
-# 
-# # Serie para una encuesta específica
-# serie <- consolidado_grafico %>%
-#   filter(encuesta == "ENI") %>%
-#   serie_am_pm()
-# 
-# # Gráfico
-# plot_lineas_am_pm(
-#   serie,
-#   titulo = "Entrevistas por día de la semana — ENI"
-# )
-
-
-
-
-
-
-
-# ---------------------------------------------------------
-# 4) HEATMAP HORARIO (GGPLOT — ROBUSTO)
-# ---------------------------------------------------------
-
-plot_heatmap_horario <- function(heatmap_df, encuesta) {
-  heatmap_df %>%
-    filter(
-      dia %in% c("lunes", "martes", "miércoles", "jueves", "viernes")
-    ) %>%
-    mutate(
-      dia = factor(
-        dia,
-        levels = c(
-          "lunes", "martes", "miércoles",
-          "jueves", "viernes"
-        )
-      )
-    ) %>%
-    ggplot(
-      aes(x = hora, y = dia, fill = value)
-    ) +
-    geom_tile(color = "white", linewidth = 0.2) +
-    scale_fill_viridis_c(option = "C", name = "Entrevistas") +
-    labs(
-      title = "Distribución horaria del trabajo (08–19)",
-      subtitle = paste("Heatmap lunes a viernes —", encuesta),
-      x = "Hora del día",
-      y = "Día de la semana"
-    ) +
-    theme_minimal(base_size = 12) +
-    theme(
-      panel.grid = element_blank(),
-      legend.position = "right"
-    )
-}
-
-
-
-# plot_heatmap_horario(
-#   heatmap_df,
-#   encuesta = "ENI"
-# )
-
-
-
-
-
-
+library(htmlwidgets)
 library(echarts4r)
 library(dplyr)
 library(tidyr)
 library(purrr)
 
 
-# 1) CALIDAD — BARRA HORIZONTAL (%)
+prep_registros_calidad <- function(tabla_reporte)
+{ tabla_reporte %>%
+    transmute( evaluados = as.numeric(gsub("\\.", "", n_total)),
+               validos = as.numeric(gsub("\\.", "", n_validos)),
+               sin_out = as.numeric(gsub("\\.", "", n_validos_sin_outliers)) ) %>%
+    summarise( evaluados = sum(evaluados, na.rm = TRUE),
+               validos = sum(validos, na.rm = TRUE),
+               sin_out = sum(sin_out, na.rm = TRUE) ) %>%
+    pivot_longer( everything(),
+                  names_to = "estado", values_to = "n" ) %>%
+    mutate( estado = factor( estado, levels = c("evaluados", "validos", "sin_out"),
+                             labels = c( "Registros evaluados", "Registros válidos", "Válidos sin outliers" ) ) ) }
 
-grafico_calidad <- function(fila) {
+plot_cobertura_registros <- function(
+    tabla_reporte,
+    titulo,
+    subtitulo
+) {
   
-  datos <- tibble(
-    indicador = c("Error fecha", "Regla operativa", "Outliers"),
-    valor = as.numeric(
-      gsub(",", ".", c(
-        fila$pct_error_fecha,
-        fila$pct_regla_operativa,
-        fila$pct_outliers
-      ))
+  datos <- prep_registros_calidad(tabla_reporte) %>%
+    mutate(
+      color = c("#2F5597", "#6AA84F", "#CC4125")
     )
-  ) 
   
   datos %>%
-    e_charts(indicador) %>%
+    e_charts(estado) %>%
     e_bar(
-      valor,
-      name = "Porcentaje",
-      barMaxWidth = 38,
-      itemStyle = list(
-        color = "#1E3B7D"   
-      )) %>%
+      n,
+      barMaxWidth = 42,
+      itemStyle = JS("
+        function(params){
+          return { color: params.data.color };
+        }
+      ")
+    ) %>%
     e_flip_coords() %>%
+    e_legend(FALSE) %>%
     e_tooltip(
       trigger = "axis",
       axisPointer = list(type = "shadow"),
-      formatter = htmlwidgets::JS("
+      formatter = JS("
         function(params){
           var p = params[0];
           var v = p.value;
+
           if (Array.isArray(v)) v = v[0];
-          else if (typeof v === 'object' && v !== null && 'value' in v) v = v.value;
-          return '<b>' + p.axisValue + '</b><br/>' +
-                 Number(v).toLocaleString('es-CL',
-                   { minimumFractionDigits: 2, maximumFractionDigits: 2 }
-                 ) + ' %';
+          if (typeof v === 'string')
+            v = Number(v.replace(/\\./g,'').replace(',','.'));
+
+          var formatted = v
+            .toFixed(0)
+            .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');
+
+          return '<b>' + p.axisValue + '</b><br/>' + formatted;
         }
       ")
     ) %>%
     e_x_axis(
-      max = 100,
       axisLabel = list(
-        formatter = htmlwidgets::JS("function(v){ return v + '%'; }")
+        formatter = JS(
+          "function(v){ return v.toLocaleString('es-CL'); }"
+        )
       )
     ) %>%
-    e_legend(FALSE) %>%
-    e_title("") %>% 
-    e_animation(duration = 1200, easing = "elasticOut") %>% 
-    e_grid(top = 110, left = 30, right = 30, bottom = 10, containLabel = TRUE) 
+    e_title(
+      text = titulo,
+      subtext = subtitulo,
+      left = "center"
+    ) %>%
+    e_grid(
+      left = 40,
+      right = 20,
+      top = 70,
+      bottom = 10,
+      containLabel = TRUE
+    )
 }
 
 
 
-# fila <- reporte_origen_etapa %>%
-#   filter(encuesta == "ENI", etapa == "Consistencia")
-# 
-# grafico_calidad(fila)
+
+# horario y dia de la semana ----------------------------------------------
+
+prep_dia_franja <- function(consolidado) {
+  consolidado %>%
+    dplyr::filter(
+      !is.na(datetime_i),
+      !is.na(dia_semana),
+      !is.na(horario)
+    ) %>%
+    dplyr::mutate(
+      dia_semana = factor(
+        dia_semana,
+        levels = c(
+          "lunes", "martes", "miércoles",
+          "jueves", "viernes", "sábado", "domingo"
+        )
+      ),
+      horario = factor(horario, levels = c("AM", "PM"))
+    )
+}
+
+# Base para gráficos
+consolidado_grafico <- prep_dia_franja(consolidado)
+
+
+
+grafico_am_pm <- function(
+    data,
+    encuesta = NULL,
+    etapa    = NULL
+) {
+  
+  # -----------------------------
+  # Filtros explícitos
+  # -----------------------------
+  df <- data
+  
+  if (!is.null(encuesta)) {
+    df <- df[df$encuesta == encuesta, ]
+  }
+  
+  if (!is.null(etapa)) {
+    df <- df[df$etapa == etapa, ]
+  }
+  
+  # -----------------------------
+  # Validación
+  # -----------------------------
+  if (nrow(df) == 0) {
+    stop("No hay datos para la combinación solicitada")
+  }
+  
+  n_total <- nrow(df)  # <- aquí están las 245
+  
+  # -----------------------------
+  # Serie día x franja (ABSOLUTA)
+  # -----------------------------
+  serie <- df %>%
+    dplyr::group_by(dia_semana, horario) %>%
+    dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
+    tidyr::pivot_wider(
+      names_from  = horario,
+      values_from = n,
+      values_fill = 0
+    )
+  
+  # -----------------------------
+  # Título
+  # -----------------------------
+  titulo <- paste(
+    "Distribución de entrevistas",
+    if (!is.null(encuesta)) paste("—", encuesta) else "",
+    if (!is.null(etapa)) paste("(", etapa, ")") else ""
+  )
+  
+  subtitulo <- paste(
+    "Total entrevistas:",
+    format(n_total, big.mark = ".", decimal.mark = ","),
+    "· AM vs PM por día"
+  )
+  
+  # -----------------------------
+  # Gráfico
+  # -----------------------------
+  serie %>%
+    echarts4r::e_charts(dia_semana) %>%
+    echarts4r::e_line(AM, name = "AM", smooth = TRUE, symbol = "circle") %>%
+    echarts4r::e_line(PM, name = "PM", smooth = TRUE, symbol = "circle") %>%
+    echarts4r::e_tooltip(trigger = "axis") %>%
+    echarts4r::e_legend(FALSE) %>%
+    echarts4r::e_y_axis(name = "Número de entrevistas") %>%
+    echarts4r::e_title(
+      text = titulo,
+      subtext = subtitulo,
+      left = "center"
+    )
+}
+
