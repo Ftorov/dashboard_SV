@@ -1,5 +1,5 @@
 ---
-title: "título pendiente"
+title: "Inicio"
 page-layout: full
 ---
 
@@ -9,7 +9,6 @@ source("R/_load_all.R", encoding = "UTF-8")
 
 ::: {.hero}
 
-## Subtitulo pendiente
 
 <p class="hero-lead">
 Indicadores, visualizaciones y descargas orientadas a la gestión operativa de la supervisión CAWI.

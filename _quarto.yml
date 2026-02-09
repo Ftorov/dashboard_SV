@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "dashboard_SV"
+  title: "Supervisión CAWI"
   site-url: "https://ftorov.github.io/dashboard_SV"
   favicon: "assets/images/logo_ine.png"
   
@@ -89,5 +89,5 @@ execute:
   message: false       # Oculta mensajes
   error: false         # Oculta errores
   cache: false         # No usa caché
-  freeze: false         # Recalcula solo si el archivo cambió
+  freeze: auto         # Recalcula solo si el archivo cambió
   encoding: "UTF-8"    # Codificación de texto
