@@ -12,34 +12,33 @@ source("R/_load_all.R", encoding = "UTF-8")
 
 ## 1. Alcance
 
-Este proyecto consolida y estandariza información proveniente de **Survey Solutions** asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar **calidad temporal**, **cumplimiento de reglas operativas** y **comportamiento estadístico de las duraciones**, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.
+Este dashboard consolida y estandariza información proveniente de **Survey Solutions** asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar **calidad temporal**, **cumplimiento de reglas operativas** y **comportamiento estadístico de las duraciones**, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.
 
 La unidad de análisis corresponde a la **entrevista supervisada** (`interview__id`). Todos los indicadores se calculan sobre el universo efectivo de registros disponibles tras la depuración inicial.
 
----
+------------------------------------------------------------------------
 
 ## 2. Origen y consolidación de datos
 
 Los datos se obtienen desde archivos `.zip` exportados desde Survey Solutions, que contienen:
 
-* Archivo principal de supervisión (`*.tab`)
-* Archivo de diagnósticos (`interview__diagnostics.tab`)
+-   Archivo principal de supervisión (`*.tab`)
+-   Archivo de diagnósticos (`interview__diagnostics.tab`)
 
 Ambos insumos se integran mediante `interview__id`, incorporando el identificador del responsable de la supervisión. Posteriormente, los datos se consolidan en una única estructura longitudinal, preservando el origen de cada registro (`origen_df`) y armonizando codificaciones de encuesta y etapa.
 
----
+------------------------------------------------------------------------
 
 ## 3. Identificación de encuesta y etapa
 
 La **etapa del proceso** se deriva a partir de variables binarias (`P_3_1__*`), asignándose una única etapa prioritaria:
 
-* Verificación
-* Recolección
-* Consistencia
-* Procesamiento
+-   Verificación
+-   Recolección
+-   Consistencia
+-   Procesamiento
 
-La **encuesta** se determina a partir del origen del archivo consolidado, garantizando trazabilidad.
----
+## La **encuesta** se determina a partir del origen del archivo consolidado, garantizando trazabilidad.
 
 ## 4. Tratamiento temporal y cálculo de duraciones
 
@@ -47,8 +46,8 @@ La **encuesta** se determina a partir del origen del archivo consolidado, garant
 
 Las fechas de inicio (`P_2_1`) y término (`P_9_1`) se transforman a formato POSIXct. Se definen los siguientes **errores temporales**:
 
-* Fechas faltantes o inválidas
-* Duraciones negativas (término anterior al inicio)
+-   Fechas faltantes o inválidas
+-   Duraciones negativas (término anterior al inicio)
 
 Los registros con errores temporales se excluyen del cálculo de duraciones válidas.
 
@@ -56,14 +55,12 @@ Los registros con errores temporales se excluyen del cálculo de duraciones vál
 
 La duración se calcula como:
 
-```
-duración_seg = difftime(datetime_t, datetime_i, units = "secs")
-duración_min = duración_seg / 60
-```
+    duración_seg = difftime(datetime_t, datetime_i, units = "secs")
+    duración_min = duración_seg / 60
 
 Solo las duraciones no negativas y con fechas válidas continúan al siguiente nivel de validación.
 
----
+------------------------------------------------------------------------
 
 ## 5. Reglas operativas de duración
 
@@ -71,14 +68,14 @@ Las **reglas operativas** definen rangos esperados de duración (en minutos) por
 
 Los registros que incumplen reglas operativas se excluyen del cálculo estadístico posterior, pero se contabilizan como **errores operativos**.
 
----
+------------------------------------------------------------------------
 
 ## 6. Detección estadística de outliers
 
 La detección de valores atípicos se aplica **exclusivamente** sobre duraciones que:
 
-* No presentan errores temporales
-* Cumplen reglas operativas
+-   No presentan errores temporales
+-   Cumplen reglas operativas
 
 El análisis se realiza **por etapa**, reconociendo que las distribuciones de duración difieren estructuralmente entre procesos.
 
@@ -86,14 +83,12 @@ El análisis se realiza **por etapa**, reconociendo que las distribuciones de du
 
 Se calculan los cuartiles Q1 y Q3 y el rango intercuartílico:
 
-```
-IQR = Q3 − Q1
-```
+    IQR = Q3 − Q1
 
 Se definen los límites:
 
-* Límite inferior: `Q1 − 1.5 × IQR`
-* Límite superior: `Q3 + 1.5 × IQR`
+-   Límite inferior: `Q1 − 1.5 × IQR`
+-   Límite superior: `Q3 + 1.5 × IQR`
 
 Un registro es outlier IQR si su duración se encuentra fuera de este rango.
 
@@ -101,15 +96,11 @@ Un registro es outlier IQR si su duración se encuentra fuera de este rango.
 
 Se calcula la mediana y la MAD de las duraciones válidas:
 
-```
-z_MAD = (duración − mediana) / MAD
-```
+    z_MAD = (duración − mediana) / MAD
 
 Un registro es considerado outlier MAD si:
 
-```
-|z_MAD| > 3.5
-```
+    |z_MAD| > 3.5
 
 Este criterio es robusto ante asimetrías y colas largas.
 
@@ -117,43 +108,43 @@ Este criterio es robusto ante asimetrías y colas largas.
 
 Un registro se clasifica como **outlier estadístico** si cumple al menos uno de los criterios:
 
-* Outlier IQR
-* Outlier MAD
+-   Outlier IQR
+-   Outlier MAD
 
----
+------------------------------------------------------------------------
 
 ## 7. Definición de registros válidos
 
 Se consideran **válidos sin outliers** aquellos registros que:
 
-* No presentan errores temporales
-* Cumplen reglas operativas
-* No son outliers estadísticos
+-   No presentan errores temporales
+-   Cumplen reglas operativas
+-   No son outliers estadísticos
 
 Solo este subconjunto se utiliza para el cálculo de estadísticas descriptivas (media, mediana, percentiles y rangos).
 
----
+------------------------------------------------------------------------
 
 ## 8. Indicadores reportados
 
 Para cada nivel de agregación (encuesta, etapa, responsable, horario, día), se reportan:
 
-* Total de registros
-* Errores de fecha
-* Incumplimientos de reglas operativas
-* Outliers estadísticos
-* Registros válidos
-* Estadísticos descriptivos de duración
+-   Total de registros
+-   Errores de fecha
+-   Incumplimientos de reglas operativas
+-   Outliers estadísticos
+-   Registros válidos
+-   Estadísticos descriptivos de duración
 
 Todos los porcentajes utilizan como denominador el **total de registros** del grupo correspondiente.
 
----
+------------------------------------------------------------------------
 
 ## 9. Principios metodológicos
 
-* Separación estricta entre **errores operativos** y **anomalías estadísticas**
-* Uso de métodos robustos y trazables
-* Reglas explícitas y auditables
-* Reproducibilidad completa del proceso
+-   Separación estricta entre **errores operativos** y **anomalías estadísticas**
+-   Uso de métodos robustos y trazables
+-   Reglas explícitas y auditables
+-   Reproducibilidad completa del proceso
 
 Esta metodología prioriza la **interpretabilidad operativa** por sobre enfoques puramente exploratorios, asegurando coherencia y estabilidad en el monitoreo continuo.

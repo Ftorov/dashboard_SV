@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Supervisión CAWI"
+  title: "Sección Supervisión CAWI"
   site-url: "https://ftorov.github.io/dashboard_SV"
   favicon: "assets/images/logo_ine.png"
   

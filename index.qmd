@@ -1,22 +1,11 @@
 ---
-title: "Inicio"
+title: ""
 page-layout: full
 ---
 
 ```{r setup, include=FALSE}
 source("R/_load_all.R", encoding = "UTF-8")
 ```
-
-::: {.hero}
-
-
-<p class="hero-lead">
-Indicadores, visualizaciones y descargas orientadas a la gestión operativa de la supervisión CAWI.
-</p>
-
-:::
-
-
 
 ## Accesos rápidos
 
@@ -79,7 +68,6 @@ Indicadores, visualizaciones y descargas orientadas a la gestión operativa de l
   </div>
 </div>
 ```
-
 ## Recursos disponibles
 
 ```{=html}
@@ -118,4 +106,41 @@ Indicadores, visualizaciones y descargas orientadas a la gestión operativa de l
   </a>
 
 </div>
+```
+```{r, echo=FALSE}
+library(htmltools)
+
+div(
+  class = "status-grid",
+
+  div(
+    class = "status-card",
+    tags$i(class = "bi bi-info-circle"),
+    div(
+      tags$strong("Versión"),
+      tags$p("Primera entrega funcional")
+    )
+  ),
+
+  div(
+    class = "status-card",
+    tags$i(class = "bi bi-database"),
+    div(
+      tags$strong("Origen de datos"),
+      tags$p("Descarga directa desde Survey Solutions")
+    )
+  ),
+
+  div(
+    class = "status-card",
+    tags$i(class = "bi bi-clock-history"),
+    div(
+      tags$strong("Última actualización"),
+      tags$p(
+        class = "status-date",
+        format(fecha_ultima_actualizacion, "%d/%m/%Y")
+      )
+    )
+  )
+)
 ```

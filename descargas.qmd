@@ -11,445 +11,378 @@ source("R/report.R",encoding = "UTF-8")
 
 ## Control y calidad del proceso
 
-
 <!-- indicador 1 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Encuesta · Etapa · Responsable
 
-<p class="stat-desc"> 
-Indicadores desagregados por encuesta, etapa del proceso y responsable de la supervisión, orientados a la detección de errores y cargas operativas. 
+<p class="stat-desc">
+
+Indicadores desagregados por encuesta, etapa del proceso y responsable de la supervisión.
+
 </p>
-<div class="stat-actions">
- <button class="stat-btn stat-btn-toggle"
+
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
 <a href="assets/tabulados/R1_encuesta_etapa_usuario.xlsx" 
 class="stat-btn stat-btn-download" 
-download>
-Descargar Excel
-</a>
+download> Descargar Excel </a>
+:::
 
-</div> <div class="stat-content"> 
-
+::: stat-content
 ```{r}
 tabla_reporte("origen_etapa_responsable") 
-``` 
-
-</div>
-
+```
+:::
 :::
 
 <!-- indicador 2 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Encuesta · Etapa
 
-<p class="stat-desc"> 
-Resultados consolidados por encuesta y etapa del proceso de supervisión, útiles para el monitoreo global del desempeño operativo. 
+<p class="stat-desc">
+
+Resultados consolidados por encuesta y etapa del proceso de supervisión.
+
 </p>
 
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R2_encuesta_etapa.xlsx" 
+<a href="assets/tabulados/R2_encuesta_etapa.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("origen_etapa") 
 ```
-
-</div>
+:::
 :::
 
 <!-- indicador 3 -->
 
 ## Desempeño por responsable
 
-::: {.stat-block}
-
+::: stat-block
 ### Responsable · Etapa
 
-<p class="stat-desc"> 
-Indicadores de desempeño por responsable de la supervisión, diferenciados por etapa del proceso. 
+<p class="stat-desc">
+
+Indicadores de desempeño por responsable de la supervisión, diferenciados por etapa del proceso.
+
 </p>
 
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R3_usuario_etapa.xlsx" 
+<a href="assets/tabulados/R3_usuario_etapa.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
-
+::: stat-content
 ```{r}
 tabla_reporte("responsable_etapa") 
 
 ```
-
-</div>
-
 :::
-
+:::
 
 <!-- indicador 4 -->
 
-::: {.stat-block}
+::: stat-block
+### Responsable
 
-### Responsable 
+<p class="stat-desc">
 
-<p class="stat-desc"> 
-Indicadores agregados de supervisión por responsable, orientados a evaluaciones globales de desempeño. 
+Indicadores agregados de supervisión por responsable.
+
 </p>
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R5_usuario.xlsx" 
+<a href="assets/tabulados/R5_usuario.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("responsable") 
 ```
-
-</div>
-
 :::
-
+:::
 
 <!-- indicador 5 -->
 
 ## Análisis temporal de la supervisión
 
-::: {.stat-block}
-
+::: stat-block
 ### Franja horaria (AM / PM)
 
-<p class="stat-desc"> 
-Distribución de los indicadores de supervisión según la franja horaria de inicio de la entrevista. 
+<p class="stat-desc">
+
+Distribución de los indicadores de supervisión según la franja horaria de inicio de la entrevista.
+
 </p>
 
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R6_horario.xlsx" 
+<a href="assets/tabulados/R6_horario.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("horario") 
 
 ```
-
-</div>
-
+:::
 :::
 
 <!-- indicador 6 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Día de la semana
 
-<p class="stat-desc"> 
-Indicadores de supervisión según el día de realización de la entrevista supervisada. 
+<p class="stat-desc">
+
+Indicadores de supervisión según el día de realización de la entrevista supervisada.
+
 </p>
 
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R7_dia_semana.xlsx" 
+<a href="assets/tabulados/R7_dia_semana.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("dia") 
 
 ```
-
-</div>
-
 :::
-
-
-
+:::
 
 ## Cruces temporales y por responsable
 
 <!-- indicador 7 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Día de la semana · Franja horaria
 
-<p class="stat-desc"> 
-Indicadores combinados por día de la semana y franja horaria de realización de la supervisión. 
+<p class="stat-desc">
+
+Indicadores combinados por día de la semana y franja horaria de realización de la supervisión.
+
 </p>
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R8_dia_horario.xlsx" 
+<a href="assets/tabulados/R8_dia_horario.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("dia_horario") 
 ```
-
-</div>
-
 :::
-
+:::
 
 <!-- indicador 8 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Responsable · Día de la semana
 
-<p class="stat-desc"> 
-Indicadores de supervisión por responsable, desagregados según el día de la semana. 
+<p class="stat-desc">
+
+Indicadores de supervisión por responsable, desagregados según el día de la semana.
+
 </p>
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R9_responsable_dia.xlsx" 
+<a href="assets/tabulados/R9_responsable_dia.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("responsable_dia") 
 
 ```
-
-
-</div>
-
+:::
 :::
 
 <!-- indicador 9 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Responsable · Franja horaria
 
-<p class="stat-desc"> 
-Indicadores de supervisión por responsable según la franja horaria de realización. 
+<p class="stat-desc">
+
+Indicadores de supervisión por responsable según la franja horaria de realización.
+
 </p>
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/R10_responsable_horario.xlsx" 
+<a href="assets/tabulados/R10_responsable_horario.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("responsable_horario") 
 
 ```
-
-</div>
-
 :::
-
+:::
 
 ## Auditoria
 
 <!-- indicador 10 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Resumen global de auditoría
 
 <p class="stat-desc">
-Indicadores globales del proceso de supervisión que permiten evaluar
-errores, reglas operativas y valores atípicos en el conjunto total
-de registros.
+
+Indicadores globales del proceso de supervisión que permiten evaluar errores, reglas operativas y valores atípicos en el conjunto total de registros.
+
 </p>
 
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/Resumen_global.xlsx"
+<a href="assets/tabulados/Resumen_global.xlsx"
      class="stat-btn stat-btn-download"
-     download>
-     Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-
-<div class="stat-content">
-
+::: stat-content
 ```{r}
 tabla_reporte("auditoria_global")
 ```
-
-</div>
-
+:::
 :::
 
 <!-- indicador 11 -->
 
-::: {.stat-block}
-
+::: stat-block
 ### Auditoría detallada
 
-<p class="stat-desc"> 
-Detalle de auditoría por encuesta, etapa y responsable, orientado a revisión operativa y trazabilidad de hallazgos. 
+<p class="stat-desc">
+
+Detalle de auditoría por encuesta, etapa y responsable, orientado a revisión operativa y trazabilidad de hallazgos.
+
 </p>
-<div class="stat-actions">
-  <button class="stat-btn stat-btn-toggle"
+
+::: stat-actions
+<button class="stat-btn stat-btn-toggle"
   onclick="
     const block = this.closest('.stat-block');
     block.classList.toggle('is-open');
     this.textContent = block.classList.contains('is-open')
       ? 'Ocultar resultados'
       : 'Ver resultados';
-  ">
-Ver resultados
-</button>
+  "> Ver resultados </button>
 
-  <a href="assets/tabulados/Auditoria_fina.xlsx" 
+<a href="assets/tabulados/Auditoria_fina.xlsx" 
      class="stat-btn stat-btn-download" 
-     download>
-    Descargar Excel
-  </a>
-</div>
+     download> Descargar Excel </a>
+:::
 
-<div class="stat-content"> 
+::: stat-content
 ```{r}
 tabla_reporte("auditoria_fina") 
 ```
-
-</div>
-
 :::
-
-
-
-
-
+:::
