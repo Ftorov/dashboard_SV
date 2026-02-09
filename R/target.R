@@ -137,13 +137,13 @@ kpi_grupos <- list(
 
 kpi_definiciones <- list(
   "Error en registro de fecha" =
-    "Porcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.",
+    "Porcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término.",
   
   "Regla operativa" =
-    "Porcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.",
+    "Porcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa.",
   
   "Outliers" =
-    "Porcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.",
+    "Porcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD).",
   
   "Registros evaluados" =
     "Total de registros procesados en la etapa considerada.",

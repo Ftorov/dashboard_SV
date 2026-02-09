@@ -1,6 +1,6 @@
 ---
 title: ""
-subtitle: "Seguimiento de cobertura, calidad y tiempos por etapa del proceso de supervisión"
+subtitle: ""
 ---
 
 ```{r setup, include = FALSE}

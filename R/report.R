@@ -639,16 +639,6 @@ reporte_responsable_horario <- consolidado %>%
 
 # 11. EXPORTAR ------------------------------------------------------------------
 
-# ========================================================================
-# TABLAS REACTABLE – ESTÁNDAR ÚNICO (AUDITORÍA COMO NORMA)
-# ========================================================================
-
-library(reactable)
-library(htmltools)
-
-# ------------------------------------------------------------------------
-# TEMA BASE (ÚNICO, SOBRIO, INSTITUCIONAL)
-# ------------------------------------------------------------------------
 
 tema_base <- reactableTheme(
   style = list(
@@ -668,9 +658,9 @@ tema_base <- reactableTheme(
   highlightColor = "#f1f5f9"
 )
 
-# ------------------------------------------------------------------------
-# HELPERS DE COLUMNAS (MISMO LENGUAJE AUDITORÍA)
-# ------------------------------------------------------------------------
+
+# HELPERS DE COLUMNAS 
+
 
 col_texto <- function(nombre) {
   colDef(name = nombre, align = "left")
@@ -714,9 +704,9 @@ col_numerica_condicional <- function(nombre) {
   )
 }
 
-# ------------------------------------------------------------------------
+
 # DEFINICIÓN CANÓNICA DE COLUMNAS 
-# ------------------------------------------------------------------------
+
 
 columnas_estandar <- list(
   encuesta = col_texto("Encuesta"),
@@ -745,17 +735,17 @@ columnas_estandar <- list(
   maximo  = col_texto("Máximo")
 )
 
-# ------------------------------------------------------------------------
+
 # FILTRO SEGURO DE COLUMNAS 
-# ------------------------------------------------------------------------
+
 
 columnas_validas <- function(columnas, data) {
   columnas[names(columnas) %in% names(data)]
 }
 
-# ------------------------------------------------------------------------
+
 # TABLA ESTÁNDAR 
-# ------------------------------------------------------------------------
+
 
 tabla_estandar <- function(data, paginar = TRUE) {
   
@@ -774,9 +764,9 @@ tabla_estandar <- function(data, paginar = TRUE) {
   )
 }
 
-# ------------------------------------------------------------------------
-# DISPATCHER PRINCIPAL (AUDITORÍA ES UNA MÁS DEL SISTEMA)
-# ------------------------------------------------------------------------
+
+# DISPATCHER PRINCIPAL 
+
 
 tabla_reporte <- function(tipo) {
   
@@ -827,78 +817,183 @@ ruta_salida <- file.path(
 
 # EXPORTACIÓN DE TABULADOS PUBLICABLES (DESCARGAS QMD)
 
+# ========================================================================
+# ESTILOS EXCEL – TABULADOS PUBLICABLES
+# ========================================================================
 
-write.xlsx(
+style_header_pub <- createStyle(
+  fgFill = "#1f4e79",        # azul institucional
+  fontColour = "white",
+  textDecoration = "bold",
+  halign = "center",
+  valign = "center",
+  border = "Bottom"
+)
+
+style_body_pub <- createStyle(
+  halign = "center",
+  valign = "center",
+  border = "TopBottomLeftRight"
+)
+
+style_text_left <- createStyle(
+  halign = "left",
+  valign = "center"
+)
+
+style_pct <- createStyle(
+  numFmt = "0.0\"%\"",
+  halign = "center"
+)
+
+style_int <- createStyle(
+  numFmt = "#,##0",
+  halign = "center"
+)
+
+exportar_tabulado_publicable <- function(data, archivo, nombre_hoja) {
+  
+  wb <- createWorkbook()
+  addWorksheet(wb, nombre_hoja)
+  
+  writeData(
+    wb,
+    sheet = nombre_hoja,
+    x = data,
+    withFilter = TRUE
+  )
+  
+  freezePane(wb, nombre_hoja, firstRow = TRUE)
+  
+  # Header
+  addStyle(
+    wb, nombre_hoja, style_header_pub,
+    rows = 1,
+    cols = 1:ncol(data),
+    gridExpand = TRUE
+  )
+  
+  # Cuerpo
+  addStyle(
+    wb, nombre_hoja, style_body_pub,
+    rows = 2:(nrow(data) + 1),
+    cols = 1:ncol(data),
+    gridExpand = TRUE
+  )
+  
+  # Alineación texto
+  cols_texto <- which(names(data) %in%
+                        c("encuesta", "etapa", "responsible", "horario", "dia_semana"))
+  
+  if (length(cols_texto) > 0) {
+    addStyle(
+      wb, nombre_hoja, style_text_left,
+      rows = 2:(nrow(data) + 1),
+      cols = cols_texto,
+      gridExpand = TRUE,
+      stack = TRUE
+    )
+  }
+  
+  # Formato numérico
+  cols_int <- grep("^n_", names(data))
+  cols_pct <- grep("^pct_", names(data))
+  
+  if (length(cols_int) > 0) {
+    addStyle(
+      wb, nombre_hoja, style_int,
+      rows = 2:(nrow(data) + 1),
+      cols = cols_int,
+      gridExpand = TRUE,
+      stack = TRUE
+    )
+  }
+  
+  if (length(cols_pct) > 0) {
+    addStyle(
+      wb, nombre_hoja, style_pct,
+      rows = 2:(nrow(data) + 1),
+      cols = cols_pct,
+      gridExpand = TRUE,
+      stack = TRUE
+    )
+  }
+  
+  setColWidths(wb, nombre_hoja, cols = 1:ncol(data), widths = "auto")
+  showGridLines(wb, nombre_hoja, showGridLines = FALSE)
+  
+  saveWorkbook(
+    wb,
+    file = file.path(dir_publicable, archivo),
+    overwrite = TRUE
+  )
+}
+
+
+
+
+# ========================================================================
+# EXPORTACIÓN DE TABULADOS PUBLICABLES (DESCARGAS QMD)
+# ========================================================================
+
+exportar_tabulado_publicable(
   reporte_origen_etapa_responsible,
-  file.path(dir_publicable, "R1_encuesta_etapa_usuario.xlsx"),
-  overwrite = TRUE
+  "R1_encuesta_etapa_usuario.xlsx",
+  "Encuesta_etapa_usuario"
 )
 
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_origen_etapa,
-  file.path(dir_publicable, "R2_encuesta_etapa.xlsx"),
-  overwrite = TRUE
+  "R2_encuesta_etapa.xlsx",
+  "Encuesta_etapa"
 )
 
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_por_responsible_etapa,
-  file.path(dir_publicable, "R3_usuario_etapa.xlsx"),
-  overwrite = TRUE
+  "R3_usuario_etapa.xlsx",
+  "Responsable_etapa"
 )
 
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_etapa,
-  file.path(dir_publicable, "R4_etapa.xlsx"),
-  overwrite = TRUE
+  "R4_etapa.xlsx",
+  "Etapa"
 )
 
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_por_responsible,
-  file.path(dir_publicable, "R5_usuario.xlsx"),
-  overwrite = TRUE
+  "R5_usuario.xlsx",
+  "Responsable"
 )
 
-write.xlsx(
-  reporte_auditoria_global,
-  file.path(dir_publicable, "Resumen_global.xlsx"),
-  overwrite = TRUE
-)
-
-write.xlsx(
-  reporte_auditoria_fina,
-  file.path(dir_publicable, "Auditoria_fina.xlsx"),
-  overwrite = TRUE
-)
-
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_por_horario,
-  file.path(dir_publicable, "R6_horario.xlsx"),
-  overwrite = TRUE
+  "R6_horario.xlsx",
+  "Horario"
 )
 
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_por_dia,
-  file.path(dir_publicable, "R7_dia_semana.xlsx"),
-  overwrite = TRUE
+  "R7_dia_semana.xlsx",
+  "Dia_semana"
 )
 
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_dia_horario,
-  file.path(dir_publicable, "R8_dia_horario.xlsx"),
-  overwrite = TRUE
+  "R8_dia_horario.xlsx",
+  "Dia_horario"
 )
 
-
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_responsable_dia,
-  file.path(dir_publicable, "R9_responsable_dia.xlsx"),
-  overwrite = TRUE
+  "R9_responsable_dia.xlsx",
+  "Responsable_dia"
 )
 
-write.xlsx(
+exportar_tabulado_publicable(
   reporte_responsable_horario,
-  file.path(dir_publicable, "R10_responsable_horario.xlsx"),
-  overwrite = TRUE
+  "R10_responsable_horario.xlsx",
+  "Responsable_horario"
 )
 
 
