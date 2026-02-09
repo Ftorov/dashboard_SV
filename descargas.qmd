@@ -1,86 +1,455 @@
 ---
-title: ""
+title: "Reportes de Supervisión"
 page-layout: full
-css: assets/css/tabulados.css
+toc: true
+toc-depth: 2
 ---
 
-## Reportes de supervisión
+```{r}
+source("R/report.R",encoding = "UTF-8")
+```
 
-Estos tabulados presentan indicadores de control y calidad del proceso de supervisión, desagregados por encuesta, etapa, responsable y dimensiones temporales asociadas a la realización de la entrevista (día de la semana y franja horaria AM/PM). Incluyen recuentos totales de registros, detección de errores de fecha, aplicación de reglas operativas, identificación de valores atípicos y estadísticas descriptivas de la duración de las entrevistas válidas.
+## Control y calidad del proceso
 
-Los archivos están disponibles en formato Excel para descarga directa.
 
-------------------------------------------------------------------------
+<!-- indicador 1 -->
 
-::: tab-group
-::: tab-row
-**Encuesta, Etapa de la Supervisión y Usuario**\
-Indicadores desagregados por encuesta, etapa y responsable. <a href="assets/tabulados/R1_encuesta_etapa_usuario.xlsx" class="btn-download" download> Descargar </a>
+::: {.stat-block}
+
+### Encuesta · Etapa · Responsable
+
+<p class="stat-desc"> 
+Indicadores desagregados por encuesta, etapa del proceso y responsable de la supervisión, orientados a la detección de errores y cargas operativas. 
+</p>
+<div class="stat-actions">
+ <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+<a href="assets/tabulados/R1_encuesta_etapa_usuario.xlsx" 
+class="stat-btn stat-btn-download" 
+download>
+Descargar Excel
+</a>
+
+</div> <div class="stat-content"> 
+
+```{r}
+tabla_reporte("origen_etapa_responsable") 
+``` 
+
+</div>
+
 :::
 
-::: tab-row
-**Encuesta y Etapa de la Supervisión**\
-Resultados consolidados por encuesta y etapa del proceso. <a href="assets/tabulados/R2_encuesta_etapa.xlsx" class="btn-download" download> Descargar </a>
-:::
+<!-- indicador 2 -->
+
+::: {.stat-block}
+
+### Encuesta · Etapa
+
+<p class="stat-desc"> 
+Resultados consolidados por encuesta y etapa del proceso de supervisión, útiles para el monitoreo global del desempeño operativo. 
+</p>
+
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/R2_encuesta_etapa.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("origen_etapa") 
+```
+
+</div>
 :::
 
-------------------------------------------------------------------------
+<!-- indicador 3 -->
 
-::: tab-group
-::: tab-row
-**Usuario y Etapa de la Supervisión**\
-Indicadores de desempeño por usuario y etapa. <a href="assets/tabulados/R3_usuario_etapa.xlsx" class="btn-download" download> Descargar </a>
-:::
+## Desempeño por responsable
 
-::: tab-row
-**Usuario**\
-Indicadores agregados de supervisión por responsable. <a href="assets/tabulados/R5_usuario.xlsx" class="btn-download" download> Descargar </a>
-:::
-:::
+::: {.stat-block}
 
-------------------------------------------------------------------------
+### Responsable · Etapa
 
-::: tab-group
-::: tab-row
-**Supervisión por Horario (AM / PM)**\
-Indicadores de supervisión según franja horaria de inicio de la entrevista. <a href="assets/tabulados/R6_horario.xlsx" class="btn-download" download> Descargar </a>
-:::
+<p class="stat-desc"> 
+Indicadores de desempeño por responsable de la supervisión, diferenciados por etapa del proceso. 
+</p>
 
-::: tab-row
-**Supervisión por Día de la Semana**\
-Distribución de indicadores según día de realización de la supervisión. <a href="assets/tabulados/R7_dia_semana.xlsx" class="btn-download" download> Descargar </a>
-:::
-:::
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
 
-------------------------------------------------------------------------
+  <a href="assets/tabulados/R3_usuario_etapa.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
 
-::: tab-group
-::: tab-row
-**Día de la Semana y Horario**\
-Indicadores combinados por día y franja horaria de la supervisión. <a href="assets/tabulados/R8_dia_horario.xlsx" class="btn-download" download> Descargar </a>
-:::
+<div class="stat-content"> 
 
-::: tab-row
-**Usuario y Día de la Semana**\
-Indicadores de supervisión por responsable, desagregados por día. <a href="assets/tabulados/R9_responsable_dia.xlsx" class="btn-download" download> Descargar </a>
-:::
+```{r}
+tabla_reporte("responsable_etapa") 
 
-::: tab-row
-**Usuario y Horario**\
-Indicadores de supervisión por responsable, según horario de realización. <a href="assets/tabulados/R10_responsable_horario.xlsx" class="btn-download" download> Descargar </a>
-:::
+```
+
+</div>
+
 :::
 
-------------------------------------------------------------------------
 
-::: tab-group
-::: tab-row
-**Resumen Global**\
-Indicadores globales de auditoría de la supervisión. <a href="assets/tabulados/Resumen_global.xlsx" class="btn-download" download> Descargar </a>
+<!-- indicador 4 -->
+
+::: {.stat-block}
+
+### Responsable 
+
+<p class="stat-desc"> 
+Indicadores agregados de supervisión por responsable, orientados a evaluaciones globales de desempeño. 
+</p>
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/R5_usuario.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("responsable") 
+```
+
+</div>
+
 :::
 
-::: tab-row
-**Auditoría**\
-Detalle de auditoría por encuesta, etapa y responsable. <a href="assets/tabulados/Auditoria_fina.xlsx" class="btn-download" download> Descargar </a>
+
+<!-- indicador 5 -->
+
+## Análisis temporal de la supervisión
+
+::: {.stat-block}
+
+### Franja horaria (AM / PM)
+
+<p class="stat-desc"> 
+Distribución de los indicadores de supervisión según la franja horaria de inicio de la entrevista. 
+</p>
+
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/R6_horario.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("horario") 
+
+```
+
+</div>
+
 :::
+
+<!-- indicador 6 -->
+
+::: {.stat-block}
+
+### Día de la semana
+
+<p class="stat-desc"> 
+Indicadores de supervisión según el día de realización de la entrevista supervisada. 
+</p>
+
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/R7_dia_semana.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("dia") 
+
+```
+
+</div>
+
 :::
+
+
+
+
+## Cruces temporales y por responsable
+
+<!-- indicador 7 -->
+
+::: {.stat-block}
+
+### Día de la semana · Franja horaria
+
+<p class="stat-desc"> 
+Indicadores combinados por día de la semana y franja horaria de realización de la supervisión. 
+</p>
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/R8_dia_horario.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("dia_horario") 
+```
+
+</div>
+
+:::
+
+
+<!-- indicador 8 -->
+
+::: {.stat-block}
+
+### Responsable · Día de la semana
+
+<p class="stat-desc"> 
+Indicadores de supervisión por responsable, desagregados según el día de la semana. 
+</p>
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/R9_responsable_dia.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("responsable_dia") 
+
+```
+
+
+</div>
+
+:::
+
+<!-- indicador 9 -->
+
+::: {.stat-block}
+
+### Responsable · Franja horaria
+
+<p class="stat-desc"> 
+Indicadores de supervisión por responsable según la franja horaria de realización. 
+</p>
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/R10_responsable_horario.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("responsable_horario") 
+
+```
+
+</div>
+
+:::
+
+
+## Auditoria
+
+<!-- indicador 10 -->
+
+::: {.stat-block}
+
+### Resumen global de auditoría
+
+<p class="stat-desc">
+Indicadores globales del proceso de supervisión que permiten evaluar
+errores, reglas operativas y valores atípicos en el conjunto total
+de registros.
+</p>
+
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/Resumen_global.xlsx"
+     class="stat-btn stat-btn-download"
+     download>
+     Descargar Excel
+  </a>
+</div>
+
+
+<div class="stat-content">
+
+```{r}
+tabla_reporte("auditoria_global")
+```
+
+</div>
+
+:::
+
+<!-- indicador 11 -->
+
+::: {.stat-block}
+
+### Auditoría detallada
+
+<p class="stat-desc"> 
+Detalle de auditoría por encuesta, etapa y responsable, orientado a revisión operativa y trazabilidad de hallazgos. 
+</p>
+<div class="stat-actions">
+  <button class="stat-btn stat-btn-toggle"
+  onclick="
+    const block = this.closest('.stat-block');
+    block.classList.toggle('is-open');
+    this.textContent = block.classList.contains('is-open')
+      ? 'Ocultar resultados'
+      : 'Ver resultados';
+  ">
+Ver resultados
+</button>
+
+  <a href="assets/tabulados/Auditoria_fina.xlsx" 
+     class="stat-btn stat-btn-download" 
+     download>
+    Descargar Excel
+  </a>
+</div>
+
+<div class="stat-content"> 
+```{r}
+tabla_reporte("auditoria_fina") 
+```
+
+</div>
+
+:::
+
+
+
+
+

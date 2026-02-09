@@ -1,15 +1,122 @@
 ---
-title: "dashboard_SV"
+title: "título pendiente"
+page-layout: full
 ---
 
-```{r}
-source("R/report.R",encoding = "UTF-8")
-source("R/target.R", encoding = "UTF-8")
-source("R/grafic.R", encoding = "UTF-8")
+```{r setup, include=FALSE}
+source("R/_load_all.R", encoding = "UTF-8")
 ```
 
-This is a Quarto website.
+::: {.hero}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Subtitulo pendiente
+
+<p class="hero-lead">
+Indicadores, visualizaciones y descargas orientadas a la gestión operativa de la supervisión CAWI.
+</p>
+
+:::
 
 
+
+## Accesos rápidos
+
+```{=html}
+<div class="container-fluid quick-access">
+  <div class="row g-3">
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="ENI.qmd" class="qa-card qa-eni">
+        <div class="qa-icon">
+          <i class="bi bi-lightbulb"></i>
+        </div>
+        <div class="qa-body">
+          <h3>ENI</h3>
+          <p>Encuesta Nacional de Innovación</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="ENIA.qmd" class="qa-card qa-enia">
+        <div class="qa-icon">
+          <i class="bi bi-boxes"></i>
+        </div>
+        <div class="qa-body">
+          <h3>ENIA</h3>
+          <p>Encuesta Nacional Industrial Anual</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+    
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="ELE.qmd" class="qa-card qa-ele">
+        <div class="qa-icon">
+          <i class="bi bi-building"></i>
+        </div>
+        <div class="qa-body">
+          <h3>ELE</h3>
+          <p>Encuesta Longitudinal de Empresas</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="EOC.qmd" class="qa-card qa-eoc">
+        <div class="qa-icon">
+          <i class="bi bi-palette"></i>
+        </div>
+        <div class="qa-body">
+          <h3>EOC</h3>
+          <p>Encuesta de Oferta Cultural</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+```
+
+## Recursos disponibles
+
+```{=html}
+<div class="resource-grid">
+
+  <!-- Descargas -->
+  <a href="descargas.qmd" class="resource-card resource-downloads">
+    <div class="resource-icon">
+      <i class="bi bi-download"></i>
+    </div>
+
+    <div class="resource-body">
+      <h3>Descargas</h3>
+      <p>
+        Tabulados consolidados, auditorías y cruces operativos
+        en formato Excel.
+      </p>
+      <span class="resource-link">Ir a descargas →</span>
+    </div>
+  </a>
+
+  <!-- Documentación -->
+  <a href="metodologia.qmd" class="resource-card resource-docs">
+    <div class="resource-icon">
+      <i class="bi bi-journal-text"></i>
+    </div>
+
+    <div class="resource-body">
+      <h3>Documentación</h3>
+      <p>
+        Metodología, definiciones operativas y criterios
+        utilizados en los indicadores.
+      </p>
+      <span class="resource-link">Ver documentación →</span>
+    </div>
+  </a>
+
+</div>
+```

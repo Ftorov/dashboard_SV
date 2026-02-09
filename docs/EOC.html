@@ -41,14 +41,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2eab6412616f6754704c632408e30d15.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-f448adeb448497c0158b2791638f5f6d.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e907b9c21eb13761600435f52035fc7f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-39b8b5c43dd62313de44d665691aa5c6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -89,10 +89,26 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./assets/images/LOGO INE.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">dashboard_SV</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -108,17 +124,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">dashboard_SV</a> 
-        <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -130,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link"><i class="bi bi-house" role="img">
 </i> 
- <span class="menu-text">Home</span></a>
+ <span class="menu-text">Inicio</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -145,41 +153,72 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ENI.html" class="sidebar-item-text sidebar-link"><i class="bi bi-lightbulb" role="img">
+  <a href="./ENI.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-lightbulb" role="img">
 </i> 
  <span class="menu-text">Encuesta Nacional de Innovación</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ENIA.html" class="sidebar-item-text sidebar-link"><i class="bi bi-boxes" role="img">
+  <a href="./ENIA.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-boxes" role="img">
 </i> 
  <span class="menu-text">Encuesta Nacional Industrial Anual</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ELE.html" class="sidebar-item-text sidebar-link"><i class="bi bi-layers" role="img">
+  <a href="./ELE.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-building" role="img">
 </i> 
  <span class="menu-text">Encuesta Longitudinal de Empresas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./EOC.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-palette" role="img">
+  <a href="./EOC.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-bi bi-palette" role="img">
 </i> 
  <span class="menu-text">Encuesta de Oferta Cultural</span></a>
   </div>
 </li>
       </ul>
   </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false"><i class="bi bi-file-earmark-bar-graph" role="img">
+</i> 
+ <span class="menu-text">Tabulados</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descargas.html" class="sidebar-item-text sidebar-link"><i class="bi bi-download" role="img">
 </i> 
  <span class="menu-text">Descargas</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false"><i class="bi bi-journal-text" role="img">
+</i> 
+ <span class="menu-text">Documentación</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./metodologia.html" class="sidebar-item-text sidebar-link"><i class="bi bi-diagram-3" role="img">
+</i> 
+ <span class="menu-text">Metodología</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -251,8 +290,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-be89ce394a5cf23a731d" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-be89ce394a5cf23a731d">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["153","Registros evaluados"]},{"value":["153","Registros válidos"]},{"value":["140","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"EOC — Verificación"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-4b3768d579c1cdd58d07" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-4b3768d579c1cdd58d07">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["153","Registros evaluados"]},{"value":["153","Registros válidos"]},{"value":["140","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"EOC — Verificación"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
@@ -365,14 +404,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-815ec1bb6ae8720b2042" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-815ec1bb6ae8720b2042">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes"," 0"]},{"value":["martes","55"]},{"value":["miércoles"," 0"]},{"value":["viernes"," 2"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","32"]},{"value":["martes","33"]},{"value":["miércoles","10"]},{"value":["viernes","21"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — EOC — Verificación","subtext":"Total entrevistas: 153 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-bca9469e15106ad73cd8" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-bca9469e15106ad73cd8">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes"," 0"]},{"value":["martes","55"]},{"value":["miércoles"," 0"]},{"value":["viernes"," 2"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","32"]},{"value":["martes","33"]},{"value":["miércoles","10"]},{"value":["viernes","21"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — EOC — Verificación","subtext":"Total entrevistas: 153 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-a0fceaa4a9f2495ea747" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-a0fceaa4a9f2495ea747">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes"," 0"]},{"value":["09","lunes"," 0"]},{"value":["10","lunes"," 0"]},{"value":["11","lunes"," 0"]},{"value":["12","lunes"," 6"]},{"value":["13","lunes"," 0"]},{"value":["14","lunes"," 0"]},{"value":["15","lunes","14"]},{"value":["16","lunes"," 8"]},{"value":["17","lunes"," 4"]},{"value":["18","lunes"," 0"]},{"value":["08","martes"," 4"]},{"value":["09","martes","14"]},{"value":["10","martes","16"]},{"value":["11","martes","21"]},{"value":["12","martes","18"]},{"value":["13","martes"," 2"]},{"value":["14","martes"," 3"]},{"value":["15","martes","10"]},{"value":["16","martes"," 0"]},{"value":["17","martes"," 0"]},{"value":["18","martes"," 0"]},{"value":["08","miércoles"," 0"]},{"value":["09","miércoles"," 0"]},{"value":["10","miércoles"," 0"]},{"value":["11","miércoles"," 0"]},{"value":["12","miércoles"," 0"]},{"value":["13","miércoles"," 0"]},{"value":["14","miércoles"," 0"]},{"value":["15","miércoles"," 0"]},{"value":["16","miércoles"," 5"]},{"value":["17","miércoles"," 5"]},{"value":["18","miércoles"," 0"]},{"value":["08","jueves"," 0"]},{"value":["09","jueves"," 0"]},{"value":["10","jueves"," 0"]},{"value":["11","jueves"," 0"]},{"value":["12","jueves"," 0"]},{"value":["13","jueves"," 0"]},{"value":["14","jueves"," 0"]},{"value":["15","jueves"," 0"]},{"value":["16","jueves"," 0"]},{"value":["17","jueves"," 0"]},{"value":["18","jueves"," 0"]},{"value":["08","viernes"," 0"]},{"value":["09","viernes"," 0"]},{"value":["10","viernes"," 0"]},{"value":["11","viernes"," 2"]},{"value":["12","viernes","11"]},{"value":["13","viernes"," 0"]},{"value":["14","viernes"," 0"]},{"value":["15","viernes","10"]},{"value":["16","viernes"," 0"]},{"value":["17","viernes"," 0"]},{"value":["18","viernes"," 0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":21}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"EOC — Verificación"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-e2e2ac73bfe2e71f7765" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-e2e2ac73bfe2e71f7765">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes"," 0"]},{"value":["09","lunes"," 0"]},{"value":["10","lunes"," 0"]},{"value":["11","lunes"," 0"]},{"value":["12","lunes"," 6"]},{"value":["13","lunes"," 0"]},{"value":["14","lunes"," 0"]},{"value":["15","lunes","14"]},{"value":["16","lunes"," 8"]},{"value":["17","lunes"," 4"]},{"value":["18","lunes"," 0"]},{"value":["08","martes"," 4"]},{"value":["09","martes","14"]},{"value":["10","martes","16"]},{"value":["11","martes","21"]},{"value":["12","martes","18"]},{"value":["13","martes"," 2"]},{"value":["14","martes"," 3"]},{"value":["15","martes","10"]},{"value":["16","martes"," 0"]},{"value":["17","martes"," 0"]},{"value":["18","martes"," 0"]},{"value":["08","miércoles"," 0"]},{"value":["09","miércoles"," 0"]},{"value":["10","miércoles"," 0"]},{"value":["11","miércoles"," 0"]},{"value":["12","miércoles"," 0"]},{"value":["13","miércoles"," 0"]},{"value":["14","miércoles"," 0"]},{"value":["15","miércoles"," 0"]},{"value":["16","miércoles"," 5"]},{"value":["17","miércoles"," 5"]},{"value":["18","miércoles"," 0"]},{"value":["08","jueves"," 0"]},{"value":["09","jueves"," 0"]},{"value":["10","jueves"," 0"]},{"value":["11","jueves"," 0"]},{"value":["12","jueves"," 0"]},{"value":["13","jueves"," 0"]},{"value":["14","jueves"," 0"]},{"value":["15","jueves"," 0"]},{"value":["16","jueves"," 0"]},{"value":["17","jueves"," 0"]},{"value":["18","jueves"," 0"]},{"value":["08","viernes"," 0"]},{"value":["09","viernes"," 0"]},{"value":["10","viernes"," 0"]},{"value":["11","viernes"," 2"]},{"value":["12","viernes","11"]},{"value":["13","viernes"," 0"]},{"value":["14","viernes"," 0"]},{"value":["15","viernes","10"]},{"value":["16","viernes"," 0"]},{"value":["17","viernes"," 0"]},{"value":["18","viernes"," 0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":21}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"EOC — Verificación"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -994,6 +1033,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Subdepartamento de Supervisión y Verificación de Estadísticas Económicas y Precios</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

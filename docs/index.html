@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>dashboard_SV</title>
+<title>título pendiente – dashboard_SV</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,14 +40,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2eab6412616f6754704c632408e30d15.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-f448adeb448497c0158b2791638f5f6d.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e907b9c21eb13761600435f52035fc7f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-39b8b5c43dd62313de44d665691aa5c6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -76,16 +76,32 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./assets/images/LOGO INE.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">dashboard_SV</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Inicio</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -95,17 +111,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">dashboard_SV</a> 
-        <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -117,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-house" role="img">
 </i> 
- <span class="menu-text">Home</span></a>
+ <span class="menu-text">Inicio</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -132,41 +140,72 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ENI.html" class="sidebar-item-text sidebar-link"><i class="bi bi-lightbulb" role="img">
+  <a href="./ENI.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-lightbulb" role="img">
 </i> 
  <span class="menu-text">Encuesta Nacional de Innovación</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ENIA.html" class="sidebar-item-text sidebar-link"><i class="bi bi-boxes" role="img">
+  <a href="./ENIA.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-boxes" role="img">
 </i> 
  <span class="menu-text">Encuesta Nacional Industrial Anual</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ELE.html" class="sidebar-item-text sidebar-link"><i class="bi bi-layers" role="img">
+  <a href="./ELE.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-building" role="img">
 </i> 
  <span class="menu-text">Encuesta Longitudinal de Empresas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./EOC.html" class="sidebar-item-text sidebar-link"><i class="bi bi-palette" role="img">
+  <a href="./EOC.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-palette" role="img">
 </i> 
  <span class="menu-text">Encuesta de Oferta Cultural</span></a>
   </div>
 </li>
       </ul>
   </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false"><i class="bi bi-file-earmark-bar-graph" role="img">
+</i> 
+ <span class="menu-text">Tabulados</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descargas.html" class="sidebar-item-text sidebar-link"><i class="bi bi-download" role="img">
 </i> 
  <span class="menu-text">Descargas</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false"><i class="bi bi-journal-text" role="img">
+</i> 
+ <span class="menu-text">Documentación</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./metodologia.html" class="sidebar-item-text sidebar-link"><i class="bi bi-diagram-3" role="img">
+</i> 
+ <span class="menu-text">Metodología</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -174,16 +213,16 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">dashboard_SV</h1>
+<h1 class="title">título pendiente</h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -195,10 +234,112 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
+<section id="subtitulo-pendiente" class="level2 hero">
+<h2 class="anchored" data-anchor-id="subtitulo-pendiente">Subtitulo pendiente</h2>
+<p class="hero-lead">
+Indicadores, visualizaciones y descargas orientadas a la gestión operativa de la supervisión CAWI.
+</p>
+</section>
+<section id="accesos-rápidos" class="level2">
+<h2 class="anchored" data-anchor-id="accesos-rápidos">Accesos rápidos</h2>
+<div class="container-fluid quick-access">
+  <div class="row g-3">
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./ENI.html" class="qa-card qa-eni">
+        <div class="qa-icon">
+          <i class="bi bi-lightbulb"></i>
+        </div>
+        <div class="qa-body">
+          <h3 class="anchored">ENI</h3>
+          <p>Encuesta Nacional de Innovación</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./ENIA.html" class="qa-card qa-enia">
+        <div class="qa-icon">
+          <i class="bi bi-boxes"></i>
+        </div>
+        <div class="qa-body">
+          <h3 class="anchored">ENIA</h3>
+          <p>Encuesta Nacional Industrial Anual</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+    
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./ELE.html" class="qa-card qa-ele">
+        <div class="qa-icon">
+          <i class="bi bi-building"></i>
+        </div>
+        <div class="qa-body">
+          <h3 class="anchored">ELE</h3>
+          <p>Encuesta Longitudinal de Empresas</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./EOC.html" class="qa-card qa-eoc">
+        <div class="qa-icon">
+          <i class="bi bi-palette"></i>
+        </div>
+        <div class="qa-body">
+          <h3 class="anchored">EOC</h3>
+          <p>Encuesta de Oferta Cultural</p>
+          <span class="qa-link">Ir al tablero →</span>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+</section>
+<section id="recursos-disponibles" class="level2">
+<h2 class="anchored" data-anchor-id="recursos-disponibles">Recursos disponibles</h2>
+<div class="resource-grid">
+
+  <!-- Descargas -->
+  <a href="./descargas.html" class="resource-card resource-downloads">
+    <div class="resource-icon">
+      <i class="bi bi-download"></i>
+    </div>
+
+    <div class="resource-body">
+      <h3 class="anchored">Descargas</h3>
+      <p>
+        Tabulados consolidados, auditorías y cruces operativos
+        en formato Excel.
+      </p>
+      <span class="resource-link">Ir a descargas →</span>
+    </div>
+  </a>
+
+  <!-- Documentación -->
+  <a href="./metodologia.html" class="resource-card resource-docs">
+    <div class="resource-icon">
+      <i class="bi bi-journal-text"></i>
+    </div>
+
+    <div class="resource-body">
+      <h3 class="anchored">Documentación</h3>
+      <p>
+        Metodología, definiciones operativas y criterios
+        utilizados en los indicadores.
+      </p>
+      <span class="resource-link">Ver documentación →</span>
+    </div>
+  </a>
+
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -708,7 +849,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
@@ -718,6 +859,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Subdepartamento de Supervisión y Verificación de Estadísticas Económicas y Precios</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

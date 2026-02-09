@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ftorov.github.io/dashboard_SV/index.html</loc>
-    <lastmod>2026-02-03T18:09:13.908Z</lastmod>
+    <loc>https://ftorov.github.io/dashboard_SV/metodologia.html</loc>
+    <lastmod>2026-02-09T14:37:00.342Z</lastmod>
   </url>
   <url>
-    <loc>https://ftorov.github.io/dashboard_SV/ENIA.html</loc>
-    <lastmod>2026-02-04T14:53:08.306Z</lastmod>
+    <loc>https://ftorov.github.io/dashboard_SV/EOC.html</loc>
+    <lastmod>2026-02-09T13:27:25.314Z</lastmod>
   </url>
   <url>
-    <loc>https://ftorov.github.io/dashboard_SV/ENI.knit.html</loc>
-    <lastmod>2026-02-04T18:50:19.385Z</lastmod>
+    <loc>https://ftorov.github.io/dashboard_SV/ENI.html</loc>
+    <lastmod>2026-02-09T13:26:55.896Z</lastmod>
   </url>
   <url>
     <loc>https://ftorov.github.io/dashboard_SV/descargas.html</loc>
-    <lastmod>2026-02-03T13:48:44.818Z</lastmod>
+    <lastmod>2026-02-06T18:12:57.335Z</lastmod>
   </url>
   <url>
     <loc>https://ftorov.github.io/dashboard_SV/about.html</loc>
@@ -22,14 +22,14 @@
   </url>
   <url>
     <loc>https://ftorov.github.io/dashboard_SV/ELE.html</loc>
-    <lastmod>2026-02-04T18:53:46.383Z</lastmod>
+    <lastmod>2026-02-09T13:26:58.050Z</lastmod>
   </url>
   <url>
-    <loc>https://ftorov.github.io/dashboard_SV/ENI.html</loc>
-    <lastmod>2026-02-04T18:46:53.797Z</lastmod>
+    <loc>https://ftorov.github.io/dashboard_SV/ENIA.html</loc>
+    <lastmod>2026-02-09T13:27:12.425Z</lastmod>
   </url>
   <url>
-    <loc>https://ftorov.github.io/dashboard_SV/EOC.html</loc>
-    <lastmod>2026-02-04T18:54:49.754Z</lastmod>
+    <loc>https://ftorov.github.io/dashboard_SV/index.html</loc>
+    <lastmod>2026-02-09T14:14:10.985Z</lastmod>
   </url>
 </urlset>

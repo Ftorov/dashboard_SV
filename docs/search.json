@@ -1,49 +1,199 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "dashboard_SV",
+    "objectID": "metodologia.html",
+    "href": "metodologia.html",
+    "title": "Metodología",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "text": "Este proyecto consolida y estandariza información proveniente de Survey Solutions asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar calidad temporal, cumplimiento de reglas operativas y comportamiento estadístico de las duraciones, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.\nLa unidad de análisis corresponde a la entrevista supervisada (interview__id). Todos los indicadores se calculan sobre el universo efectivo de registros disponibles tras la depuración inicial.",
     "crumbs": [
-      "Home"
+      "Documentación",
+      "Metodología"
     ]
   },
   {
-    "objectID": "ENIA.html",
-    "href": "ENIA.html",
+    "objectID": "metodologia.html#alcance",
+    "href": "metodologia.html#alcance",
+    "title": "Metodología",
+    "section": "",
+    "text": "Este proyecto consolida y estandariza información proveniente de Survey Solutions asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar calidad temporal, cumplimiento de reglas operativas y comportamiento estadístico de las duraciones, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.\nLa unidad de análisis corresponde a la entrevista supervisada (interview__id). Todos los indicadores se calculan sobre el universo efectivo de registros disponibles tras la depuración inicial.",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#origen-y-consolidación-de-datos",
+    "href": "metodologia.html#origen-y-consolidación-de-datos",
+    "title": "Metodología",
+    "section": "2. Origen y consolidación de datos",
+    "text": "2. Origen y consolidación de datos\nLos datos se obtienen desde archivos .zip exportados desde Survey Solutions, que contienen:\n\nArchivo principal de supervisión (*.tab)\nArchivo de diagnósticos (interview__diagnostics.tab)\n\nAmbos insumos se integran mediante interview__id, incorporando el identificador del responsable de la supervisión. Posteriormente, los datos se consolidan en una única estructura longitudinal, preservando el origen de cada registro (origen_df) y armonizando codificaciones de encuesta y etapa.",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#identificación-de-encuesta-y-etapa",
+    "href": "metodologia.html#identificación-de-encuesta-y-etapa",
+    "title": "Metodología",
+    "section": "3. Identificación de encuesta y etapa",
+    "text": "3. Identificación de encuesta y etapa\nLa etapa del proceso se deriva a partir de variables binarias (P_3_1__*), asignándose una única etapa prioritaria:\n\nVerificación\nRecolección\nConsistencia\nProcesamiento\n\nLa encuesta se determina a partir del origen del archivo consolidado, garantizando trazabilidad.",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#tratamiento-temporal-y-cálculo-de-duraciones",
+    "href": "metodologia.html#tratamiento-temporal-y-cálculo-de-duraciones",
+    "title": "Metodología",
+    "section": "4. Tratamiento temporal y cálculo de duraciones",
+    "text": "4. Tratamiento temporal y cálculo de duraciones\n\n4.1 Parseo de fechas\nLas fechas de inicio (P_2_1) y término (P_9_1) se transforman a formato POSIXct. Se definen los siguientes errores temporales:\n\nFechas faltantes o inválidas\nDuraciones negativas (término anterior al inicio)\n\nLos registros con errores temporales se excluyen del cálculo de duraciones válidas.\n\n\n4.2 Duración de la entrevista\nLa duración se calcula como:\nduración_seg = difftime(datetime_t, datetime_i, units = \"secs\")\nduración_min = duración_seg / 60\nSolo las duraciones no negativas y con fechas válidas continúan al siguiente nivel de validación.",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#reglas-operativas-de-duración",
+    "href": "metodologia.html#reglas-operativas-de-duración",
+    "title": "Metodología",
+    "section": "5. Reglas operativas de duración",
+    "text": "5. Reglas operativas de duración\nLas reglas operativas definen rangos esperados de duración (en minutos) por encuesta y etapa. Estas reglas son explícitas, editables y versionables.\nLos registros que incumplen reglas operativas se excluyen del cálculo estadístico posterior, pero se contabilizan como errores operativos.",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#detección-estadística-de-outliers",
+    "href": "metodologia.html#detección-estadística-de-outliers",
+    "title": "Metodología",
+    "section": "6. Detección estadística de outliers",
+    "text": "6. Detección estadística de outliers\nLa detección de valores atípicos se aplica exclusivamente sobre duraciones que:\n\nNo presentan errores temporales\nCumplen reglas operativas\n\nEl análisis se realiza por etapa, reconociendo que las distribuciones de duración difieren estructuralmente entre procesos.\n\n6.1 Método IQR (Tukey)\nSe calculan los cuartiles Q1 y Q3 y el rango intercuartílico:\nIQR = Q3 − Q1\nSe definen los límites:\n\nLímite inferior: Q1 − 1.5 × IQR\nLímite superior: Q3 + 1.5 × IQR\n\nUn registro es outlier IQR si su duración se encuentra fuera de este rango.\n\n\n6.2 Método MAD (desviación absoluta mediana)\nSe calcula la mediana y la MAD de las duraciones válidas:\nz_MAD = (duración − mediana) / MAD\nUn registro es considerado outlier MAD si:\n|z_MAD| &gt; 3.5\nEste criterio es robusto ante asimetrías y colas largas.\n\n\n6.3 Criterio combinado\nUn registro se clasifica como outlier estadístico si cumple al menos uno de los criterios:\n\nOutlier IQR\nOutlier MAD",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#definición-de-registros-válidos",
+    "href": "metodologia.html#definición-de-registros-válidos",
+    "title": "Metodología",
+    "section": "7. Definición de registros válidos",
+    "text": "7. Definición de registros válidos\nSe consideran válidos sin outliers aquellos registros que:\n\nNo presentan errores temporales\nCumplen reglas operativas\nNo son outliers estadísticos\n\nSolo este subconjunto se utiliza para el cálculo de estadísticas descriptivas (media, mediana, percentiles y rangos).",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#indicadores-reportados",
+    "href": "metodologia.html#indicadores-reportados",
+    "title": "Metodología",
+    "section": "8. Indicadores reportados",
+    "text": "8. Indicadores reportados\nPara cada nivel de agregación (encuesta, etapa, responsable, horario, día), se reportan:\n\nTotal de registros\nErrores de fecha\nIncumplimientos de reglas operativas\nOutliers estadísticos\nRegistros válidos\nEstadísticos descriptivos de duración\n\nTodos los porcentajes utilizan como denominador el total de registros del grupo correspondiente.",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "metodologia.html#principios-metodológicos",
+    "href": "metodologia.html#principios-metodológicos",
+    "title": "Metodología",
+    "section": "9. Principios metodológicos",
+    "text": "9. Principios metodológicos\n\nSeparación estricta entre errores operativos y anomalías estadísticas\nUso de métodos robustos y trazables\nReglas explícitas y auditables\nReproducibilidad completa del proceso\n\nEsta metodología prioriza la interpretabilidad operativa por sobre enfoques puramente exploratorios, asegurando coherencia y estabilidad en el monitoreo continuo.",
+    "crumbs": [
+      "Documentación",
+      "Metodología"
+    ]
+  },
+  {
+    "objectID": "EOC.html",
+    "href": "EOC.html",
     "title": "dashboard_SV",
     "section": "",
-    "text": "VerificaciónRecolecciónAnálisis y consistencia\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:02:37\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:05:31\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,05%\n\n1 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n6,40%\n\n118 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n21,48%\n\n396 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n1.844\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n1.725\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n1.329\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:03:07\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:08:13\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,14%\n\n2 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n28,85%\n\n403 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n22,69%\n\n317 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n1.397\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n992\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n675",
+    "text": "VerificaciónRecolecciónAnálisis y consistencia\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:32\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:35\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:03:26\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n8,50%\n\n13 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n153\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n153\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n140\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.",
     "crumbs": [
       "Encuestas",
-      "Encuesta Nacional Industrial Anual"
+      "Encuesta de Oferta Cultural"
     ]
   },
   {
-    "objectID": "ENI.knit.html",
-    "href": "ENI.knit.html",
+    "objectID": "ENI.html",
+    "href": "ENI.html",
     "title": "dashboard_SV",
     "section": "",
-    "text": "VerificaciónRecolecciónAnálisis y consistencia\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:16\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:29\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:03:42\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n1,22%\n\n3 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n4,90%\n\n12 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n245\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n242\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n230\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:00:52\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:05:22\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n38,97%\n\n1.323 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n0,77%\n\n26 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n3.395\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n2.072\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n2.046\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:35\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:08:15\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,07%\n\n1 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n2,84%\n\n40 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n6,54%\n\n92 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n1.407\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n1.366\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n1.274"
+    "text": "VerificaciónRecolecciónAnálisis y consistencia\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:16\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:29\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:03:42\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n1,22%\n\n3 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n4,90%\n\n12 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n245\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n242\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n230\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:00:52\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:05:22\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n38,97%\n\n1.323 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n0,77%\n\n26 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n3.395\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n2.072\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n2.046\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:35\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:08:15\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,07%\n\n1 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n2,84%\n\n40 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n6,54%\n\n92 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n1.407\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n1.366\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n1.274",
+    "crumbs": [
+      "Encuestas",
+      "Encuesta Nacional de Innovación"
+    ]
   },
   {
     "objectID": "descargas.html",
     "href": "descargas.html",
-    "title": "dashboard_SV",
+    "title": "Reportes de Supervisión",
     "section": "",
-    "text": "Estos tabulados presentan indicadores de control y calidad del proceso de supervisión, desagregados por encuesta, etapa, responsable y dimensiones temporales asociadas a la realización de la entrevista (día de la semana y franja horaria AM/PM). Incluyen recuentos totales de registros, detección de errores de fecha, aplicación de reglas operativas, identificación de valores atípicos y estadísticas descriptivas de la duración de las entrevistas válidas.\nLos archivos están disponibles en formato Excel para descarga directa.\n\n\n\nEncuesta, Etapa de la Supervisión y Usuario\nIndicadores desagregados por encuesta, etapa y responsable.  Descargar \n\n\nEncuesta y Etapa de la Supervisión\nResultados consolidados por encuesta y etapa del proceso.  Descargar \n\n\n\n\n\nUsuario y Etapa de la Supervisión\nIndicadores de desempeño por usuario y etapa.  Descargar \n\n\nUsuario\nIndicadores agregados de supervisión por responsable.  Descargar \n\n\n\n\n\nSupervisión por Horario (AM / PM)\nIndicadores de supervisión según franja horaria de inicio de la entrevista.  Descargar \n\n\nSupervisión por Día de la Semana\nDistribución de indicadores según día de realización de la supervisión.  Descargar \n\n\n\n\n\nDía de la Semana y Horario\nIndicadores combinados por día y franja horaria de la supervisión.  Descargar \n\n\nUsuario y Día de la Semana\nIndicadores de supervisión por responsable, desagregados por día.  Descargar \n\n\nUsuario y Horario\nIndicadores de supervisión por responsable, según horario de realización.  Descargar \n\n\n\n\n\nResumen Global\nIndicadores globales de auditoría de la supervisión.  Descargar \n\n\nAuditoría\nDetalle de auditoría por encuesta, etapa y responsable.  Descargar",
+    "text": "Indicadores desagregados por encuesta, etapa del proceso y responsable de la supervisión, orientados a la detección de errores y cargas operativas.\n\n\n Ver resultados \n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResultados consolidados por encuesta y etapa del proceso de supervisión, útiles para el monitoreo global del desempeño operativo.\n\n\n Ver resultados \n Descargar Excel",
     "crumbs": [
+      "Tabulados",
       "Descargas"
     ]
   },
   {
-    "objectID": "descargas.html#reportes-de-supervisión",
-    "href": "descargas.html#reportes-de-supervisión",
-    "title": "dashboard_SV",
+    "objectID": "descargas.html#control-y-calidad-del-proceso",
+    "href": "descargas.html#control-y-calidad-del-proceso",
+    "title": "Reportes de Supervisión",
     "section": "",
-    "text": "Estos tabulados presentan indicadores de control y calidad del proceso de supervisión, desagregados por encuesta, etapa, responsable y dimensiones temporales asociadas a la realización de la entrevista (día de la semana y franja horaria AM/PM). Incluyen recuentos totales de registros, detección de errores de fecha, aplicación de reglas operativas, identificación de valores atípicos y estadísticas descriptivas de la duración de las entrevistas válidas.\nLos archivos están disponibles en formato Excel para descarga directa.\n\n\n\nEncuesta, Etapa de la Supervisión y Usuario\nIndicadores desagregados por encuesta, etapa y responsable.  Descargar \n\n\nEncuesta y Etapa de la Supervisión\nResultados consolidados por encuesta y etapa del proceso.  Descargar \n\n\n\n\n\nUsuario y Etapa de la Supervisión\nIndicadores de desempeño por usuario y etapa.  Descargar \n\n\nUsuario\nIndicadores agregados de supervisión por responsable.  Descargar \n\n\n\n\n\nSupervisión por Horario (AM / PM)\nIndicadores de supervisión según franja horaria de inicio de la entrevista.  Descargar \n\n\nSupervisión por Día de la Semana\nDistribución de indicadores según día de realización de la supervisión.  Descargar \n\n\n\n\n\nDía de la Semana y Horario\nIndicadores combinados por día y franja horaria de la supervisión.  Descargar \n\n\nUsuario y Día de la Semana\nIndicadores de supervisión por responsable, desagregados por día.  Descargar \n\n\nUsuario y Horario\nIndicadores de supervisión por responsable, según horario de realización.  Descargar \n\n\n\n\n\nResumen Global\nIndicadores globales de auditoría de la supervisión.  Descargar \n\n\nAuditoría\nDetalle de auditoría por encuesta, etapa y responsable.  Descargar",
+    "text": "Indicadores desagregados por encuesta, etapa del proceso y responsable de la supervisión, orientados a la detección de errores y cargas operativas.\n\n\n Ver resultados \n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResultados consolidados por encuesta y etapa del proceso de supervisión, útiles para el monitoreo global del desempeño operativo.\n\n\n Ver resultados \n Descargar Excel",
     "crumbs": [
+      "Tabulados",
+      "Descargas"
+    ]
+  },
+  {
+    "objectID": "descargas.html#desempeño-por-responsable",
+    "href": "descargas.html#desempeño-por-responsable",
+    "title": "Reportes de Supervisión",
+    "section": "Desempeño por responsable",
+    "text": "Desempeño por responsable\n\nResponsable · Etapa\n\nIndicadores de desempeño por responsable de la supervisión, diferenciados por etapa del proceso.\n\n\n Ver resultados \n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nResponsable\n\nIndicadores agregados de supervisión por responsable, orientados a evaluaciones globales de desempeño.\n\n\n Ver resultados \n Descargar Excel",
+    "crumbs": [
+      "Tabulados",
+      "Descargas"
+    ]
+  },
+  {
+    "objectID": "descargas.html#análisis-temporal-de-la-supervisión",
+    "href": "descargas.html#análisis-temporal-de-la-supervisión",
+    "title": "Reportes de Supervisión",
+    "section": "Análisis temporal de la supervisión",
+    "text": "Análisis temporal de la supervisión\n\nFranja horaria (AM / PM)\n\nDistribución de los indicadores de supervisión según la franja horaria de inicio de la entrevista.\n\n\n Ver resultados \n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nDía de la semana\n\nIndicadores de supervisión según el día de realización de la entrevista supervisada.\n\n\n Ver resultados \n Descargar Excel",
+    "crumbs": [
+      "Tabulados",
+      "Descargas"
+    ]
+  },
+  {
+    "objectID": "descargas.html#cruces-temporales-y-por-responsable",
+    "href": "descargas.html#cruces-temporales-y-por-responsable",
+    "title": "Reportes de Supervisión",
+    "section": "Cruces temporales y por responsable",
+    "text": "Cruces temporales y por responsable\n\n\nDía de la semana · Franja horaria\n\nIndicadores combinados por día de la semana y franja horaria de realización de la supervisión.\n\n\n Ver resultados \n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nResponsable · Día de la semana\n\nIndicadores de supervisión por responsable, desagregados según el día de la semana.\n\n\n Ver resultados \n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nResponsable · Franja horaria\n\nIndicadores de supervisión por responsable según la franja horaria de realización.\n\n\n Ver resultados \n Descargar Excel",
+    "crumbs": [
+      "Tabulados",
+      "Descargas"
+    ]
+  },
+  {
+    "objectID": "descargas.html#auditoria",
+    "href": "descargas.html#auditoria",
+    "title": "Reportes de Supervisión",
+    "section": "Auditoria",
+    "text": "Auditoria\n\n\nResumen global de auditoría\n\nIndicadores globales del proceso de supervisión que permiten evaluar errores, reglas operativas y valores atípicos en el conjunto total de registros.\n\n\n Ver resultados \n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nAuditoría detallada\n\nDetalle de auditoría por encuesta, etapa y responsable, orientado a revisión operativa y trazabilidad de hallazgos.\n\n\n Ver resultados \n Descargar Excel",
+    "crumbs": [
+      "Tabulados",
       "Descargas"
     ]
   },
@@ -66,25 +216,54 @@
     ]
   },
   {
-    "objectID": "ENI.html",
-    "href": "ENI.html",
+    "objectID": "ENIA.html",
+    "href": "ENIA.html",
     "title": "dashboard_SV",
     "section": "",
-    "text": "VerificaciónRecolecciónAnálisis y consistencia\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:16\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:29\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:03:42\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n1,22%\n\n3 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n4,90%\n\n12 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n245\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n242\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n230\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:00:52\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:05:22\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n38,97%\n\n1.323 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n0,77%\n\n26 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n3.395\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n2.072\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n2.046\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:35\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:08:15\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,07%\n\n1 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n2,84%\n\n40 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n6,54%\n\n92 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n1.407\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n1.366\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n1.274",
+    "text": "VerificaciónRecolecciónAnálisis y consistencia\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:02:37\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:05:31\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,05%\n\n1 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n6,40%\n\n118 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n21,48%\n\n396 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n1.844\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n1.725\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n1.329\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:03:07\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:18\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:08:13\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,14%\n\n2 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n28,85%\n\n403 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n22,69%\n\n317 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n1.397\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n992\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n675",
     "crumbs": [
       "Encuestas",
-      "Encuesta Nacional de Innovación"
+      "Encuesta Nacional Industrial Anual"
     ]
   },
   {
-    "objectID": "EOC.html",
-    "href": "EOC.html",
-    "title": "dashboard_SV",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "título pendiente",
     "section": "",
-    "text": "VerificaciónRecolecciónAnálisis y consistencia\n\n\n\n\n\n\n\n\nDuración media\n\n\n\n\nPromedio del tiempo de respuesta calculado sobre registros válidos sin outliers.\n\n\n\n00:01:32\n\n\n\n\n\nDuración mínima\n\n\n\n\nMenor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:00:35\n\n\n\n\n\nDuración máxima\n\n\n\n\nMayor tiempo de respuesta observado entre los registros válidos sin outliers.\n\n\n\n00:03:26\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nError en registro de fecha\n\n\n\n\nPorcentaje de registros con inconsistencias temporales, definidas como fechas u horas faltantes o duraciones negativas entre inicio y término. El denominador corresponde al total de registros procesados en la etapa analizada.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nRegla operativa\n\n\n\n\nPorcentaje de registros cuya duración incumple los umbrales mínimos o máximos definidos por encuesta y etapa. El cálculo se realiza sobre el total de registros.\n\n\n\n0,00%\n\n0 registros\n\n\n\n\nOutliers\n\n\n\n\nPorcentaje de registros con duraciones atípicas identificadas mediante criterios estadísticos (IQR de Tukey y Z-MAD), calculado sobre el total de registros con duración válida.\n\n\n\n8,50%\n\n13 registros\n\n\n\n\n\n\n\n\n\n\n\n\nRegistros evaluados\n\n\n\n\nTotal de registros procesados en la etapa considerada.\n\n\n\n153\n\n\n\n\n\nRegistros válidos\n\n\n\n\nNúmero de registros cuya duración cumple las reglas operativas definidas.\n\n\n\n153\n\n\n\n\n\nVálidos sin outliers\n\n\n\n\nRegistros válidos que no presentan valores atípicos y que conforman la base final para el análisis.\n\n\n\n140\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.\n         \n\n\n\n\n\n\n\n           No hay información para mostrar\n           La combinación seleccionada no registra datos.",
+    "text": "Indicadores, visualizaciones y descargas orientadas a la gestión operativa de la supervisión CAWI.",
     "crumbs": [
-      "Encuestas",
-      "Encuesta de Oferta Cultural"
+      "Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#subtitulo-pendiente",
+    "href": "index.html#subtitulo-pendiente",
+    "title": "título pendiente",
+    "section": "",
+    "text": "Indicadores, visualizaciones y descargas orientadas a la gestión operativa de la supervisión CAWI.",
+    "crumbs": [
+      "Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#accesos-rápidos",
+    "href": "index.html#accesos-rápidos",
+    "title": "título pendiente",
+    "section": "Accesos rápidos",
+    "text": "Accesos rápidos\n\n  \n\n    \n      \n        \n          \n        \n        \n          ENI\n          Encuesta Nacional de Innovación\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          ENIA\n          Encuesta Nacional Industrial Anual\n          Ir al tablero →\n        \n      \n    \n    \n    \n      \n        \n          \n        \n        \n          ELE\n          Encuesta Longitudinal de Empresas\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          EOC\n          Encuesta de Oferta Cultural\n          Ir al tablero →",
+    "crumbs": [
+      "Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#recursos-disponibles",
+    "href": "index.html#recursos-disponibles",
+    "title": "título pendiente",
+    "section": "Recursos disponibles",
+    "text": "Recursos disponibles\n\n\n  \n  \n    \n      \n    \n\n    \n      Descargas\n      \n        Tabulados consolidados, auditorías y cruces operativos\n        en formato Excel.\n      \n      Ir a descargas →\n    \n  \n\n  \n  \n    \n      \n    \n\n    \n      Documentación\n      \n        Metodología, definiciones operativas y criterios\n        utilizados en los indicadores.\n      \n      Ver documentación →",
+    "crumbs": [
+      "Inicio"
     ]
   }
 ]

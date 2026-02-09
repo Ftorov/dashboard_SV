@@ -7,6 +7,10 @@ website:
   site-url: "https://ftorov.github.io/dashboard_SV"
   favicon: "assets/images/logo_ine.png"
   
+  navbar:
+    background: primary                        
+    logo: "assets/images/LOGO INE.png"   
+    
   sidebar:
     pinned: true                             
     style: "floating"                          
@@ -14,27 +18,40 @@ website:
     search: true                               
     contents:
       - href: index.qmd
-        text: Home
+        text: Inicio
         icon: house
         
       - section: "Encuestas"
         icon: clipboard-data
         contents:
          - text: "Encuesta Nacional de Innovación"
-           icon: lightbulb
+           icon: bi bi-lightbulb
            href: ENI.qmd
          - text: "Encuesta Nacional Industrial Anual"
-           icon: boxes
+           icon: bi bi-boxes
            href: ENIA.qmd
          - text: "Encuesta Longitudinal de Empresas"
-           icon: layers
+           icon: bi bi-building
            href: ELE.qmd
          - text: "Encuesta de Oferta Cultural"
-           icon: palette
+           icon: bi bi-palette
            href: EOC.qmd
-      - text: "Descargas"
-        icon: download
-        href: descargas.qmd
+      - section: "Tabulados"
+        icon: file-earmark-bar-graph
+        contents:
+          - text: "Descargas"
+            icon: download
+            href: descargas.qmd
+  
+      - section: "Documentación"
+        icon: journal-text
+        contents:
+          - text: "Metodología"
+            icon: diagram-3
+            href: metodologia.qmd
+    
+  page-footer:
+    left: Subdepartamento de Supervisión y Verificación de Estadísticas Económicas y Precios
 
 format:
   html:
@@ -42,7 +59,7 @@ format:
       light: cosmo                 # Tema claro
       dark: darkly                 # Tema oscuro
       
-
+    back-to-top: true
     page-navigation: true          # Navegación entre páginas
     anchor-sections: true          # Anclas en los títulos
     smooth-scroll: true            # Desplazamiento suave
@@ -72,5 +89,5 @@ execute:
   message: false       # Oculta mensajes
   error: false         # Oculta errores
   cache: false         # No usa caché
-  freeze: auto         # Recalcula solo si el archivo cambió
+  freeze: false         # Recalcula solo si el archivo cambió
   encoding: "UTF-8"    # Codificación de texto

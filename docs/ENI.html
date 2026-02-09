@@ -41,14 +41,14 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2eab6412616f6754704c632408e30d15.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-f448adeb448497c0158b2791638f5f6d.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e907b9c21eb13761600435f52035fc7f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-39b8b5c43dd62313de44d665691aa5c6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -89,10 +89,26 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./assets/images/LOGO INE.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">dashboard_SV</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -108,17 +124,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">dashboard_SV</a> 
-        <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -130,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link"><i class="bi bi-house" role="img">
 </i> 
- <span class="menu-text">Home</span></a>
+ <span class="menu-text">Inicio</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -145,41 +153,72 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ENI.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-lightbulb" role="img">
+  <a href="./ENI.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-bi bi-lightbulb" role="img">
 </i> 
  <span class="menu-text">Encuesta Nacional de Innovación</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ENIA.html" class="sidebar-item-text sidebar-link"><i class="bi bi-boxes" role="img">
+  <a href="./ENIA.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-boxes" role="img">
 </i> 
  <span class="menu-text">Encuesta Nacional Industrial Anual</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ELE.html" class="sidebar-item-text sidebar-link"><i class="bi bi-layers" role="img">
+  <a href="./ELE.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-building" role="img">
 </i> 
  <span class="menu-text">Encuesta Longitudinal de Empresas</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./EOC.html" class="sidebar-item-text sidebar-link"><i class="bi bi-palette" role="img">
+  <a href="./EOC.html" class="sidebar-item-text sidebar-link"><i class="bi bi-bi bi-palette" role="img">
 </i> 
  <span class="menu-text">Encuesta de Oferta Cultural</span></a>
   </div>
 </li>
       </ul>
   </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false"><i class="bi bi-file-earmark-bar-graph" role="img">
+</i> 
+ <span class="menu-text">Tabulados</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descargas.html" class="sidebar-item-text sidebar-link"><i class="bi bi-download" role="img">
 </i> 
  <span class="menu-text">Descargas</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false"><i class="bi bi-journal-text" role="img">
+</i> 
+ <span class="menu-text">Documentación</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./metodologia.html" class="sidebar-item-text sidebar-link"><i class="bi bi-diagram-3" role="img">
+</i> 
+ <span class="menu-text">Metodología</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -267,8 +306,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-1f6e7d46c52b73265971" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-1f6e7d46c52b73265971">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["245","Registros evaluados"]},{"value":["242","Registros válidos"]},{"value":["230","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Verificación"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-7a3fc17a809c1b717024" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-7a3fc17a809c1b717024">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["245","Registros evaluados"]},{"value":["242","Registros válidos"]},{"value":["230","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Verificación"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
@@ -381,14 +420,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-9c6af3087d96b9dee1c1" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-9c6af3087d96b9dee1c1">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes","12"]},{"value":["martes","25"]},{"value":["miércoles","29"]},{"value":["jueves","23"]},{"value":["viernes","15"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","29"]},{"value":["martes","32"]},{"value":["miércoles","46"]},{"value":["jueves","20"]},{"value":["viernes","14"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI — Verificación","subtext":"Total entrevistas: 245 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-454a76bce88590d586a3" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-454a76bce88590d586a3">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes","12"]},{"value":["martes","25"]},{"value":["miércoles","29"]},{"value":["jueves","23"]},{"value":["viernes","15"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","29"]},{"value":["martes","32"]},{"value":["miércoles","46"]},{"value":["jueves","20"]},{"value":["viernes","14"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI — Verificación","subtext":"Total entrevistas: 245 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-961b0d4eafc286a5bd01" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-961b0d4eafc286a5bd01">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes"," 1"]},{"value":["09","lunes"," 5"]},{"value":["10","lunes"," 3"]},{"value":["11","lunes"," 3"]},{"value":["12","lunes"," 0"]},{"value":["13","lunes"," 0"]},{"value":["14","lunes"," 5"]},{"value":["15","lunes","17"]},{"value":["16","lunes"," 7"]},{"value":["17","lunes"," 0"]},{"value":["18","lunes"," 0"]},{"value":["08","martes"," 0"]},{"value":["09","martes"," 8"]},{"value":["10","martes","11"]},{"value":["11","martes"," 6"]},{"value":["12","martes"," 8"]},{"value":["13","martes"," 0"]},{"value":["14","martes","14"]},{"value":["15","martes"," 7"]},{"value":["16","martes"," 2"]},{"value":["17","martes"," 1"]},{"value":["18","martes"," 0"]},{"value":["08","miércoles"," 6"]},{"value":["09","miércoles"," 6"]},{"value":["10","miércoles"," 7"]},{"value":["11","miércoles","10"]},{"value":["12","miércoles"," 7"]},{"value":["13","miércoles"," 1"]},{"value":["14","miércoles","16"]},{"value":["15","miércoles","10"]},{"value":["16","miércoles","12"]},{"value":["17","miércoles"," 0"]},{"value":["18","miércoles"," 0"]},{"value":["08","jueves"," 2"]},{"value":["09","jueves"," 7"]},{"value":["10","jueves"," 8"]},{"value":["11","jueves"," 6"]},{"value":["12","jueves"," 0"]},{"value":["13","jueves"," 1"]},{"value":["14","jueves"," 4"]},{"value":["15","jueves"," 8"]},{"value":["16","jueves"," 7"]},{"value":["17","jueves"," 0"]},{"value":["18","jueves"," 0"]},{"value":["08","viernes"," 0"]},{"value":["09","viernes"," 1"]},{"value":["10","viernes"," 5"]},{"value":["11","viernes"," 9"]},{"value":["12","viernes"," 5"]},{"value":["13","viernes"," 1"]},{"value":["14","viernes"," 2"]},{"value":["15","viernes"," 2"]},{"value":["16","viernes"," 3"]},{"value":["17","viernes"," 1"]},{"value":["18","viernes"," 0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":17}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENI — Verificación"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-a4eb28d7a511a69a48b8" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-a4eb28d7a511a69a48b8">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes"," 1"]},{"value":["09","lunes"," 5"]},{"value":["10","lunes"," 3"]},{"value":["11","lunes"," 3"]},{"value":["12","lunes"," 0"]},{"value":["13","lunes"," 0"]},{"value":["14","lunes"," 5"]},{"value":["15","lunes","17"]},{"value":["16","lunes"," 7"]},{"value":["17","lunes"," 0"]},{"value":["18","lunes"," 0"]},{"value":["08","martes"," 0"]},{"value":["09","martes"," 8"]},{"value":["10","martes","11"]},{"value":["11","martes"," 6"]},{"value":["12","martes"," 8"]},{"value":["13","martes"," 0"]},{"value":["14","martes","14"]},{"value":["15","martes"," 7"]},{"value":["16","martes"," 2"]},{"value":["17","martes"," 1"]},{"value":["18","martes"," 0"]},{"value":["08","miércoles"," 6"]},{"value":["09","miércoles"," 6"]},{"value":["10","miércoles"," 7"]},{"value":["11","miércoles","10"]},{"value":["12","miércoles"," 7"]},{"value":["13","miércoles"," 1"]},{"value":["14","miércoles","16"]},{"value":["15","miércoles","10"]},{"value":["16","miércoles","12"]},{"value":["17","miércoles"," 0"]},{"value":["18","miércoles"," 0"]},{"value":["08","jueves"," 2"]},{"value":["09","jueves"," 7"]},{"value":["10","jueves"," 8"]},{"value":["11","jueves"," 6"]},{"value":["12","jueves"," 0"]},{"value":["13","jueves"," 1"]},{"value":["14","jueves"," 4"]},{"value":["15","jueves"," 8"]},{"value":["16","jueves"," 7"]},{"value":["17","jueves"," 0"]},{"value":["18","jueves"," 0"]},{"value":["08","viernes"," 0"]},{"value":["09","viernes"," 1"]},{"value":["10","viernes"," 5"]},{"value":["11","viernes"," 9"]},{"value":["12","viernes"," 5"]},{"value":["13","viernes"," 1"]},{"value":["14","viernes"," 2"]},{"value":["15","viernes"," 2"]},{"value":["16","viernes"," 3"]},{"value":["17","viernes"," 1"]},{"value":["18","viernes"," 0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":17}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENI — Verificación"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -448,8 +487,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-6cc5a16f50d99594f6a9" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-6cc5a16f50d99594f6a9">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["3395","Registros evaluados"]},{"value":["2072","Registros válidos"]},{"value":["2046","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Recolección"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-e1cd06da19e13d3d858f" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-e1cd06da19e13d3d858f">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["3395","Registros evaluados"]},{"value":["2072","Registros válidos"]},{"value":["2046","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Recolección"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
@@ -562,14 +601,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-372f711ba8d7022a824e" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-372f711ba8d7022a824e">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes","442"]},{"value":["martes","157"]},{"value":["miércoles"," 80"]},{"value":["jueves","529"]},{"value":["viernes","474"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","443"]},{"value":["martes"," 64"]},{"value":["miércoles","305"]},{"value":["jueves","598"]},{"value":["viernes","303"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI — Recolección","subtext":"Total entrevistas: 3.395 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-ce6f01b0625435a8c896" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-ce6f01b0625435a8c896">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes","442"]},{"value":["martes","157"]},{"value":["miércoles"," 80"]},{"value":["jueves","529"]},{"value":["viernes","474"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","443"]},{"value":["martes"," 64"]},{"value":["miércoles","305"]},{"value":["jueves","598"]},{"value":["viernes","303"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI — Recolección","subtext":"Total entrevistas: 3.395 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-f50d6f80ecebae5329c8" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-f50d6f80ecebae5329c8">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes"," 19"]},{"value":["09","lunes","107"]},{"value":["10","lunes","162"]},{"value":["11","lunes","153"]},{"value":["12","lunes"," 54"]},{"value":["13","lunes"," 26"]},{"value":["14","lunes","162"]},{"value":["15","lunes"," 96"]},{"value":["16","lunes","105"]},{"value":["17","lunes","  0"]},{"value":["18","lunes","  0"]},{"value":["08","martes"," 36"]},{"value":["09","martes"," 40"]},{"value":["10","martes"," 42"]},{"value":["11","martes"," 36"]},{"value":["12","martes","  5"]},{"value":["13","martes","  0"]},{"value":["14","martes"," 15"]},{"value":["15","martes"," 17"]},{"value":["16","martes"," 15"]},{"value":["17","martes"," 12"]},{"value":["18","martes","  0"]},{"value":["08","miércoles","  0"]},{"value":["09","miércoles","  7"]},{"value":["10","miércoles"," 20"]},{"value":["11","miércoles"," 53"]},{"value":["12","miércoles"," 13"]},{"value":["13","miércoles","  7"]},{"value":["14","miércoles"," 99"]},{"value":["15","miércoles","108"]},{"value":["16","miércoles"," 61"]},{"value":["17","miércoles"," 17"]},{"value":["18","miércoles","  0"]},{"value":["08","jueves"," 21"]},{"value":["09","jueves","127"]},{"value":["10","jueves","180"]},{"value":["11","jueves","199"]},{"value":["12","jueves","116"]},{"value":["13","jueves"," 25"]},{"value":["14","jueves","146"]},{"value":["15","jueves","196"]},{"value":["16","jueves","110"]},{"value":["17","jueves","  5"]},{"value":["18","jueves","  0"]},{"value":["08","viernes"," 31"]},{"value":["09","viernes","130"]},{"value":["10","viernes","148"]},{"value":["11","viernes","165"]},{"value":["12","viernes"," 57"]},{"value":["13","viernes"," 40"]},{"value":["14","viernes"," 99"]},{"value":["15","viernes"," 68"]},{"value":["16","viernes"," 33"]},{"value":["17","viernes","  1"]},{"value":["18","viernes","  5"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":199}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENI — Recolección"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-32043b05065b81275344" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-32043b05065b81275344">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes"," 19"]},{"value":["09","lunes","107"]},{"value":["10","lunes","162"]},{"value":["11","lunes","153"]},{"value":["12","lunes"," 54"]},{"value":["13","lunes"," 26"]},{"value":["14","lunes","162"]},{"value":["15","lunes"," 96"]},{"value":["16","lunes","105"]},{"value":["17","lunes","  0"]},{"value":["18","lunes","  0"]},{"value":["08","martes"," 36"]},{"value":["09","martes"," 40"]},{"value":["10","martes"," 42"]},{"value":["11","martes"," 36"]},{"value":["12","martes","  5"]},{"value":["13","martes","  0"]},{"value":["14","martes"," 15"]},{"value":["15","martes"," 17"]},{"value":["16","martes"," 15"]},{"value":["17","martes"," 12"]},{"value":["18","martes","  0"]},{"value":["08","miércoles","  0"]},{"value":["09","miércoles","  7"]},{"value":["10","miércoles"," 20"]},{"value":["11","miércoles"," 53"]},{"value":["12","miércoles"," 13"]},{"value":["13","miércoles","  7"]},{"value":["14","miércoles"," 99"]},{"value":["15","miércoles","108"]},{"value":["16","miércoles"," 61"]},{"value":["17","miércoles"," 17"]},{"value":["18","miércoles","  0"]},{"value":["08","jueves"," 21"]},{"value":["09","jueves","127"]},{"value":["10","jueves","180"]},{"value":["11","jueves","199"]},{"value":["12","jueves","116"]},{"value":["13","jueves"," 25"]},{"value":["14","jueves","146"]},{"value":["15","jueves","196"]},{"value":["16","jueves","110"]},{"value":["17","jueves","  5"]},{"value":["18","jueves","  0"]},{"value":["08","viernes"," 31"]},{"value":["09","viernes","130"]},{"value":["10","viernes","148"]},{"value":["11","viernes","165"]},{"value":["12","viernes"," 57"]},{"value":["13","viernes"," 40"]},{"value":["14","viernes"," 99"]},{"value":["15","viernes"," 68"]},{"value":["16","viernes"," 33"]},{"value":["17","viernes","  1"]},{"value":["18","viernes","  5"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":199}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENI — Recolección"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -629,8 +668,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-a70f7fb6b3d7fdd9b53c" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-a70f7fb6b3d7fdd9b53c">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["1407","Registros evaluados"]},{"value":["1366","Registros válidos"]},{"value":["1274","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Consistencia"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-c39443e9aa5a2daec05b" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-c39443e9aa5a2daec05b">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"xAxis":[{"show":true}],"yAxis":[{"data":["Registros evaluados","Registros válidos","Válidos sin outliers"],"type":"category","boundaryGap":true}],"legend":{"data":["n"],"show":false,"type":"plain"},"series":[{"data":[{"value":["1407","Registros evaluados"]},{"value":["1366","Registros válidos"]},{"value":["1274","Válidos sin outliers"]}],"name":"n","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d","barMaxWidth":42,"itemStyle":"\n        function(params){\n          return { color: params.data.color };\n        }\n      ","label":{"show":true,"position":"insideRight","color":"#FFFFFF","fontWeight":"bold","formatter":"\n          function(params){\n            var v = params.value;\n            if (Array.isArray(v)) v = v[0];\n            if (typeof v === 'string')\n              v = Number(v.replace(/\\./g,'').replace(',','.'));\n            return v\n              .toFixed(0)\n              .replace(/\\B(?=(\\d{3})+(?!\\d))/g, '.');\n          }\n        "}}],"tooltip":{"trigger":"axis","axisPointer":{"type":"shadow"},"formatter":"\n        function(params){\n          var p = params[0];\n          var v = p.value;\n          if (Array.isArray(v)) v = v[0];\n          if (typeof v === 'string')\n            v = Number(v.replace(/\\./g,'').replace(',','.'));\n          return '<b>' + p.axisValue + '<\/b><br>' +\n                 v.toLocaleString('es-CL');\n        }\n      "},"title":[{"left":"center","text":"Cobertura de registros","subtext":"ENI — Consistencia"}],"grid":[{"left":40,"right":20,"top":70,"bottom":10,"containLabel":true}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":["opts.series.0.itemStyle","opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
@@ -743,14 +782,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-bc25eca73809520505a7" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-bc25eca73809520505a7">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes","171"]},{"value":["martes","178"]},{"value":["miércoles"," 74"]},{"value":["jueves"," 86"]},{"value":["viernes"," 91"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","242"]},{"value":["martes","282"]},{"value":["miércoles"," 64"]},{"value":["jueves","125"]},{"value":["viernes"," 94"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI — Consistencia","subtext":"Total entrevistas: 1.407 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-7b2f9589153f5ce87d46" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-7b2f9589153f5ce87d46">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true,"name":"Número de entrevistas"}],"xAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"type":"category","boundaryGap":true}],"legend":{"data":["AM","PM"],"show":true,"type":"plain","orient":"vertical","right":10,"top":"middle"},"series":[{"data":[{"value":["lunes","171"]},{"value":["martes","178"]},{"value":["miércoles"," 74"]},{"value":["jueves"," 86"]},{"value":["viernes"," 91"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"AM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"},{"data":[{"value":["lunes","242"]},{"value":["martes","282"]},{"value":["miércoles"," 64"]},{"value":["jueves","125"]},{"value":["viernes"," 94"]}],"yAxisIndex":0,"xAxisIndex":0,"name":"PM","type":"line","coordinateSystem":"cartesian2d","smooth":true,"symbol":"circle"}],"tooltip":{"trigger":"axis"},"title":[{"left":"center","text":"Distribución de entrevistas — ENI — Consistencia","subtext":"Total entrevistas: 1.407 · AM vs PM por día"}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[],"magicType":{"type":["bar","line"]}}},"animation":true,"animationDuration":900,"animationEasing":"cubicOut"},"dispose":true},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="echarts4r html-widget html-fill-item" id="htmlwidget-bee4b01aff1d018f4e89" style="width:100%;height:500px;"></div>
-<script type="application/json" data-for="htmlwidget-bee4b01aff1d018f4e89">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes","16"]},{"value":["09","lunes","37"]},{"value":["10","lunes","68"]},{"value":["11","lunes","44"]},{"value":["12","lunes","27"]},{"value":["13","lunes","15"]},{"value":["14","lunes","56"]},{"value":["15","lunes","72"]},{"value":["16","lunes","57"]},{"value":["17","lunes","13"]},{"value":["18","lunes"," 2"]},{"value":["08","martes","29"]},{"value":["09","martes","38"]},{"value":["10","martes","57"]},{"value":["11","martes","54"]},{"value":["12","martes","36"]},{"value":["13","martes"," 5"]},{"value":["14","martes","30"]},{"value":["15","martes","79"]},{"value":["16","martes","67"]},{"value":["17","martes","36"]},{"value":["18","martes","29"]},{"value":["08","miércoles"," 6"]},{"value":["09","miércoles","14"]},{"value":["10","miércoles","30"]},{"value":["11","miércoles","24"]},{"value":["12","miércoles","12"]},{"value":["13","miércoles"," 1"]},{"value":["14","miércoles","13"]},{"value":["15","miércoles","21"]},{"value":["16","miércoles","15"]},{"value":["17","miércoles"," 2"]},{"value":["18","miércoles"," 0"]},{"value":["08","jueves"," 7"]},{"value":["09","jueves","21"]},{"value":["10","jueves","27"]},{"value":["11","jueves","30"]},{"value":["12","jueves","31"]},{"value":["13","jueves"," 6"]},{"value":["14","jueves","17"]},{"value":["15","jueves","47"]},{"value":["16","jueves","24"]},{"value":["17","jueves"," 0"]},{"value":["18","jueves"," 0"]},{"value":["08","viernes"," 2"]},{"value":["09","viernes","25"]},{"value":["10","viernes","28"]},{"value":["11","viernes","36"]},{"value":["12","viernes","10"]},{"value":["13","viernes","22"]},{"value":["14","viernes","19"]},{"value":["15","viernes","39"]},{"value":["16","viernes"," 3"]},{"value":["17","viernes"," 1"]},{"value":["18","viernes"," 0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":79}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENI — Consistencia"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
+<div class="echarts4r html-widget html-fill-item" id="htmlwidget-7f3793535252cbcc3827" style="width:100%;height:500px;"></div>
+<script type="application/json" data-for="htmlwidget-7f3793535252cbcc3827">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"data":["lunes","martes","miércoles","jueves","viernes"],"name":"Día de la semana"}],"xAxis":[{"data":["08","09","10","11","12","13","14","15","16","17","18"],"type":"category","name":"Hora del día","nameLocation":"middle","nameGap":30}],"series":[{"data":[{"value":["08","lunes","16"]},{"value":["09","lunes","37"]},{"value":["10","lunes","68"]},{"value":["11","lunes","44"]},{"value":["12","lunes","27"]},{"value":["13","lunes","15"]},{"value":["14","lunes","56"]},{"value":["15","lunes","72"]},{"value":["16","lunes","57"]},{"value":["17","lunes","13"]},{"value":["18","lunes"," 2"]},{"value":["08","martes","29"]},{"value":["09","martes","38"]},{"value":["10","martes","57"]},{"value":["11","martes","54"]},{"value":["12","martes","36"]},{"value":["13","martes"," 5"]},{"value":["14","martes","30"]},{"value":["15","martes","79"]},{"value":["16","martes","67"]},{"value":["17","martes","36"]},{"value":["18","martes","29"]},{"value":["08","miércoles"," 6"]},{"value":["09","miércoles","14"]},{"value":["10","miércoles","30"]},{"value":["11","miércoles","24"]},{"value":["12","miércoles","12"]},{"value":["13","miércoles"," 1"]},{"value":["14","miércoles","13"]},{"value":["15","miércoles","21"]},{"value":["16","miércoles","15"]},{"value":["17","miércoles"," 2"]},{"value":["18","miércoles"," 0"]},{"value":["08","jueves"," 7"]},{"value":["09","jueves","21"]},{"value":["10","jueves","27"]},{"value":["11","jueves","30"]},{"value":["12","jueves","31"]},{"value":["13","jueves"," 6"]},{"value":["14","jueves","17"]},{"value":["15","jueves","47"]},{"value":["16","jueves","24"]},{"value":["17","jueves"," 0"]},{"value":["18","jueves"," 0"]},{"value":["08","viernes"," 2"]},{"value":["09","viernes","25"]},{"value":["10","viernes","28"]},{"value":["11","viernes","36"]},{"value":["12","viernes","10"]},{"value":["13","viernes","22"]},{"value":["14","viernes","19"]},{"value":["15","viernes","39"]},{"value":["16","viernes"," 3"]},{"value":["17","viernes"," 1"]},{"value":["18","viernes"," 0"]}],"name":null,"type":"heatmap","coordinateSystem":"cartesian2d","label":{"show":true,"formatter":"\n          function(params){\n            return params.value[2] === 0 ? '' : params.value[2];\n          }\n        "}}],"visualMap":[{"orient":"vertical","right":10,"top":"middle","calculable":true,"type":"continuous","min":0,"max":79}],"title":[{"left":"center","text":"Distribución horaria del trabajo (08:00 a 18:59)","subtext":"ENI — Consistencia"}],"tooltip":{"trigger":"item","formatter":"\n        function (params) {\n          var hora = params.value[0];\n          var dia  = params.value[1];\n          var val  = params.value[2];\n\n          if (val === 0) return '';\n\n          return (\n            '<b>' + dia + '<\/b><br/>' +\n            'Hora: ' + hora + ':00 a ' + hora + ':59<br/>' +\n            'Supervisiones: ' + val\n          );\n        }\n      "},"grid":[{"left":80,"right":80,"top":80,"bottom":40}],"toolbox":{"show":true,"orient":"horizontal","right":10,"top":10,"feature":{"saveAsImage":[]}}},"dispose":true},"evals":["opts.series.0.label.formatter","opts.tooltip.formatter"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1269,8 +1308,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Home">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Home</span>
+      <a href="./index.html" class="pagination-link" aria-label="Inicio">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Inicio</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1280,6 +1319,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Subdepartamento de Supervisión y Verificación de Estadísticas Económicas y Precios</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

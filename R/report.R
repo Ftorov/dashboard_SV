@@ -1,19 +1,52 @@
 
 
-# LIBRERÍAS ---------------------------------------------------------------
+# 0. MEDICIÓN DE TIEMPO DE EJECUCIÓN --------------------------------------
 
-if(!require(dplyr)) install.packages("dplyr") else require(dplyr)
-if(!require(lubridate)) install.packages("lubridate") else require(lubridate)
-if(!require(data.table)) install.packages("data.table") else require(data.table)
-if(!require(writexl)) install.packages("writexl") else require(writexl)
-if(!require(fs)) install.packages("fs") else require(fs)
-if(!require(openxlsx)) install.packages("openxlsx") else require(openxlsx)
+t_inicio <- Sys.time()
 
-options(scipen=999)
 
-# -------------------------------------------------------------------------
-# FUNCIONES DE FORMATO (ES-CL)
-# -------------------------------------------------------------------------
+# 1. LIBRERÍAS ------------------------------------------------------------
+pkgs <- c(
+  "dplyr", "lubridate", "data.table", "writexl",
+  "fs", "openxlsx", "tibble", "purrr", "reactable", "htmltools"
+)
+
+for (p in pkgs) {
+  if (!require(p, character.only = TRUE)) {
+    install.packages(p)
+    library(p, character.only = TRUE)
+  }
+}
+
+options(scipen = 999)
+
+
+# 2. METADATOS DEL REPORTE ------------------------------------------------
+
+metadata_reporte <- list(
+  proyecto         = "Dashboard de prueba",
+  responsable      = "Francisco Toro",
+  fecha_descarga   = as.Date("2026-01-26"),
+  fecha_generacion = Sys.Date(),
+  version          = "v1.1"
+)
+
+metadata_bases <- tibble(
+  encuesta = c("ENI","ENI","ENIA","ENIA","EOC","ELE"),
+  archivo_zip = c(
+    "ENI_SV_Verif_2025_1_Tabular_All.zip",
+    "Superv_2025_Rec_ENI_2_Tabular_All.zip",
+    "Superv_2025_Rec_ENIA_1_Tabular_All.zip",
+    "Superv_2025_Analis_ENIA_1_Tabular_All.zip",
+    "EOC_SV_Verif_2025_1_Tabular_All.zip",
+    "Superv_2025_Ver_ELE8_1_Tabular_All.zip"
+  ),
+  fecha_descarga = metadata_reporte$fecha_descarga,
+  fuente = "Survey Solutions"
+)
+
+
+# 3. FUNCIONES DE FORMATO (ES-CL) -----------------------------------------
 
 fmt_pct_cl <- function(x, digits = 2) {
   ifelse(
@@ -43,10 +76,7 @@ fmt_num_cl <- function(x) {
 }
 
 
-
-
-# RUTA BASE Y MAPE0 DE ARCHIVOS -------------------------------------------
-
+# 4.  RUTA BASE Y ARCHIVOS ------------------------------------------------
 
 base_path <- "datasets/260121"
 tmp_dir <- tempdir()
@@ -90,8 +120,7 @@ archivos <- list(
 )
 
 
-# CARGA + JOIN CON DIAGNOSTICS ------------------------------------------
-
+# 5. CARGA + JOIN CON DIAGNOSTICS ------------------------------------------
 
 for (zip_name in names(archivos)) {
   
@@ -121,66 +150,25 @@ for (zip_name in names(archivos)) {
 }
 
 
-# CONSOLIDADO DE SUPERVISIÓN ----------------------------------------------
+# 6. CONSOLIDADO ----------------------------------------------
 
-cols <- c(
-  "interview__id",
-  "responsible",
-  "P_2_1",
-  "P_3_1__1",
-  "P_3_1__2",
-  "P_3_1__3",
-  "P_3_1__4",
-  "P_9_1"
-)
+cols <- c("interview__id","responsible","P_2_1","P_3_1__1",
+          "P_3_1__2","P_3_1__3","P_3_1__4","P_9_1")
 
-dfs <- sapply(archivos, `[[`, "df")
-
-lista <- list()
-
-for (df_name in dfs) {
-  
-  df <- as.data.table(get(df_name, envir = .GlobalEnv))
-  
-  cols_ok <- intersect(cols, names(df))
-  tmp <- df[, ..cols_ok][, lapply(.SD, as.character)]
+lista <- lapply(sapply(archivos, `[[`, "df"), function(df_name) {
+  df <- as.data.table(get(df_name))
+  tmp <- df[, intersect(cols, names(df)), with = FALSE][, lapply(.SD, as.character)]
   tmp[, origen_df := df_name]
-  
-  faltantes <- setdiff(cols, names(tmp))
-  for (f in faltantes) tmp[, (f) := NA_character_]
-  
+  for (f in setdiff(cols, names(tmp))) tmp[, (f) := NA_character_]
   setcolorder(tmp, c(cols, "origen_df"))
-  lista[[df_name]] <- tmp
-}
+  tmp
+})
 
-consolidado <- rbindlist(lista, fill = TRUE)
+consolidado <- rbindlist(lista, fill = TRUE) %>%
+  mutate(across(where(is.character), ~trimws(iconv(.x, "", "UTF-8"))),
+         responsible = sub("_.*$", "", responsible))
 
-# -------------------------------------------------------------------------
-# NORMALIZACIÓN GLOBAL DE TEXTO (encoding + espacios)
-# -------------------------------------------------------------------------
-# Esto previene problemas de UTF-8 / Latin1 provenientes de Excel, ZIP, etc.
-# Se aplica a TODAS las columnas de texto del consolidado
-
-consolidado <- consolidado %>%
-  mutate(
-    across(
-      where(is.character),
-      ~ trimws(iconv(.x, from = "", to = "UTF-8"))
-    )
-  )
-
-
-consolidado <- consolidado %>%
-  mutate(
-    responsible = ifelse(
-      !is.na(responsible),
-      sub("_.*$", "", responsible),
-      NA_character_
-    )
-  )
-
-
-# DEFINICIÓN DE ETAPA -----------------------------------------------------
+#7. ETAPA Y ENCUESTA ---------------------------------------------
 
 consolidado <- consolidado %>%
   mutate(
@@ -192,9 +180,6 @@ consolidado <- consolidado %>%
       TRUE ~ NA_character_
     )
   )
-
-
-# DEFINICIÓN DE ENCUESTA --------------------------------------------------
 
 consolidado <- consolidado %>%
   mutate(
@@ -210,10 +195,23 @@ consolidado <- consolidado %>%
   )
 
 
+vars_clave <- c(
+  "P_2_1","P_3_1__1","P_3_1__2",
+  "P_3_1__3","P_3_1__4","P_9_1"
+)
 
-# -------------------------------------------------------------------------
-# 1) TABLA DE REGLAS OPERATIVAS (EDITABLE)
-# -------------------------------------------------------------------------
+consolidado <- consolidado %>%
+  filter(
+    if_any(
+      all_of(vars_clave),
+      ~ !is.na(.) & . != "" & . != "##N/A##"
+    )
+  )
+
+
+
+
+# 8. REGLAS OPERATIVAS (EDITABLE)--------------------------------
 
 reglas_duracion <- tribble(
   ~encuesta, ~etapa,           ~min_min, ~max_min,
@@ -226,9 +224,8 @@ reglas_duracion <- tribble(
   "EOC",     "Verificación",     0.3,      25
 )
 
-# -------------------------------------------------------------------------
-# 2) PROCESAMIENTO DE FECHAS Y DURACIONES
-# -------------------------------------------------------------------------
+
+# 9. FECHAS Y DURACIONES -----------------------------------------------------
 
 consolidado <- consolidado %>%
   mutate(
@@ -251,31 +248,23 @@ consolidado <- consolidado %>%
 
 consolidado <- consolidado %>%
   mutate(
-    # -------------------------------
-    # Parseo de fechas y horas
-    # -------------------------------
-    datetime_i = suppressWarnings(ymd_hms(P_2_1)),  # inicio
-    datetime_t = suppressWarnings(ymd_hms(P_9_1)),  # término
-    
-    # -------------------------------
-    # Indicadores temporales
-    # -------------------------------
+
+
     dia_semana = ifelse(
       !is.na(datetime_i),
       weekdays(as.Date(datetime_i)),
       NA_character_
     ),
     
-    # Normalización ES-CL
     dia_semana = recode(
       dia_semana,
-      "Monday"    = "Lunes",
-      "Tuesday"   = "Martes",
-      "Wednesday" = "Miércoles",
-      "Thursday"  = "Jueves",
-      "Friday"    = "Viernes",
-      "Saturday"  = "Sábado",
-      "Sunday"    = "Domingo"
+      "Monday"    = "lunes",
+      "Tuesday"   = "martes",
+      "Wednesday" = "miércoles",
+      "Thursday"  = "jueves",
+      "Friday"    = "viernes",
+      "Saturday"  = "sábado",
+      "Sunday"    = "domingo"
     ),
     
     horario = ifelse(
@@ -284,14 +273,14 @@ consolidado <- consolidado %>%
       NA_character_
     ),
     
-    # -------------------------------
+
     # Flags de error temporal
-    # -------------------------------
+
     flag_na_datetime = is.na(datetime_i) | is.na(datetime_t),
     
-    # -------------------------------
+
     # Duración
-    # -------------------------------
+
     duracion_seg = as.numeric(difftime(datetime_t, datetime_i, units = "secs")),
     flag_duracion_negativa = duracion_seg < 0,
     
@@ -299,9 +288,6 @@ consolidado <- consolidado %>%
     duracion_min = duracion_seg / 60
   )
 
-# -------------------------------------------------------------------------
-# 3) APLICAR REGLAS POR ENCUESTA Y ETAPA
-# -------------------------------------------------------------------------
 
 consolidado <- consolidado %>%
   left_join(
@@ -318,9 +304,7 @@ consolidado <- consolidado %>%
       duracion_min < min_min
   )
 
-# -------------------------------------------------------------------------
-# 4) DURACIÓN LIMPIA Y DETECCIÓN DE OUTLIERS
-# -------------------------------------------------------------------------
+
 
 consolidado <- consolidado %>%
   mutate(
@@ -390,15 +374,9 @@ consolidado <- consolidado %>%
   )
 
 
-
-
-
-# FUNCIONES ----------------------------------------------------------------------
 reporte_generico <- function(data, ...) {
   
-  # -----------------------------
-  # Helpers locales
-  # -----------------------------
+
   
   min_to_hms <- function(x) {
     if (is.na(x)) return(NA_character_)
@@ -409,51 +387,31 @@ reporte_generico <- function(data, ...) {
     sprintf("%02d:%02d:%02d", h, m, s)
   }
   
-  # -----------------------------
-  # Resumen
-  # -----------------------------
+
   
   data %>%
     group_by(...) %>%
     summarise(
-      
-      # -------------------------------------------------
-      # BASE
-      # -------------------------------------------------
       n_total = n(),
-      
-      # -------------------------------------------------
-      # ERRORES DE FECHA
-      # % sobre TOTAL (denominador explícito)
-      # -------------------------------------------------
       n_error_fecha = sum(flag_error_fecha, na.rm = TRUE),
       pct_error_fecha = ifelse(
         n_total > 0,
         100 * n_error_fecha / n_total,
         NA_real_
       ),
-      
-      # -------------------------------------------------
-      # REGLAS OPERATIVAS
-      # % sobre TOTAL (denominador explícito)
-      # -------------------------------------------------
+
       n_regla_operativa = sum(flag_regla_operativa, na.rm = TRUE),
       pct_regla_operativa = ifelse(
         n_total > 0,
         100 * n_regla_operativa / n_total,
         NA_real_
       ),
-      
-      # -------------------------------------------------
-      # DURACIONES VÁLIDAS
-      # -------------------------------------------------
+
       n_validos = sum(!is.na(duracion_min_limpia)),
       
-      # -------------------------------------------------
+
       # OUTLIERS
-      # DEFINICIÓN CLAVE:
-      # % sobre TOTAL (NO sobre válidos)
-      # -------------------------------------------------
+
       n_outliers = sum(
         flag_outlier_estadistico & !is.na(duracion_min_limpia),
         na.rm = TRUE
@@ -465,16 +423,16 @@ reporte_generico <- function(data, ...) {
         NA_real_
       ),
       
-      # -------------------------------------------------
+
       # VÁLIDOS SIN OUTLIERS
-      # -------------------------------------------------
+
       n_validos_sin_outliers = sum(
         !is.na(duracion_min_limpia) & !flag_outlier_estadistico
       ),
       
-      # -------------------------------------------------
+
       # DISTRIBUCIÓN (solo válidos sin outliers)
-      # -------------------------------------------------
+
       valores_validos = list(
         duracion_min_limpia[
           !is.na(duracion_min_limpia) & !flag_outlier_estadistico
@@ -523,35 +481,35 @@ reporte_generico <- function(data, ...) {
 
 
 
-# REPORTES ---------------------------------------------------------------------
+# 10. REPORTES ---------------------------------------------------------------------
 
-# 1. reporte etapa -------------------------------------------------------------
+# 10.1. reporte etapa -------------------------------------------------------------
 reporte_etapa <- consolidado %>%
   filter(!is.na(etapa)) %>%
   reporte_generico(etapa)
 
-# 2. reporte usuario -----------------------------------------------------------
+# 10.2. reporte usuario -----------------------------------------------------------
 reporte_por_responsible <- consolidado %>%
   filter(!is.na(responsible)) %>%
   reporte_generico(responsible)
 
-# 3. reporte usuario etapa -----------------------------------------------------
+# 10.3. reporte usuario etapa -----------------------------------------------------
 reporte_por_responsible_etapa <- consolidado %>%
   filter(!is.na(responsible), !is.na(etapa)) %>%
   reporte_generico(responsible, etapa)
 
-# 4. reporte encuesta etapa ----------------------------------------------------
+# 10.4. reporte encuesta etapa ----------------------------------------------------
 reporte_origen_etapa <- consolidado %>%
   filter(!is.na(origen_df), !is.na(etapa)) %>%
   reporte_generico(encuesta, etapa)
 
-# 5. reporte encuesta, etapa, usuario ------------------------------------------
+# 10.5. reporte encuesta, etapa, usuario ------------------------------------------
 reporte_origen_etapa_responsible <- consolidado %>%
   filter(!is.na(origen_df), !is.na(etapa), !is.na(responsible)) %>%
   reporte_generico(encuesta, etapa, responsible)
 
 
-# 6. reporte de alerta  --------------------------------------------------
+# 10.6. reporte de alerta  --------------------------------------------------
 reporte_alerta <- consolidado %>%
   filter(
     flag_error_fecha |
@@ -578,20 +536,32 @@ reporte_alerta <- consolidado %>%
   arrange(origen_df, etapa, responsible)
 
 
-# 7. auditoria global -----------------------------------------------------
+# 10.7. auditoria global -----------------------------------------------------
 
 reporte_auditoria_global <- consolidado %>%
   summarise(
     total_registros = n(),
     
     errores_fecha = sum(flag_error_fecha, na.rm = TRUE),
-    pct_errores_fecha = 100 * mean(flag_error_fecha, na.rm = TRUE),
+    pct_errores_fecha = ifelse(
+      total_registros > 0,
+      100 * errores_fecha / total_registros,
+      NA_real_
+    ),
     
     reglas_operativa = sum(flag_regla_operativa, na.rm = TRUE),
-    pct_reglas_operativa = 100 * mean(flag_regla_operativa, na.rm = TRUE),
+    pct_reglas_operativa = ifelse(
+      total_registros > 0,
+      100 * reglas_operativa / total_registros,
+      NA_real_
+    ),
     
     outliers = sum(flag_outlier_estadistico, na.rm = TRUE),
-    pct_outliers = 100 * mean(flag_outlier_estadistico, na.rm = TRUE)
+    pct_outliers = ifelse(
+      total_registros > 0,
+      100 * outliers / total_registros,
+      NA_real_
+    )
   ) %>%
   mutate(
     across(c(total_registros, errores_fecha, reglas_operativa, outliers), fmt_num_cl),
@@ -600,9 +570,7 @@ reporte_auditoria_global <- consolidado %>%
 
 
 
-# 8. auditoria general -------------------------------------------------------
-
-
+# 10.8. auditoria general -------------------------------------------------------
 
 reporte_auditoria_fina <- consolidado %>%
   filter(!is.na(etapa), !is.na(origen_df), !is.na(responsible)) %>%
@@ -611,15 +579,24 @@ reporte_auditoria_fina <- consolidado %>%
     n_total = n(),
     
     errores_fecha = sum(flag_error_fecha, na.rm = TRUE),
-    pct_errores_fecha = 100 * mean(flag_error_fecha, na.rm = TRUE),
+    pct_errores_fecha = ifelse(
+      n_total > 0,
+      100 * errores_fecha / n_total,
+      NA_real_
+    ),
     
     reglas_operativa = sum(flag_regla_operativa, na.rm = TRUE),
-    pct_reglas_operativa = 100 * mean(flag_regla_operativa, na.rm = TRUE),
+    pct_reglas_operativa = ifelse(
+      n_total > 0,
+      100 * reglas_operativa / n_total,
+      NA_real_
+    ),
     
-    outliers = sum(flag_outlier_estadistico & !is.na(duracion_min_limpia), na.rm = TRUE),
-    pct_outliers = 100 * mean(
-      flag_outlier_estadistico & !is.na(duracion_min_limpia),
-      na.rm = TRUE
+    outliers = sum(flag_outlier_estadistico, na.rm = TRUE),
+    pct_outliers = ifelse(
+      n_total > 0,
+      100 * outliers / n_total,
+      NA_real_
     ),
     
     .groups = "drop"
@@ -630,38 +607,206 @@ reporte_auditoria_fina <- consolidado %>%
   )
 
 
-# 9. reporte por horario --------------------------------------------------
+# 10.9. reporte por horario --------------------------------------------------
 reporte_por_horario <- consolidado %>%
   filter(!is.na(horario)) %>%
   reporte_generico(horario)
 
 
 
-# 10. reporte por día de la semana ----------------------------------------
+# 10.10. reporte por día de la semana ----------------------------------------
 reporte_por_dia <- consolidado %>%
   filter(!is.na(dia_semana)) %>%
   reporte_generico(dia_semana)
 
 
-# 11. reporte por día y horario -------------------------------------------
+# 10.11. reporte por día y horario -------------------------------------------
 reporte_dia_horario <- consolidado %>%
   filter(!is.na(dia_semana), !is.na(horario)) %>%
   reporte_generico(dia_semana, horario)
 
 
-# 12. reporte responsable por día ----------------------------------------
+# 10.12. reporte responsable por día ----------------------------------------
 reporte_responsable_dia <- consolidado %>%
   filter(!is.na(responsible), !is.na(dia_semana)) %>%
   reporte_generico(responsible, dia_semana)
 
-# 13. reporte responsable por horario ------------------------------------
+# 10.13. reporte responsable por horario ------------------------------------
 reporte_responsable_horario <- consolidado %>%
   filter(!is.na(responsible), !is.na(horario)) %>%
   reporte_generico(responsible, horario)
-#SALIDA ------------------------------------------------------------------
 
 
-# ---- Ruta de salida -----------------------------------------------------
+# 11. EXPORTAR ------------------------------------------------------------------
+
+# ========================================================================
+# TABLAS REACTABLE – ESTÁNDAR ÚNICO (AUDITORÍA COMO NORMA)
+# ========================================================================
+
+library(reactable)
+library(htmltools)
+
+# ------------------------------------------------------------------------
+# TEMA BASE (ÚNICO, SOBRIO, INSTITUCIONAL)
+# ------------------------------------------------------------------------
+
+tema_base <- reactableTheme(
+  style = list(
+    fontFamily = "system-ui",
+    fontSize   = "0.95rem",
+    color      = "#0f172a"
+  ),
+  headerStyle = list(
+    backgroundColor = "#f8fafc",
+    borderBottom    = "2px solid #e5e7eb",
+    fontWeight      = "600",
+    color           = "#334155"
+  ),
+  cellStyle = list(
+    padding = "14px"
+  ),
+  highlightColor = "#f1f5f9"
+)
+
+# ------------------------------------------------------------------------
+# HELPERS DE COLUMNAS (MISMO LENGUAJE AUDITORÍA)
+# ------------------------------------------------------------------------
+
+col_texto <- function(nombre) {
+  colDef(name = nombre, align = "left")
+}
+
+col_numerica <- function(nombre) {
+  colDef(
+    name  = nombre,
+    align = "center",
+    style = list(fontWeight = "600")
+  )
+}
+
+col_pct <- function(nombre) {
+  colDef(
+    name  = nombre,
+    align = "center",
+    style = list(fontWeight = "600")
+  )
+}
+
+col_numerica_color <- function(nombre, color) {
+  colDef(
+    name  = nombre,
+    align = "center",
+    style = list(fontWeight = "600", color = color)
+  )
+}
+
+col_numerica_condicional <- function(nombre) {
+  colDef(
+    name  = nombre,
+    align = "center",
+    style = function(value) {
+      list(
+        fontWeight = "600",
+        color = if (as.numeric(gsub("\\.", "", value)) > 0)
+          "#dc2626" else "#16a34a"
+      )
+    }
+  )
+}
+
+# ------------------------------------------------------------------------
+# DEFINICIÓN CANÓNICA DE COLUMNAS 
+# ------------------------------------------------------------------------
+
+columnas_estandar <- list(
+  encuesta = col_texto("Encuesta"),
+  etapa    = col_texto("Etapa"),
+  responsible = col_texto("Responsable"),
+  horario  = col_texto("Horario"),
+  dia_semana = col_texto("Día"),
+  
+  n_total = col_numerica("Total registros"),
+  
+  n_error_fecha = col_numerica_condicional("Errores de fecha"),
+  pct_error_fecha = col_pct("% errores de fecha"),
+  
+  n_regla_operativa = col_numerica_color("Errores operativos", "#b45309"),
+  pct_regla_operativa = col_pct("% reglas operativas"),
+  
+  n_outliers = col_numerica_color("Outliers", "#7c2d12"),
+  pct_outliers = col_pct("% outliers"),
+  
+  n_validos = col_numerica("Registros válidos"),
+  n_validos_sin_outliers = col_numerica("Válidos sin outliers"),
+  
+  media   = col_texto("Duración media"),
+  mediana = col_texto("Mediana"),
+  minimo  = col_texto("Mínimo"),
+  maximo  = col_texto("Máximo")
+)
+
+# ------------------------------------------------------------------------
+# FILTRO SEGURO DE COLUMNAS 
+# ------------------------------------------------------------------------
+
+columnas_validas <- function(columnas, data) {
+  columnas[names(columnas) %in% names(data)]
+}
+
+# ------------------------------------------------------------------------
+# TABLA ESTÁNDAR 
+# ------------------------------------------------------------------------
+
+tabla_estandar <- function(data, paginar = TRUE) {
+  
+  reactable(
+    data,
+    searchable = TRUE,
+    pagination = paginar,
+    defaultPageSize = 8,
+    bordered   = FALSE,
+    highlight  = TRUE,
+    striped    = FALSE,
+    compact    = TRUE,
+    
+    columns = columnas_validas(columnas_estandar, data),
+    theme   = tema_base
+  )
+}
+
+# ------------------------------------------------------------------------
+# DISPATCHER PRINCIPAL (AUDITORÍA ES UNA MÁS DEL SISTEMA)
+# ------------------------------------------------------------------------
+
+tabla_reporte <- function(tipo) {
+  
+  switch(
+    tipo,
+    
+    # Auditoría
+    "auditoria_global" = tabla_estandar(reporte_auditoria_global, paginar = FALSE),
+    "auditoria_fina"   = tabla_estandar(reporte_auditoria_fina),
+    
+    # Alertas
+    "alertas" = tabla_estandar(reporte_alerta),
+    
+    # Reportes operativos
+    "etapa"                    = tabla_estandar(reporte_etapa),
+    "responsable"              = tabla_estandar(reporte_por_responsible),
+    "responsable_etapa"        = tabla_estandar(reporte_por_responsible_etapa),
+    "origen_etapa"             = tabla_estandar(reporte_origen_etapa),
+    "origen_etapa_responsable" = tabla_estandar(reporte_origen_etapa_responsible),
+    "horario"                  = tabla_estandar(reporte_por_horario),
+    "dia"                      = tabla_estandar(reporte_por_dia),
+    "dia_horario"              = tabla_estandar(reporte_dia_horario),
+    "responsable_dia"          = tabla_estandar(reporte_responsable_dia),
+    "responsable_horario"      = tabla_estandar(reporte_responsable_horario),
+    
+    stop("Tipo de reporte no reconocido: ", tipo)
+  )
+}
+
+
 
 dir_salida <- "tabulados"
 dir_create(dir_salida)
@@ -679,9 +824,9 @@ ruta_salida <- file.path(
 )
 
 
-# -------------------------------------------------------------------------
+
 # EXPORTACIÓN DE TABULADOS PUBLICABLES (DESCARGAS QMD)
-# -------------------------------------------------------------------------
+
 
 write.xlsx(
   reporte_origen_etapa_responsible,
@@ -758,8 +903,6 @@ write.xlsx(
 
 
 message("Tabulados publicables exportados en assets/tabulados/")
-
-
 
 
 # ---- Workbook ----------------------------------------------------------
@@ -843,3 +986,11 @@ tryCatch(
     message(e$message)
   }
 )
+
+
+# 12. TIEMPO TOTAL DE EJECUCIÓN -------------------------------------------
+
+tiempo_ejecucion <- Sys.time() - t_inicio
+message("Reporte generado correctamente")
+message("Tiempo total de ejecución: ", round(tiempo_ejecucion, 2))
+
