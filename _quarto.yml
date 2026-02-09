@@ -36,19 +36,15 @@ website:
          - text: "Encuesta de Oferta Cultural"
            icon: bi bi-palette
            href: EOC.qmd
-      - section: "Tabulados"
-        icon: file-earmark-bar-graph
-        contents:
-          - text: "Descargas"
-            icon: download
-            href: descargas.qmd
+
+      - text: "Descargas"
+        icon: download
+        href: descargas.qmd
   
-      - section: "Documentación"
-        icon: journal-text
-        contents:
-          - text: "Metodología"
-            icon: diagram-3
-            href: metodologia.qmd
+
+      - text: "Metodología"
+        icon: diagram-3
+        href: metodologia.qmd
     
   page-footer:
     left: Subdepartamento de Supervisión y Verificación de Estadísticas Económicas y Precios

@@ -6,7 +6,6 @@
     "section": "",
     "text": "Este dashboard consolida y estandariza información proveniente de Survey Solutions asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar calidad temporal, cumplimiento de reglas operativas y comportamiento estadístico de las duraciones, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.\nLa unidad de análisis corresponde a la entrevista supervisada (interview__id). Todos los indicadores se calculan sobre el universo efectivo de registros disponibles tras la depuración inicial.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -17,7 +16,6 @@
     "section": "",
     "text": "Este dashboard consolida y estandariza información proveniente de Survey Solutions asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar calidad temporal, cumplimiento de reglas operativas y comportamiento estadístico de las duraciones, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.\nLa unidad de análisis corresponde a la entrevista supervisada (interview__id). Todos los indicadores se calculan sobre el universo efectivo de registros disponibles tras la depuración inicial.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -28,7 +26,6 @@
     "section": "2. Origen y consolidación de datos",
     "text": "2. Origen y consolidación de datos\nLos datos se obtienen desde archivos .zip exportados desde Survey Solutions, que contienen:\n\nArchivo principal de supervisión (*.tab)\nArchivo de diagnósticos (interview__diagnostics.tab)\n\nAmbos insumos se integran mediante interview__id, incorporando el identificador del responsable de la supervisión. Posteriormente, los datos se consolidan en una única estructura longitudinal, preservando el origen de cada registro (origen_df) y armonizando codificaciones de encuesta y etapa.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -39,7 +36,6 @@
     "section": "3. Identificación de encuesta y etapa",
     "text": "3. Identificación de encuesta y etapa\nLa etapa del proceso se deriva a partir de variables binarias (P_3_1__*), asignándose una única etapa prioritaria:\n\nVerificación\nRecolección\nConsistencia\nProcesamiento",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -50,7 +46,6 @@
     "section": "La encuesta se determina a partir del origen del archivo consolidado, garantizando trazabilidad.",
     "text": "La encuesta se determina a partir del origen del archivo consolidado, garantizando trazabilidad.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -61,7 +56,6 @@
     "section": "4. Tratamiento temporal y cálculo de duraciones",
     "text": "4. Tratamiento temporal y cálculo de duraciones\n\n4.1 Parseo de fechas\nLas fechas de inicio (P_2_1) y término (P_9_1) se transforman a formato POSIXct. Se definen los siguientes errores temporales:\n\nFechas faltantes o inválidas\nDuraciones negativas (término anterior al inicio)\n\nLos registros con errores temporales se excluyen del cálculo de duraciones válidas.\n\n\n4.2 Duración de la entrevista\nLa duración se calcula como:\nduración_seg = difftime(datetime_t, datetime_i, units = \"secs\")\nduración_min = duración_seg / 60\nSolo las duraciones no negativas y con fechas válidas continúan al siguiente nivel de validación.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -72,7 +66,6 @@
     "section": "5. Reglas operativas de duración",
     "text": "5. Reglas operativas de duración\nLas reglas operativas definen rangos esperados de duración (en minutos) por encuesta y etapa. Estas reglas son explícitas, editables y versionables.\nLos registros que incumplen reglas operativas se excluyen del cálculo estadístico posterior, pero se contabilizan como errores operativos.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -83,7 +76,6 @@
     "section": "6. Detección estadística de outliers",
     "text": "6. Detección estadística de outliers\nLa detección de valores atípicos se aplica exclusivamente sobre duraciones que:\n\nNo presentan errores temporales\nCumplen reglas operativas\n\nEl análisis se realiza por etapa, reconociendo que las distribuciones de duración difieren estructuralmente entre procesos.\n\n6.1 Método IQR (Tukey)\nSe calculan los cuartiles Q1 y Q3 y el rango intercuartílico:\nIQR = Q3 − Q1\nSe definen los límites:\n\nLímite inferior: Q1 − 1.5 × IQR\nLímite superior: Q3 + 1.5 × IQR\n\nUn registro es outlier IQR si su duración se encuentra fuera de este rango.\n\n\n6.2 Método MAD (desviación absoluta mediana)\nSe calcula la mediana y la MAD de las duraciones válidas:\nz_MAD = (duración − mediana) / MAD\nUn registro es considerado outlier MAD si:\n|z_MAD| &gt; 3.5\nEste criterio es robusto ante asimetrías y colas largas.\n\n\n6.3 Criterio combinado\nUn registro se clasifica como outlier estadístico si cumple al menos uno de los criterios:\n\nOutlier IQR\nOutlier MAD",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -94,7 +86,6 @@
     "section": "7. Definición de registros válidos",
     "text": "7. Definición de registros válidos\nSe consideran válidos sin outliers aquellos registros que:\n\nNo presentan errores temporales\nCumplen reglas operativas\nNo son outliers estadísticos\n\nSolo este subconjunto se utiliza para el cálculo de estadísticas descriptivas (media, mediana, percentiles y rangos).",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -105,7 +96,6 @@
     "section": "8. Indicadores reportados",
     "text": "8. Indicadores reportados\nPara cada nivel de agregación (encuesta, etapa, responsable, horario, día), se reportan:\n\nTotal de registros\nErrores de fecha\nIncumplimientos de reglas operativas\nOutliers estadísticos\nRegistros válidos\nEstadísticos descriptivos de duración\n\nTodos los porcentajes utilizan como denominador el total de registros del grupo correspondiente.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -116,7 +106,6 @@
     "section": "9. Principios metodológicos",
     "text": "9. Principios metodológicos\n\nSeparación estricta entre errores operativos y anomalías estadísticas\nUso de métodos robustos y trazables\nReglas explícitas y auditables\nReproducibilidad completa del proceso\n\nEsta metodología prioriza la interpretabilidad operativa por sobre enfoques puramente exploratorios, asegurando coherencia y estabilidad en el monitoreo continuo.",
     "crumbs": [
-      "Documentación",
       "Metodología"
     ]
   },
@@ -149,7 +138,6 @@
     "section": "",
     "text": "Indicadores desagregados por encuesta, etapa del proceso y responsable de la supervisión.\n\n\n\nVer resultados\n\n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResultados consolidados por encuesta y etapa del proceso de supervisión.\n\n\n\nVer resultados\n\n Descargar Excel",
     "crumbs": [
-      "Tabulados",
       "Descargas"
     ]
   },
@@ -160,7 +148,6 @@
     "section": "",
     "text": "Indicadores desagregados por encuesta, etapa del proceso y responsable de la supervisión.\n\n\n\nVer resultados\n\n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResultados consolidados por encuesta y etapa del proceso de supervisión.\n\n\n\nVer resultados\n\n Descargar Excel",
     "crumbs": [
-      "Tabulados",
       "Descargas"
     ]
   },
@@ -171,7 +158,6 @@
     "section": "Desempeño por responsable",
     "text": "Desempeño por responsable\n\nResponsable · Etapa\n\nIndicadores de desempeño por responsable de la supervisión, diferenciados por etapa del proceso.\n\n\n\nVer resultados\n\n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nResponsable\n\nIndicadores agregados de supervisión por responsable.\n\n\n\nVer resultados\n\n Descargar Excel",
     "crumbs": [
-      "Tabulados",
       "Descargas"
     ]
   },
@@ -182,7 +168,6 @@
     "section": "Análisis temporal de la supervisión",
     "text": "Análisis temporal de la supervisión\n\nFranja horaria (AM / PM)\n\nDistribución de los indicadores de supervisión según la franja horaria de inicio de la entrevista.\n\n\n\nVer resultados\n\n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nDía de la semana\n\nIndicadores de supervisión según el día de realización de la entrevista supervisada.\n\n\n\nVer resultados\n\n Descargar Excel",
     "crumbs": [
-      "Tabulados",
       "Descargas"
     ]
   },
@@ -193,7 +178,6 @@
     "section": "Cruces temporales y por responsable",
     "text": "Cruces temporales y por responsable\n\n\nDía de la semana · Franja horaria\n\nIndicadores combinados por día de la semana y franja horaria de realización de la supervisión.\n\n\n\nVer resultados\n\n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nResponsable · Día de la semana\n\nIndicadores de supervisión por responsable, desagregados según el día de la semana.\n\n\n\nVer resultados\n\n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nResponsable · Franja horaria\n\nIndicadores de supervisión por responsable según la franja horaria de realización.\n\n\n\nVer resultados\n\n Descargar Excel",
     "crumbs": [
-      "Tabulados",
       "Descargas"
     ]
   },
@@ -204,7 +188,6 @@
     "section": "Auditoria",
     "text": "Auditoria\n\n\nResumen global de auditoría\n\nIndicadores globales del proceso de supervisión que permiten evaluar errores, reglas operativas y valores atípicos en el conjunto total de registros.\n\n\n\nVer resultados\n\n Descargar Excel \n\n\n\n\n\n\n\n\n\n\n\n\nAuditoría detallada\n\nDetalle de auditoría por encuesta, etapa y responsable, orientado a revisión operativa y trazabilidad de hallazgos.\n\n\n\nVer resultados\n\n Descargar Excel",
     "crumbs": [
-      "Tabulados",
       "Descargas"
     ]
   },
