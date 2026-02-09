@@ -6,7 +6,7 @@
     "section": "",
     "text": "Este dashboard consolida y estandariza información proveniente de Survey Solutions asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar calidad temporal, cumplimiento de reglas operativas y comportamiento estadístico de las duraciones, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.\nLa unidad de análisis corresponde a la entrevista supervisada (interview__id). Todos los indicadores se calculan sobre el universo efectivo de registros disponibles tras la depuración inicial.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -16,7 +16,7 @@
     "section": "",
     "text": "Este dashboard consolida y estandariza información proveniente de Survey Solutions asociada a procesos de supervisión CAWI para las encuestas ENI, ENIA, ELE y EOC. El objetivo es evaluar calidad temporal, cumplimiento de reglas operativas y comportamiento estadístico de las duraciones, permitiendo detección temprana de anomalías y apoyo a la gestión operativa.\nLa unidad de análisis corresponde a la entrevista supervisada (interview__id). Todos los indicadores se calculan sobre el universo efectivo de registros disponibles tras la depuración inicial.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -26,7 +26,7 @@
     "section": "2. Origen y consolidación de datos",
     "text": "2. Origen y consolidación de datos\nLos datos se obtienen desde archivos .zip exportados desde Survey Solutions, que contienen:\n\nArchivo principal de supervisión (*.tab)\nArchivo de diagnósticos (interview__diagnostics.tab)\n\nAmbos insumos se integran mediante interview__id, incorporando el identificador del responsable de la supervisión. Posteriormente, los datos se consolidan en una única estructura longitudinal, preservando el origen de cada registro (origen_df) y armonizando codificaciones de encuesta y etapa.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -36,7 +36,7 @@
     "section": "3. Identificación de encuesta y etapa",
     "text": "3. Identificación de encuesta y etapa\nLa etapa del proceso se deriva a partir de variables binarias (P_3_1__*), asignándose una única etapa prioritaria:\n\nVerificación\nRecolección\nConsistencia\nProcesamiento",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -46,7 +46,7 @@
     "section": "La encuesta se determina a partir del origen del archivo consolidado, garantizando trazabilidad.",
     "text": "La encuesta se determina a partir del origen del archivo consolidado, garantizando trazabilidad.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -56,7 +56,7 @@
     "section": "4. Tratamiento temporal y cálculo de duraciones",
     "text": "4. Tratamiento temporal y cálculo de duraciones\n\n4.1 Parseo de fechas\nLas fechas de inicio (P_2_1) y término (P_9_1) se transforman a formato POSIXct. Se definen los siguientes errores temporales:\n\nFechas faltantes o inválidas\nDuraciones negativas (término anterior al inicio)\n\nLos registros con errores temporales se excluyen del cálculo de duraciones válidas.\n\n\n4.2 Duración de la entrevista\nLa duración se calcula como:\nduración_seg = difftime(datetime_t, datetime_i, units = \"secs\")\nduración_min = duración_seg / 60\nSolo las duraciones no negativas y con fechas válidas continúan al siguiente nivel de validación.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -66,7 +66,7 @@
     "section": "5. Reglas operativas de duración",
     "text": "5. Reglas operativas de duración\nLas reglas operativas definen rangos esperados de duración (en minutos) por encuesta y etapa. Estas reglas son explícitas, editables y versionables.\nLos registros que incumplen reglas operativas se excluyen del cálculo estadístico posterior, pero se contabilizan como errores operativos.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -76,7 +76,7 @@
     "section": "6. Detección estadística de outliers",
     "text": "6. Detección estadística de outliers\nLa detección de valores atípicos se aplica exclusivamente sobre duraciones que:\n\nNo presentan errores temporales\nCumplen reglas operativas\n\nEl análisis se realiza por etapa, reconociendo que las distribuciones de duración difieren estructuralmente entre procesos.\n\n6.1 Método IQR (Tukey)\nSe calculan los cuartiles Q1 y Q3 y el rango intercuartílico:\nIQR = Q3 − Q1\nSe definen los límites:\n\nLímite inferior: Q1 − 1.5 × IQR\nLímite superior: Q3 + 1.5 × IQR\n\nUn registro es outlier IQR si su duración se encuentra fuera de este rango.\n\n\n6.2 Método MAD (desviación absoluta mediana)\nSe calcula la mediana y la MAD de las duraciones válidas:\nz_MAD = (duración − mediana) / MAD\nUn registro es considerado outlier MAD si:\n|z_MAD| &gt; 3.5\nEste criterio es robusto ante asimetrías y colas largas.\n\n\n6.3 Criterio combinado\nUn registro se clasifica como outlier estadístico si cumple al menos uno de los criterios:\n\nOutlier IQR\nOutlier MAD",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -86,7 +86,7 @@
     "section": "7. Definición de registros válidos",
     "text": "7. Definición de registros válidos\nSe consideran válidos sin outliers aquellos registros que:\n\nNo presentan errores temporales\nCumplen reglas operativas\nNo son outliers estadísticos\n\nSolo este subconjunto se utiliza para el cálculo de estadísticas descriptivas (media, mediana, percentiles y rangos).",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -96,7 +96,7 @@
     "section": "8. Indicadores reportados",
     "text": "8. Indicadores reportados\nPara cada nivel de agregación (encuesta, etapa, responsable, horario, día), se reportan:\n\nTotal de registros\nErrores de fecha\nIncumplimientos de reglas operativas\nOutliers estadísticos\nRegistros válidos\nEstadísticos descriptivos de duración\n\nTodos los porcentajes utilizan como denominador el total de registros del grupo correspondiente.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -106,7 +106,7 @@
     "section": "9. Principios metodológicos",
     "text": "9. Principios metodológicos\n\nSeparación estricta entre errores operativos y anomalías estadísticas\nUso de métodos robustos y trazables\nReglas explícitas y auditables\nReproducibilidad completa del proceso\n\nEsta metodología prioriza la interpretabilidad operativa por sobre enfoques puramente exploratorios, asegurando coherencia y estabilidad en el monitoreo continuo.",
     "crumbs": [
-      "Metodología"
+      "Documentación"
     ]
   },
   {
@@ -223,9 +223,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Sección Supervisión CAWI",
+    "title": "Dashboard de uso interno",
     "section": "",
-    "text": "Encuesta Nacional de Innovación\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          \n          Encuesta Nacional Industrial Anual\n          Ir al tablero →\n        \n      \n    \n    \n    \n      \n        \n          \n        \n        \n          \n          Encuesta Longitudinal de Empresas\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          \n          Encuesta de Oferta Cultural\n          Ir al tablero →",
+    "text": "Herramienta orientada al seguimiento operativo del proceso de supervisión CAWI, basada en indicadores de validación temporal, reglas operativas y detección de valores atípicos, construidos a partir de registros descargables de Survey Solutions.\nLos resultados se presentan de forma agregada y desagregada por encuesta, etapa y responsable, con el objetivo de apoyar el monitoreo continuo y la trazabilidad del proceso.",
     "crumbs": [
       "Inicio"
     ]
@@ -233,9 +233,9 @@
   {
     "objectID": "index.html#accesos-rápidos",
     "href": "index.html#accesos-rápidos",
-    "title": "Sección Supervisión CAWI",
-    "section": "",
-    "text": "Encuesta Nacional de Innovación\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          \n          Encuesta Nacional Industrial Anual\n          Ir al tablero →\n        \n      \n    \n    \n    \n      \n        \n          \n        \n        \n          \n          Encuesta Longitudinal de Empresas\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          \n          Encuesta de Oferta Cultural\n          Ir al tablero →",
+    "title": "Dashboard de uso interno",
+    "section": "Accesos rápidos",
+    "text": "Accesos rápidos\n\n  \n\n    \n      \n        \n          \n        \n        \n          ENI\n          Encuesta Nacional de Innovación\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          ENIA\n          Encuesta Nacional Industrial Anual\n          Ir al tablero →\n        \n      \n    \n    \n    \n      \n        \n          \n        \n        \n          ELE\n          Encuesta Longitudinal de Empresas\n          Ir al tablero →\n        \n      \n    \n\n    \n      \n        \n          \n        \n        \n          EOC\n          Encuesta de Oferta Cultural\n          Ir al tablero →",
     "crumbs": [
       "Inicio"
     ]
@@ -243,9 +243,9 @@
   {
     "objectID": "index.html#recursos-disponibles",
     "href": "index.html#recursos-disponibles",
-    "title": "Sección Supervisión CAWI",
+    "title": "Dashboard de uso interno",
     "section": "Recursos disponibles",
-    "text": "Recursos disponibles\n\n\n  \n  \n    \n      \n    \n\n    \n      Descargas\n      \n        Tabulados consolidados, auditorías y cruces operativos\n        en formato Excel.\n      \n      Ir a descargas →\n    \n  \n\n  \n  \n    \n      \n    \n\n    \n      Documentación\n      \n        Metodología, definiciones operativas y criterios\n        utilizados en los indicadores.\n      \n      Ver documentación →\n    \n  \n\n\n\n\n\n\n\n\nVersión\nPrimera entrega funcional\n\n\n\n\n\nOrigen de datos\nDescarga directa desde Survey Solutions\n\n\n\n\n\nÚltima actualización\n09/02/2026",
+    "text": "Recursos disponibles\n\n\n  \n  \n    \n      \n    \n\n    \n      Descargas\n      \n        Tabulados consolidados, auditorías y cruces operativos\n        en formato Excel.\n      \n      Ir a descargas →\n    \n  \n\n  \n  \n    \n      \n    \n\n    \n      Documentación\n      \n        Metodología, definiciones operativas y criterios\n        utilizados en los indicadores.\n      \n      Ver documentación →\n    \n  \n\n\n\n\n\n\n\n\nVersión\nVersión inicial operativa\n\n\n\n\n\nOrigen de datos\nSurvey Solutions (descarga directa)\n\n\n\n\n\nÚltima actualización\n09/02/2026",
     "crumbs": [
       "Inicio"
     ]

@@ -42,8 +42,8 @@ website:
         href: descargas.qmd
   
 
-      - text: "Metodología"
-        icon: diagram-3
+      - text: "Documentación"
+        icon: bi bi-journal-text
         href: metodologia.qmd
     
   page-footer:

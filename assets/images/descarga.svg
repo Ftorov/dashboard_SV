@@ -1,0 +1,27 @@
+<svg viewBox="0 0 900 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="darkBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f2f5f"></stop>
+      <stop offset="100%" stop-color="#2b3f7f"></stop>
+    </linearGradient>
+
+    <linearGradient id="lightBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00b6ff"></stop>
+      <stop offset="100%" stop-color="#0094d8"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- línea -->
+  <line x1="90" y1="60" x2="860" y2="60" stroke="#cfd8e3" stroke-width="2"></line>
+
+  <!-- círculos -->
+  <circle cx="60" cy="60" r="45" fill="url(#darkBlue)"></circle>
+  <circle cx="160" cy="60" r="30" fill="url(#lightBlue)"></circle>
+  <circle cx="240" cy="60" r="24" fill="url(#darkBlue)"></circle>
+  <circle cx="310" cy="60" r="26" fill="url(#lightBlue)"></circle>
+  <circle cx="380" cy="60" r="24" fill="url(#darkBlue)"></circle>
+  <circle cx="450" cy="60" r="22" fill="url(#darkBlue)"></circle>
+  <circle cx="520" cy="60" r="20" fill="url(#lightBlue)"></circle>
+  <circle cx="590" cy="60" r="18" fill="url(#darkBlue)"></circle>
+  <circle cx="650" cy="60" r="16" fill="url(#lightBlue)"></circle>
+</svg>

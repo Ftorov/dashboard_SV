@@ -1,13 +1,29 @@
 ---
-title: ""
+title: "Dashboard de uso interno"
 page-layout: full
+
 ---
 
 ```{r setup, include=FALSE}
 source("R/_load_all.R", encoding = "UTF-8")
 ```
 
+![](assets/images/descarga.svg){.img-fluid .index-hero}
+
+
+
+
+Herramienta orientada al seguimiento operativo del proceso de supervisión CAWI, basada en indicadores de validación temporal, reglas operativas y detección de valores atípicos, construidos a partir de registros descargables de Survey Solutions. 
+
+Los resultados se presentan de forma agregada y desagregada por encuesta, etapa y responsable, con el objetivo de apoyar el monitoreo continuo y la trazabilidad del proceso.
+
+
+
+
+
 ## Accesos rápidos
+
+
 
 ```{=html}
 <div class="container-fluid quick-access">
@@ -109,7 +125,6 @@ source("R/_load_all.R", encoding = "UTF-8")
 ```
 
 
-
 ```{r, echo=FALSE}
 library(htmltools)
 
@@ -118,29 +133,32 @@ div(
 
   div(
     class = "status-card",
-    tags$i(class = "bi bi-info-circle"),
+    tags$i(class = "bi bi-info-circle status-icon"),
     div(
-      tags$strong("Versión"),
-      tags$p("Primera entrega funcional")
+      class = "status-content",
+      tags$span(class = "status-label", "Versión"),
+      tags$p(class = "status-value", "Versión inicial operativa")
     )
   ),
 
   div(
     class = "status-card",
-    tags$i(class = "bi bi-database"),
+    tags$i(class = "bi bi-database status-icon"),
     div(
-      tags$strong("Origen de datos"),
-      tags$p("Descarga directa desde Survey Solutions")
+      class = "status-content",
+      tags$span(class = "status-label", "Origen de datos"),
+      tags$p(class = "status-value", "Survey Solutions (descarga directa)")
     )
   ),
 
   div(
     class = "status-card",
-    tags$i(class = "bi bi-clock-history"),
+    tags$i(class = "bi bi-clock-history status-icon"),
     div(
-      tags$strong("Última actualización"),
+      class = "status-content",
+      tags$span(class = "status-label", "Última actualización"),
       tags$p(
-        class = "status-date",
+        class = "status-value status-date",
         format(fecha_ultima_actualizacion, "%d/%m/%Y")
       )
     )
