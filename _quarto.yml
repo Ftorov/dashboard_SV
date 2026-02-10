@@ -85,5 +85,5 @@ execute:
   message: false       # Oculta mensajes
   error: false         # Oculta errores
   cache: false         # No usa caché
-  freeze: auto         # Recalcula solo si el archivo cambió
+  freeze: false         # Recalcula solo si el archivo cambió
   encoding: "UTF-8"    # Codificación de texto

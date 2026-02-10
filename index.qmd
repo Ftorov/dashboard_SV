@@ -1,7 +1,6 @@
 ---
 title: "Dashboard de uso interno"
 page-layout: full
-
 ---
 
 ```{r setup, include=FALSE}
@@ -10,20 +9,11 @@ source("R/_load_all.R", encoding = "UTF-8")
 
 ![](assets/images/descarga.svg){.img-fluid .index-hero}
 
-
-
-
-Herramienta orientada al seguimiento operativo del proceso de supervisión CAWI, basada en indicadores de validación temporal, reglas operativas y detección de valores atípicos, construidos a partir de registros descargables de Survey Solutions. 
+Herramienta orientada al seguimiento operativo del proceso de supervisión CAWI, basada en indicadores de validación temporal, reglas operativas y detección de valores atípicos, construidos a partir de registros descargables de Survey Solutions.
 
 Los resultados se presentan de forma agregada y desagregada por encuesta, etapa y responsable, con el objetivo de apoyar el monitoreo continuo y la trazabilidad del proceso.
 
-
-
-
-
 ## Accesos rápidos
-
-
 
 ```{=html}
 <div class="container-fluid quick-access">
@@ -123,8 +113,6 @@ Los resultados se presentan de forma agregada y desagregada por encuesta, etapa 
 
 </div>
 ```
-
-
 ```{r, echo=FALSE}
 library(htmltools)
 

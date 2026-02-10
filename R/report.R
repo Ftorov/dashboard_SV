@@ -26,7 +26,7 @@ options(scipen = 999)
 metadata_reporte <- list(
   proyecto         = "Dashboard de prueba",
   responsable      = "Francisco Toro",
-  fecha_descarga   = as.Date("2026-01-26"),
+  fecha_descarga   = Sys.Date(),
   fecha_generacion = Sys.Date(),
   version          = "v1.1"
 )
@@ -78,7 +78,7 @@ fmt_num_cl <- function(x) {
 
 # 4.  RUTA BASE Y ARCHIVOS ------------------------------------------------
 
-base_path <- "datasets/260121"
+base_path <- "datasets/260210"
 tmp_dir <- tempdir()
 
 archivos <- list(

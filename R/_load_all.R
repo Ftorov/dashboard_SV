@@ -4,7 +4,7 @@ library(htmltools)
 library(tibble)
 
 metadata_reporte <- list(
-  fecha_descarga   = as.Date("2026-01-26"),
+  fecha_descarga   = as.Date("2026-02-10"),
   fecha_generacion = Sys.Date()
 )
 
