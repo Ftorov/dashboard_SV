@@ -55,7 +55,7 @@ format:
       light: cosmo                 # Tema claro
       dark: darkly                 # Tema oscuro
       
-    back-to-top: true
+    
     page-navigation: true          # Navegación entre páginas
     anchor-sections: true          # Anclas en los títulos
     smooth-scroll: true            # Desplazamiento suave
@@ -72,6 +72,8 @@ format:
     - styles.css
     - https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css
     toc: false
+    lang: es
+    back-to-top: true
     grid:
      sidebar-width: "240px"       # Ancho de la barra lateral
      body-width: "1400px"         # Ancho del contenido central
